@@ -335,7 +335,7 @@ $(function () {
 
             $("#usd").removeClass("btn-outline-usd");
             $("#usd").addClass("btn-usd");
-            $("#inlineFormInputGroup").css({'borderColor' : '#4dbd74', 'color' : '#4dbd74'});
+            $("#inlineFormInputGroup").css({'borderColor': '#4dbd74', 'color': '#4dbd74'});
 
             var column = 2;
             usdShow();
@@ -347,7 +347,7 @@ $(function () {
 
             $("#usd").removeClass("btn-outline-usd");
             $("#usd").addClass("btn-usd");
-            $("#inlineFormInputGroup").css({'borderColor' : '#4dbd74', 'color' : '#4dbd74'});
+            $("#inlineFormInputGroup").css({'borderColor': '#4dbd74', 'color': '#4dbd74'});
 
             var column = 1;
             usdShow();
@@ -360,7 +360,7 @@ $(function () {
 
             $("#eur").removeClass("btn-outline-eur");
             $("#eur").addClass("btn-eur");
-            $("#inlineFormInputGroup").css({'borderColor' : '#3cb6d9', 'color' : '#3cb6d9'});
+            $("#inlineFormInputGroup").css({'borderColor': '#3cb6d9', 'color': '#3cb6d9'});
 
             var column = 4;
 
@@ -373,7 +373,7 @@ $(function () {
 
             $("#eur").removeClass("btn-outline-eur");
             $("#eur").addClass("btn-eur");
-            $("#inlineFormInputGroup").css({'borderColor' : '#3cb6d9', 'color' : '#3cb6d9'});
+            $("#inlineFormInputGroup").css({'borderColor': '#3cb6d9', 'color': '#3cb6d9'});
 
             var column = 3;
             eurShow();
@@ -386,7 +386,7 @@ $(function () {
 
             $("#rub").removeClass("btn-outline-rub");
             $("#rub").addClass("btn-rub");
-            $("#inlineFormInputGroup").css({'borderColor' : '#f66c6a', 'color' : '#f66c6a'});
+            $("#inlineFormInputGroup").css({'borderColor': '#f66c6a', 'color': '#f66c6a'});
 
             var column = 6;
 
@@ -399,7 +399,7 @@ $(function () {
 
             $("#rub").removeClass("btn-outline-rub");
             $("#rub").addClass("btn-rub");
-            $("#inlineFormInputGroup").css({'borderColor' : '#f66c6a', 'color' : '#f66c6a'});
+            $("#inlineFormInputGroup").css({'borderColor': '#f66c6a', 'color': '#f66c6a'});
 
             var column = 5;
             rubShow();

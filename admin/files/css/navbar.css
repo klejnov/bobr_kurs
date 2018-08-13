@@ -1,0 +1,98 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+.kursinput {
+max-width: 70px;
+}
+
+.savebutton {
+  cursor: pointer;
+}
+
+.divhome {
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+}
+
+.table-home > tbody > tr > td, .table-home > tbody > tr > th, .table-home > tfoot > tr > td, .table-home > tfoot > tr > th, .table-home > thead > tr > td, .table-home > thead > tr > th {
+  text-align: center;
+  vertical-align: middle;
+}
+@media screen and (max-width: 1000px) {
+  .kursinput {
+    width: 40px;
+  }
+  .table-home {
+    font-size: 10px;
+  }
+  .table-home > tbody > tr > td, .table-home > tbody > tr > th, .table-home > tfoot > tr > td, .table-home > tfoot > tr > th, .table-home > thead > tr > td, .table-home > thead > tr > th {
+    padding: 4px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .kursinput {
+    width: 30px;
+  }
+  .table-home {
+    font-size: 8px;
+  }
+  .table-home > tbody > tr > td, .table-home > tbody > tr > th, .table-home > tfoot > tr > td, .table-home > tfoot > tr > th, .table-home > thead > tr > td, .table-home > thead > tr > th {
+    padding: 3px;
+  }
+}
+
+.select-stats {
+  width: 329px;
+  height: 34px !important;
+}
+
+.divbuttonstats {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+/*Профиль пользователя в меню*/
+.chip {
+  display: inline-block;
+  padding: 0 25px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: #f1f1f1;
+  margin: -16px 8px -15px 0px;
+}
+
+.chip img {
+  float: left;
+  margin: 0 10px 0 -25px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+/*Профиль пользователя в меню*/
+
+/*Профиль пользователя*/
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+    padding: 2px 16px;
+}
+/*Профиль пользователя*/

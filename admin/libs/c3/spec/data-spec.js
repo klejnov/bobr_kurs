@@ -1,3 +1,19 @@
+ describe('load without data', function () {
+
+    var chart, args;
+
+    beforeAll(function () {
+        args = {
+            data: {}
+        };
+    });
+
+    it('throws when data is an empty object', () => {
+        expect(() => window.initChart(chart, args))
+            .toThrowError(Error, /url or json or rows or columns is required/);
+    });        
+});
+
 describe('c3 chart data', function () {
     'use strict';
 
@@ -164,6 +180,37 @@ describe('c3 chart data', function () {
             });
         });
     });
+
+    describe('load rows', function () {
+
+        beforeAll(function () {
+            args = {
+                data: {
+                    rows: [
+                      ['data1', 'data2', 'data3'],
+                      [90, 120, 300],
+                      [40, 160, 240],
+                      [50, 200, 290],
+                      [120, 160, 230],
+                      [80, 130, 300],
+                      [90, 220, 320]
+                    ]
+                }
+            };
+        });
+
+        it('should draw correctly', function () {
+            var expectedCx = [6, 124, 241,358,475,593],
+                expectedCy = [327, 391, 378,289,340,327];
+            d3.selectAll('.c3-circles-data1 .c3-circle').each(function (d, i) {
+                var circle = d3.select(this);
+                expect(+circle.attr('cx')).toBeCloseTo(expectedCx[i], 0);
+                expect(+circle.attr('cy')).toBeCloseTo(expectedCy[i], 0);
+            });
+        });
+    });
+
+
 
     describe('function in data.order', function () {
         beforeAll(function () {
@@ -1094,7 +1141,7 @@ describe('c3 chart data', function () {
 
                     it('should have y domain with proper padding', function () {
                         var domain = chart.internal.y.domain();
-                        expect(domain[0]).toBeCloseTo(-259, -1);
+                        expect(domain[0]).toBeCloseTo(-253, -1);
                         expect(domain[1]).toBeCloseTo(260, -1);
                     });
 
@@ -1117,7 +1164,7 @@ describe('c3 chart data', function () {
 
                     it('should have y domain with proper padding', function () {
                         var domain = chart.internal.y.domain();
-                        expect(domain[0]).toBeCloseTo(-259, -1);
+                        expect(domain[0]).toBeCloseTo(-253, -1);
                         expect(domain[1]).toBeCloseTo(260, -1);
                     });
 
@@ -1349,8 +1396,8 @@ describe('c3 chart data', function () {
 
                     it('should have y domain with proper padding', function () {
                         var domain = chart.internal.y.domain();
-                        expect(domain[0]).toBeCloseTo(-899, -1);
-                        expect(domain[1]).toBeCloseTo(101, -1.2);
+                        expect(domain[0]).toBeCloseTo(-893, -1);
+                        expect(domain[1]).toBeCloseTo(93, -1);
                     });
 
                     it('should locate labels above each data point', function () {

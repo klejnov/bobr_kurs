@@ -39,7 +39,7 @@
     <link href="libs/c3/c3.css" rel="stylesheet">
 
     <!-- Load d3.js and c3.js -->
-    <script src="https://d3js.org/d3.v3.js" charset="utf-8"></script>
+    <script src="libs/c3/d3.v5.min.js" charset="utf-8"></script>
     <script src="libs/c3/c3.js"></script>
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->

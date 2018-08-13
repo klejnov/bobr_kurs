@@ -218,6 +218,38 @@ describe('c3 chart legend', function () {
 
     });
 
+    describe('with legend.show is true', function () {
+
+        beforeAll(function () {
+            args = {
+                data: {
+                    columns: [
+                        ['data1', 30, 200, 100, 400, 150, 250],
+                        ['data2', 130, 100, 200, 100, 250, 150]
+                    ]
+                },
+                legend: {
+                    show: true
+                }
+            };
+        });
+
+        it('should initially have rendered some legend items', function () {
+            expect(d3.selectAll('.c3-legend-item').empty()).toBe(false);
+        });
+
+        it('should remove rendered every legend items', function () {
+            chart.legend.hide();
+            d3.selectAll('.c3-legend-item').each(function () {
+                expect(d3.select(this).style('visibility')).toBe('hidden');
+                // This selects all the children, but we expect it to be empty
+                expect(d3.select(this).selectAll("*").length).toEqual(undefined);
+            });
+        });
+
+
+    });
+
     describe('custom legend size', function() {
         beforeAll(function () {
             args = {
@@ -274,4 +306,68 @@ describe('c3 chart legend', function () {
         });
     });
 
+    describe('legend item tile coloring with color_treshold', function () {
+        beforeAll(function () {
+            args = {
+                data: {
+                    columns: [
+                        ['padded1', 100],
+                        ['padded2', 90],
+                        ['padded3', 50],
+                        ['padded4', 20]
+                    ]
+                },
+                type: 'gauge',
+                color: {
+                    pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'],
+                    threshold: {
+                        values: [30, 80, 95]
+                    }
+                }
+            };
+        });
+
+        // espacially for gauges with multiple arcs to have the same coloring between legend tiles, tooltip tiles and arc
+        it('selects the color from color_pattern if color_treshold is given', function () {
+            var tileColor = [];
+            d3.selectAll('.c3-legend-item-tile').each(function () {
+                tileColor.push(d3.select(this).style('stroke'));
+            });
+            expect(tileColor[0]).toBe('rgb(96, 176, 68)');
+            expect(tileColor[1]).toBe('rgb(246, 198, 0)');
+            expect(tileColor[2]).toBe('rgb(249, 118, 0)');
+            expect(tileColor[3]).toBe('rgb(255, 0, 0)');
+        });
+    });
+
+    describe('legend item tile coloring without color_treshold', function () {
+        beforeAll(function () {
+            args = {
+                data: {
+                    columns: [
+                        ['padded1', 100],
+                        ['padded2', 90],
+                        ['padded3', 50],
+                        ['padded4', 20]
+                    ],
+                    colors: {
+                        'padded1': '#60b044',
+                        'padded4': '#8b008b'
+                    }
+                },
+                type: 'gauge'
+            };
+        });
+
+        it('selects the color from data_colors, data_color or default', function () {
+            var tileColor = [];
+            d3.selectAll('.c3-legend-item-tile').each(function () {
+                tileColor.push(d3.select(this).style('stroke'));
+            });
+            expect(tileColor[0]).toBe('rgb(96, 176, 68)');
+            expect(tileColor[1]).toBe('rgb(31, 119, 180)');
+            expect(tileColor[2]).toBe('rgb(255, 127, 14)');
+            expect(tileColor[3]).toBe('rgb(139, 0, 139)');
+        });
+    });
 });

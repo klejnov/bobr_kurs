@@ -1,7 +1,7 @@
-import { c3_chart_internal_fn } from './core';
+import { ChartInternal } from './core';
 import { isDefined } from './util';
 
-c3_chart_internal_fn.getDefaultConfig = function () {
+ChartInternal.prototype.getDefaultConfig = function () {
     var config = {
         bindto: '#chart',
         svg_classname: undefined,
@@ -13,7 +13,9 @@ c3_chart_internal_fn.getDefaultConfig = function () {
         padding_bottom: undefined,
         resize_auto: true,
         zoom_enabled: false,
-        zoom_extent: undefined,
+        zoom_initialRange: undefined,
+        zoom_type: 'scroll',
+        zoom_disableDefaultBehavior: false,
         zoom_privileged: false,
         zoom_rescale: false,
         zoom_onzoom: function () {},
@@ -107,13 +109,15 @@ c3_chart_internal_fn.getDefaultConfig = function () {
         axis_x_tick_rotate: 0,
         axis_x_tick_outer: true,
         axis_x_tick_multiline: true,
+        axis_x_tick_multilineMax: 0,
         axis_x_tick_width: null,
         axis_x_max: undefined,
         axis_x_min: undefined,
         axis_x_padding: {},
         axis_x_height: undefined,
-        axis_x_extent: undefined,
+        axis_x_selection: undefined,
         axis_x_label: {},
+        axis_x_inner: undefined,
         axis_y_show: true,
         axis_y_type: undefined,
         axis_y_max: undefined,
@@ -127,7 +131,7 @@ c3_chart_internal_fn.getDefaultConfig = function () {
         axis_y_tick_values: null,
         axis_y_tick_rotate: 0,
         axis_y_tick_count: undefined,
-        axis_y_tick_time_value: undefined,
+        axis_y_tick_time_type: undefined,
         axis_y_tick_time_interval: undefined,
         axis_y_padding: {},
         axis_y_default: undefined,
@@ -184,6 +188,7 @@ c3_chart_internal_fn.getDefaultConfig = function () {
         // gauge
         gauge_fullCircle: false,
         gauge_label_show: true,
+        gauge_labelLine_show: true,
         gauge_label_format: undefined,
         gauge_min: 0,
         gauge_max: 100,
@@ -191,6 +196,7 @@ c3_chart_internal_fn.getDefaultConfig = function () {
         gauge_label_extents: undefined,
         gauge_units: undefined,
         gauge_width: undefined,
+        gauge_arcs_minWidth: 5,
         gauge_expand: {},
         gauge_expand_duration: 50,
         // donut
@@ -239,9 +245,9 @@ c3_chart_internal_fn.getDefaultConfig = function () {
 
     return config;
 };
-c3_chart_internal_fn.additionalConfig = {};
+ChartInternal.prototype.additionalConfig = {};
 
-c3_chart_internal_fn.loadConfig = function (config) {
+ChartInternal.prototype.loadConfig = function (config) {
     var this_config = this.config, target, keys, read;
     function find() {
         var key = keys.shift();

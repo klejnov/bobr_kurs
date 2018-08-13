@@ -1,8 +1,8 @@
 import CLASS from './class';
-import { c3_chart_internal_fn } from './core';
+import { ChartInternal } from './core';
 import { isUndefined } from './util';
 
-c3_chart_internal_fn.getShapeIndices = function (typeFilter) {
+ChartInternal.prototype.getShapeIndices = function (typeFilter) {
     var $$ = this, config = $$.config,
         indices = {}, i = 0, j, k;
     $$.filterTargetsToShow($$.data.targets.filter(typeFilter, $$)).forEach(function (d) {
@@ -20,21 +20,21 @@ c3_chart_internal_fn.getShapeIndices = function (typeFilter) {
     indices.__max__ = i - 1;
     return indices;
 };
-c3_chart_internal_fn.getShapeX = function (offset, targetsNum, indices, isSub) {
+ChartInternal.prototype.getShapeX = function (offset, targetsNum, indices, isSub) {
     var $$ = this, scale = isSub ? $$.subX : $$.x;
     return function (d) {
         var index = d.id in indices ? indices[d.id] : 0;
         return d.x || d.x === 0 ? scale(d.x) - offset * (targetsNum / 2 - index) : 0;
     };
 };
-c3_chart_internal_fn.getShapeY = function (isSub) {
+ChartInternal.prototype.getShapeY = function (isSub) {
     var $$ = this;
     return function (d) {
         var scale = isSub ? $$.getSubYScale(d.id) : $$.getYScale(d.id);
         return scale(d.value);
     };
 };
-c3_chart_internal_fn.getShapeOffset = function (typeFilter, indices, isSub) {
+ChartInternal.prototype.getShapeOffset = function (typeFilter, indices, isSub) {
     var $$ = this,
         targets = $$.orderTargets($$.filterTargetsToShow($$.data.targets.filter(typeFilter, $$))),
         targetIds = targets.map(function (t) { return t.id; });
@@ -63,7 +63,7 @@ c3_chart_internal_fn.getShapeOffset = function (typeFilter, indices, isSub) {
         return offset;
     };
 };
-c3_chart_internal_fn.isWithinShape = function (that, d) {
+ChartInternal.prototype.isWithinShape = function (that, d) {
     var $$ = this,
         shape = $$.d3.select(that), isWithin;
     if (!$$.isTargetToShow(d.id)) {
@@ -73,14 +73,39 @@ c3_chart_internal_fn.isWithinShape = function (that, d) {
         isWithin = $$.isStepType(d) ? $$.isWithinStep(that, $$.getYScale(d.id)(d.value)) : $$.isWithinCircle(that, $$.pointSelectR(d) * 1.5);
     }
     else if (that.nodeName === 'path') {
-        isWithin = shape.classed(CLASS.bar) ? $$.isWithinBar(that) : true;
+        isWithin = shape.classed(CLASS.bar) ? $$.isWithinBar($$.d3.mouse(that), that) : true;
     }
     return isWithin;
 };
 
 
-c3_chart_internal_fn.getInterpolate = function (d) {
-    var $$ = this,
-        interpolation = $$.isInterpolationType($$.config.spline_interpolation_type) ? $$.config.spline_interpolation_type : 'cardinal';
-    return $$.isSplineType(d) ? interpolation : $$.isStepType(d) ? $$.config.line_step_type : "linear";
+ChartInternal.prototype.getInterpolate = function (d) {
+    var $$ = this, d3 = $$.d3,
+        types = {
+            'linear': d3.curveLinear,
+            'linear-closed': d3.curveLinearClosed,
+            'basis': d3.curveBasis,
+            'basis-open': d3.curveBasisOpen,
+            'basis-closed': d3.curveBasisClosed,
+            'bundle': d3.curveBundle,
+            'cardinal': d3.curveCardinal,
+            'cardinal-open': d3.curveCardinalOpen,
+            'cardinal-closed': d3.curveCardinalClosed,
+            'monotone': d3.curveMonotoneX,
+            'step': d3.curveStep,
+            'step-before': d3.curveStepBefore,
+            'step-after': d3.curveStepAfter
+        },
+        type;
+
+    if ($$.isSplineType(d)) {
+        type = types[$$.config.spline_interpolation_type] || types.cardinal;
+    }
+    else if ($$.isStepType(d)) {
+        type = types[$$.config.line_step_type];
+    }
+    else {
+        type = types.linear;
+    }
+    return type;
 };

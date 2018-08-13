@@ -1,18 +1,18 @@
-import { c3_chart_fn } from './core';
+import { Chart } from './core';
 
-c3_chart_fn.resize = function (size) {
+Chart.prototype.resize = function (size) {
     var $$ = this.internal, config = $$.config;
     config.size_width = size ? size.width : null;
     config.size_height = size ? size.height : null;
     this.flush();
 };
 
-c3_chart_fn.flush = function () {
+Chart.prototype.flush = function () {
     var $$ = this.internal;
     $$.updateAndRedraw({withLegend: true, withTransition: false, withTransitionForTransform: false});
 };
 
-c3_chart_fn.destroy = function () {
+Chart.prototype.destroy = function () {
     var $$ = this.internal;
 
     window.clearInterval($$.intervalForObserveInserted);
@@ -22,9 +22,9 @@ c3_chart_fn.destroy = function () {
     }
 
     if (window.detachEvent) {
-        window.detachEvent('onresize', $$.resizeFunction);
+        window.detachEvent('onresize', $$.resizeIfElementDisplayed);
     } else if (window.removeEventListener) {
-        window.removeEventListener('resize', $$.resizeFunction);
+        window.removeEventListener('resize', $$.resizeIfElementDisplayed);
     } else {
         var wrapper = window.onresize;
         // check if no one else removed our wrapper and remove our resizeFunction from it
@@ -32,6 +32,9 @@ c3_chart_fn.destroy = function () {
             wrapper.remove($$.resizeFunction);
         }
     }
+
+    // remove the inner resize functions
+    $$.resizeFunction.remove();
 
     $$.selectChart.classed('c3', false).html("");
 

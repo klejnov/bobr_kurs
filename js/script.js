@@ -4,6 +4,15 @@ $(function () {
 
     var table = '';
 
+    var settings = {
+        btnBuy: true,
+        btnSell: false,
+        btnUsd: true,
+        btnEur: false,
+        btnRub: false,
+        number: 50
+    };
+
     function ratesWidgetGet() {
 
         $.ajax({
@@ -211,7 +220,7 @@ $(function () {
 
         table = $('#myTable').DataTable();
 
-        usdShow();
+        settingsApply();
 
         $('#show-10').on('click', function (e) {
             e.preventDefault();
@@ -256,13 +265,22 @@ $(function () {
 
 
     $('#usd').on('click', function () {
-        usdShow();
+        settings.btnUsd = true;
+        settings.btnEur = false;
+        settings.btnRub = false;
+        settingsApply();
     });
     $('#eur').on('click', function () {
-        eurShow();
+        settings.btnEur = true;
+        settings.btnUsd = false;
+        settings.btnRub = false;
+        settingsApply();
     });
     $('#rub').on('click', function () {
-        rubShow();
+        settings.btnRub = true;
+        settings.btnUsd = false;
+        settings.btnEur = false;
+        settingsApply();
     });
 
 
@@ -275,23 +293,125 @@ $(function () {
 
 
     $('.btn-left').on('click', function () {
-        $(".btn-right").addClass("btn-outline-eur");
-        $(".btn-left").addClass("btn-eur");
-        $(".btn-left").removeClass("btn-outline-eur");
-        $(".btn-right").removeClass("btn-eur");
-        table.order([2, 'asc']).draw();
+        settings.btnBuy = true;
+        settings.btnSell = false;
+        settingsApply();
+    });
 
-    });
+    function btnLeftClick(column) {
+        table.order([column, 'asc']).draw();
+    };
+
     $('.btn-right').on('click', function () {
-        $(".btn-left").addClass("btn-outline-eur");
-        $(".btn-right").addClass("btn-eur");
-        $(".btn-right").removeClass("btn-outline-eur");
-        $(".btn-left").removeClass("btn-eur");
-        table.order([1, 'desc']).draw();
+        settings.btnBuy = false;
+        settings.btnSell = true;
+        settingsApply();
     });
+
+    function btnRightClick(column) {
+        table.order([column, 'desc']).draw();
+    };
 
     $("i.fas.fa-chart-line").on('click', function () {
         $(this).find(".dynamics").slideDown(300).delay(2000).slideUp(300);
     });
+
+
+    function settingsApply() {
+        $(".btn-right").removeClass("btn-outline-usd btn-outline-eur btn-outline-rub btn-usd btn-eur btn-rub");
+        $(".btn-left").removeClass("btn-outline-usd btn-outline-eur btn-outline-rub btn-usd btn-eur btn-rub");
+
+        $("#usd").removeClass("btn-usd");
+        $("#eur").removeClass("btn-eur");
+        $("#rub").removeClass("btn-rub");
+
+        $("#usd").addClass("btn-outline-usd");
+        $("#eur").addClass("btn-outline-eur");
+        $("#rub").addClass("btn-outline-rub");
+
+        if (settings.btnUsd && settings.btnBuy) {
+            $(".btn-right").addClass("btn-outline-usd");
+            $(".btn-left").addClass("btn-usd");
+
+            $("#usd").removeClass("btn-outline-usd");
+            $("#usd").addClass("btn-usd");
+            $("#inlineFormInputGroup").css({'borderColor' : '#4dbd74', 'color' : '#4dbd74'});
+
+            var column = 2;
+            usdShow();
+            btnLeftClick(column);
+        }
+        if (settings.btnUsd && settings.btnSell) {
+            $(".btn-left").addClass("btn-outline-usd");
+            $(".btn-right").addClass("btn-usd");
+
+            $("#usd").removeClass("btn-outline-usd");
+            $("#usd").addClass("btn-usd");
+            $("#inlineFormInputGroup").css({'borderColor' : '#4dbd74', 'color' : '#4dbd74'});
+
+            var column = 1;
+            usdShow();
+            btnRightClick(column);
+        }
+
+        if (settings.btnEur && settings.btnBuy) {
+            $(".btn-right").addClass("btn-outline-eur");
+            $(".btn-left").addClass("btn-eur");
+
+            $("#eur").removeClass("btn-outline-eur");
+            $("#eur").addClass("btn-eur");
+            $("#inlineFormInputGroup").css({'borderColor' : '#3cb6d9', 'color' : '#3cb6d9'});
+
+            var column = 4;
+
+            eurShow();
+            btnLeftClick(column);
+        }
+        if (settings.btnEur && settings.btnSell) {
+            $(".btn-left").addClass("btn-outline-eur");
+            $(".btn-right").addClass("btn-eur");
+
+            $("#eur").removeClass("btn-outline-eur");
+            $("#eur").addClass("btn-eur");
+            $("#inlineFormInputGroup").css({'borderColor' : '#3cb6d9', 'color' : '#3cb6d9'});
+
+            var column = 3;
+            eurShow();
+            btnRightClick(column);
+        }
+
+        if (settings.btnRub && settings.btnBuy) {
+            $(".btn-right").addClass("btn-outline-rub");
+            $(".btn-left").addClass("btn-rub");
+
+            $("#rub").removeClass("btn-outline-rub");
+            $("#rub").addClass("btn-rub");
+            $("#inlineFormInputGroup").css({'borderColor' : '#f66c6a', 'color' : '#f66c6a'});
+
+            var column = 6;
+
+            rubShow();
+            btnLeftClick(column);
+        }
+        if (settings.btnRub && settings.btnSell) {
+            $(".btn-left").addClass("btn-outline-rub");
+            $(".btn-right").addClass("btn-rub");
+
+            $("#rub").removeClass("btn-outline-rub");
+            $("#rub").addClass("btn-rub");
+            $("#inlineFormInputGroup").css({'borderColor' : '#f66c6a', 'color' : '#f66c6a'});
+
+            var column = 5;
+            rubShow();
+            btnRightClick(column);
+        }
+
+        $(".number").val(settings.number);
+
+
+        console.log('Настройки в функции:');
+        console.log(settings);
+
+    };
 
 });

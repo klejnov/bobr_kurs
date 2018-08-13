@@ -187,6 +187,17 @@ nav .navbar-nav > li > a:hover {
     width: 100%;
 }
 
+.btn-usd {
+    color: #fff;
+    background-color: #4dbd74;
+    border-color: #4dbd74;
+}
+
+.btn-usd:hover, .btn-usd:active, .btn-usd:focus {
+    background-color: #4dbd74;
+    border-color: #4dbd74;
+}
+
 .btn-eur {
     color: #fff;
     background-color: #3cb6d9;
@@ -196,6 +207,17 @@ nav .navbar-nav > li > a:hover {
 .btn-eur:hover, .btn-eur:active, .btn-eur:focus {
     background-color: #3cb6d9;
     border-color: #3cb6d9;
+}
+
+.btn-rub {
+    color: #fff;
+    background-color: #f66c6a;
+    border-color: #f66c6a;
+}
+
+.btn-rub:hover, .btn-rub:active, .btn-rub:focus {
+    background-color: #f66c6a;
+    border-color: #f66c6a;
 }
 
 .input-group > .input-group-append:last-child > .input-group-text:not(:last-child) {
@@ -231,12 +253,25 @@ nav .navbar-nav > li > a:hover {
     border-radius: 0 4px 4px 0;
 }
 
-.btn-content .btn-eur {
+.btn-content .btn-block {
     width: calc(33% - 3px);
 }
 
 .btn:focus, .btn-outline-eur:not(:disabled):not(.disabled):active:focus, .btn-eur:not(:disabled):not(.disabled):active:focus {
     box-shadow: none;
+}
+
+.btn-outline-usd {
+    color: #4dbd74;
+    background-color: transparent;
+    background-image: none;
+    border-color: #4dbd74;
+}
+
+.btn-outline-usd:hover {
+    color: #fff;
+    background-color: #4dbd74;
+    border-color: #4dbd74;
 }
 
 .btn-outline-eur {
@@ -252,11 +287,25 @@ nav .navbar-nav > li > a:hover {
     border-color: #3cb6d9;
 }
 
+.btn-outline-rub {
+    color: #f66c6a;
+    background-color: transparent;
+    background-image: none;
+    border-color: #f66c6a;
+}
+
+.btn-outline-rub:hover {
+    color: #fff;
+    background-color: #f66c6a;
+    border-color: #f66c6a;
+}
+
+
 #inlineFormInputGroup {
     height: 35px;
-    border-color: #3bb7d9;
     text-align: center;
     font-size: 1.1rem;
+    border-color: #4dbd74;
 }
 
 .select-input {
@@ -433,13 +482,13 @@ i.fas.fa-chart-line {
     font-size: 1rem;
     padding: 5px;
     cursor: pointer;
-    opacity:.8;
+    opacity: .8;
     z-index: 1;
     transition: opacity .3s ease .1s;
 }
 
 i.fas.fa-chart-line:hover {
-    opacity:1;
+    opacity: 1;
 }
 
 .dynamics {
@@ -456,7 +505,7 @@ i.fas.fa-chart-line:hover {
         padding-bottom: 10px;
     }
 
-    .btn-content .btn-eur {
+    .btn-content .btn-block {
         width: calc(33% - 3px);
     }
 

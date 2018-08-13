@@ -139,22 +139,22 @@
     <div class="row">
         <div class="col-xl-2 col-lg-3 col-md-5 col-sm-6">
             <div class="buy-sell">
-                <button type="button" class="btn btn-block btn-eur btn-left">Купить</button>
-                <button type="button" class="btn btn-block btn-outline-eur btn-right">Продать</button>
+                <button type="button" class="btn btn-block btn-outline-usd btn-left">Купить</button>
+                <button type="button" class="btn btn-block btn-outline-usd btn-right">Продать</button>
             </div>
         </div>
         <div class="col-xl-1 col-lg-1 col-md-2 col-sm-2 select-input">
             <label class="sr-only" for="inlineFormInputGroup"></label>
             <div class="input-group mb-1">
-                <input type="number" class="form-control" id="inlineFormInputGroup" value="100">
+                <input type="number" class="form-control number" id="inlineFormInputGroup" value="">
             </div>
         </div>
         <div class="col-xl-3 col-lg-2 col-md-5 col-sm-4 btn-content">
-            <button type="button" class="btn btn-block btn-outline-eur btn-eur" id="usd"><i
+            <button type="button" class="btn btn-block btn-outline-usd" id="usd"><i
                         class="fas fa-dollar-sign"></i></button>
-            <button type="button" class="btn btn-block btn-eur btn-eur" id="eur"><i
+            <button type="button" class="btn btn-block btn-outline-eur" id="eur"><i
                         class="fas fa-euro-sign"></i></button>
-            <button type="button" class="btn btn-block btn-outline-eur btn-eur" id="rub"><i
+            <button type="button" class="btn btn-block btn-outline-rub" id="rub"><i
                         class="fas fa-ruble-sign"></i></button>
         </div>
         <div class="col-xl-6"></div>

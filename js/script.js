@@ -10,8 +10,10 @@ $(function () {
         btnUsd: true,
         btnEur: false,
         btnRub: false,
-        number: 50
+        number: 100
     };
+
+    var tableArr = {};
 
     function ratesWidgetGet() {
 
@@ -155,25 +157,18 @@ $(function () {
 
             console.log(result);
             $(".spinner-show").hide();
+            $(".button-show").show();
             $(".table-show").show();
             $(".dataTable tbody").empty();
 
-            $.each(result, function (key, element) {
-
-                $(".dataTable tbody").append('<tr data-id-bank="' + element.banks_id + '">' +
-                    '<td><img src="/admin/files/img/ico/' + element.ico + '" alt="">' + element.name + '</td>' +
-                    '<td>' + (Math.round(element.usd_buy * 10000) / 10000 ) + '</td>' +
-                    '<td>' + (Math.round(element.usd_sell * 10000) / 10000 ) + '</td>' +
-                    '<td>' + (Math.round(element.eur_buy * 10000) / 10000 ) + '</td>' +
-                    '<td>' + (Math.round(element.eur_sell * 10000) / 10000 ) + '</td>' +
-                    '<td>' + (Math.round(element.rub_buy * 10000) / 10000 ) + '</td>' +
-                    '<td>' + (Math.round(element.rub_sell * 10000) / 10000 ) + '</td>' +
-                    '<td>' + element.time + '</td>' +
-                    '</tr>');
-
-            });
+            tableArr = result;
 
             tableCreate();
+            tableCalc();
+
+            $('input.form-control').on('keyup change', function () {
+                showInfoBank();
+            });
 
         }).fail(function () {
             alert('Что-то пошло не так. Повторите позже.');
@@ -183,6 +178,86 @@ $(function () {
 
     ratesWidgetGet();
     banksTableGet();
+
+
+    function tableCalc() {
+
+        console.log('Таблица:1');
+        console.log(tableArr);
+
+        console.log('Таблица2:');
+        console.log(settings);
+
+        $.each(tableArr, function (key, element) {
+
+            var usd_buy = (Math.round(element.usd_buy * 10000) / 10000 );
+            var usd_sell = (Math.round(element.usd_sell * 10000) / 10000 );
+            var eur_buy = (Math.round(element.eur_buy * 10000) / 10000 );
+            var eur_sell = (Math.round(element.eur_sell * 10000) / 10000 );
+            var rub_buy = (Math.round(element.rub_buy * 10000) / 10000 );
+            var rub_sell = (Math.round(element.rub_sell * 10000) / 10000 );
+
+            var usd_buy_sum = (Math.round(element.usd_buy * settings.number * 10000) / 10000 );
+            var usd_sell_sum = (Math.round(element.usd_sell * settings.number * 10000) / 10000 );
+            var eur_buy_sum = (Math.round(element.eur_buy * settings.number * 10000) / 10000 );
+            var eur_sell_sum = (Math.round(element.eur_sell * settings.number * 10000) / 10000 );
+            var rub_buy_sum = (Math.round(element.rub_buy * settings.number * 10000) / 10000 );
+            var rub_sell_sum = (Math.round(element.rub_sell * settings.number * 10000) / 10000 );
+
+            table.row.add([
+                '<tr><td><img src="/admin/files/img/ico/' + element.ico + '" alt="">' + element.name + '<div data-info="info" data-id="' + element.banks_id + '" style="display: none">' + element.address + '<br>Банк обновлял курсы: ' + element.time + '</div><i class="fas fa-info-circle"></i></td>',
+                '<td>' + usd_buy + '</td>',
+                '<td>' + usd_sell + '</td>',
+                '<td class="usd_buy_sum">' + usd_buy_sum + ' р.</td>',
+                '<td class="usd_sell_sum">' + usd_sell_sum + ' р.</td>',
+                '<td>' + eur_buy + '</td>',
+                '<td>' + eur_sell + '</td>',
+                '<td class="eur_buy_sum">' + eur_buy_sum + ' р.</td>',
+                '<td class="eur_sell_sum">' + eur_sell_sum + ' р.</td>',
+                '<td>' + rub_buy + '</td>',
+                '<td>' + rub_sell + '</td>',
+                '<td class="rub_buy_sum">' + rub_buy_sum + ' р.</td>',
+                '<td class="rub_sell_sum">' + rub_sell_sum + ' р.</td></tr>'
+            ]).draw(true);
+
+            showInfoBank();
+        });
+
+    }
+
+    function showInfoBank() {
+
+        $('tbody>tr').off('click');
+        table.draw();
+        $('tbody>tr').on('click', function () {
+            $(this).toggleClass("active");
+            var value = $(this).find('div').html();
+            console.log(value);
+
+            var id = $(this).find('div').data("id");
+
+            $(this).after('<tr data-id-bank="bank' + id + '"><td colspan="3">' + value + '</td></tr>').slideDown(1000);
+
+            $(this).not('.active').parent().find('[data-id-bank="bank' + id + '"]').slideUp(2000).remove();
+
+        });
+    }
+
+    $('thead tr').on('click', function () {
+        showInfoBank();
+    });
+
+
+    $('input.number').on('keyup change', function () {
+        var value = $(this).val();
+        console.log(table);
+        settings.number = +value;
+
+        table.clear();
+
+        tableCalc();
+
+    });
 
 
     function tableCreate() {
@@ -222,43 +297,44 @@ $(function () {
 
         settingsApply();
 
+
         $('#show-10').on('click', function (e) {
             e.preventDefault();
             table.page.len(10).draw();
+            showInfoBank();
         });
 
         $('#show-all').on('click', function (e) {
             e.preventDefault();
             table.page.len(100).draw();
+            showInfoBank();
         });
 
     }
 
-    function usdShow() {
-        for (var i = 0; i <= 7; i++) {
-            table.column(i).visible(true, false);
-            if (i >= 3 && i <= 6) {
-                table.column(i).visible(false, false);
-            }
-        }
-
-        table.order([2, 'asc']).draw();
-    }
-
-    function eurShow() {
-        for (var i = 0; i <= 7; i++) {
-            table.column(i).visible(true, false);
-            if (i >= 1 && i <= 2 || i >= 5 && i <= 6) {
-                table.column(i).visible(false, false);
+    function usdShow(a, b, c) {
+        for (var i = 0; i <= 12; i++) {
+            table.column(i).visible(false, false);
+            if (i == a || i == b || i == c) { // спрятать
+                table.column(i).visible(true, false);
             }
         }
     }
 
-    function rubShow() {
-        for (var i = 0; i <= 7; i++) {
-            table.column(i).visible(true, false);
-            if (i >= 1 && i <= 4) {
-                table.column(i).visible(false, false);
+    function eurShow(a, b, c) {
+        for (var i = 0; i <= 12; i++) {
+            table.column(i).visible(false, false);
+            if (i == a || i == b || i == c) { // спрятать
+                table.column(i).visible(true, false);
+            }
+        }
+    }
+
+    function rubShow(a, b, c) {
+        for (var i = 0; i <= 12; i++) {
+            table.column(i).visible(false, false);
+            if (i == a || i == b || i == c) { // спрятать
+                table.column(i).visible(true, false);
             }
         }
     }
@@ -338,7 +414,7 @@ $(function () {
             $("#inlineFormInputGroup").css({'borderColor': '#4dbd74', 'color': '#4dbd74'});
 
             var column = 2;
-            usdShow();
+            usdShow(0, 2, 4);
             btnLeftClick(column);
         }
         if (settings.btnUsd && settings.btnSell) {
@@ -350,7 +426,7 @@ $(function () {
             $("#inlineFormInputGroup").css({'borderColor': '#4dbd74', 'color': '#4dbd74'});
 
             var column = 1;
-            usdShow();
+            usdShow(0, 1, 3);
             btnRightClick(column);
         }
 
@@ -362,9 +438,8 @@ $(function () {
             $("#eur").addClass("btn-eur");
             $("#inlineFormInputGroup").css({'borderColor': '#3cb6d9', 'color': '#3cb6d9'});
 
-            var column = 4;
-
-            eurShow();
+            var column = 6;
+            eurShow(0, 6, 8);
             btnLeftClick(column);
         }
         if (settings.btnEur && settings.btnSell) {
@@ -375,8 +450,8 @@ $(function () {
             $("#eur").addClass("btn-eur");
             $("#inlineFormInputGroup").css({'borderColor': '#3cb6d9', 'color': '#3cb6d9'});
 
-            var column = 3;
-            eurShow();
+            var column = 5;
+            eurShow(0, 5, 7);
             btnRightClick(column);
         }
 
@@ -388,9 +463,9 @@ $(function () {
             $("#rub").addClass("btn-rub");
             $("#inlineFormInputGroup").css({'borderColor': '#f66c6a', 'color': '#f66c6a'});
 
-            var column = 6;
+            var column = 10;
 
-            rubShow();
+            rubShow(0, 10, 12);
             btnLeftClick(column);
         }
         if (settings.btnRub && settings.btnSell) {
@@ -401,17 +476,18 @@ $(function () {
             $("#rub").addClass("btn-rub");
             $("#inlineFormInputGroup").css({'borderColor': '#f66c6a', 'color': '#f66c6a'});
 
-            var column = 5;
-            rubShow();
+            var column = 9;
+            rubShow(0, 9, 11);
             btnRightClick(column);
         }
 
         $(".number").val(settings.number);
 
 
+        showInfoBank();
+
         console.log('Настройки в функции:');
         console.log(settings);
 
     };
-
 });

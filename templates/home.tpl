@@ -135,7 +135,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container button-show">
     <div class="row">
         <div class="col-xl-2 col-lg-3 col-md-5 col-sm-6">
             <div class="buy-sell">
@@ -146,7 +146,7 @@
         <div class="col-xl-1 col-lg-1 col-md-2 col-sm-2 select-input">
             <label class="sr-only" for="inlineFormInputGroup"></label>
             <div class="input-group mb-1">
-                <input type="number" class="form-control number" id="inlineFormInputGroup" value="">
+                <input type="number" min="0" class="form-control number" id="inlineFormInputGroup" value="">
             </div>
         </div>
         <div class="col-xl-3 col-lg-2 col-md-5 col-sm-4 btn-content">
@@ -172,13 +172,18 @@
                     <thead>
                     <tr>
                         <th>Банк</th>
-                        <th>Покупка</th>
-                        <th>Продажа</th>
-                        <th>Покупка</th>
-                        <th>Продажа</th>
-                        <th>Покупка</th>
-                        <th>Продажа</th>
-                        <th>Дата</th>
+                        <th>Курс</th>
+                        <th>Курс</th>
+                        <th>Получу</th>
+                        <th>Отдам</th>
+                        <th>Курс</th>
+                        <th>Курс</th>
+                        <th>Получу</th>
+                        <th>Отдам</th>
+                        <th>Курс</th>
+                        <th>Курс</th>
+                        <th>Получу</th>
+                        <th>Отдам</th>
                     </tr>
                     </thead>
                     <tbody></tbody>
@@ -189,9 +194,9 @@
 
         <div class="col-sm-12 col-md-12 col-lg-6">
             <div>
-                <script type="text/javascript" charset="utf-8" async
-                        src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A4bf92ec3122f25a92f96574179ea40a04ecdfc45a1eba920e34b6faab6f074e2&amp;height=350&amp;lang=ru_RU&amp;scroll=true"></script>
-            </div>
+                <!--<script type="text/javascript" charset="utf-8" async
+                        src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A4bf92ec3122f25a92f96574179ea40a04ecdfc45a1eba920e34b6faab6f074e2&amp;height=450&amp;lang=ru_RU&amp;scroll=true"></script>
+            --></div>
 
         </div>
 

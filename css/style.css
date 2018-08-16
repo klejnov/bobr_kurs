@@ -300,7 +300,6 @@ nav .navbar-nav > li > a:hover {
     border-color: #f66c6a;
 }
 
-
 #inlineFormInputGroup {
     height: 35px;
     text-align: center;
@@ -465,7 +464,30 @@ table.dataTable img {
     padding-bottom: 3px;
 }
 
-.table-show {
+tr > td:first-child {
+
+    position: relative;
+}
+
+tr > td:first-child i {
+    cursor: pointer;
+    color: #d7d7d7;
+    font-size: 1rem;
+    padding-right: 0.5em;
+    position: absolute;
+    top: .5rem;
+    right: 0;
+}
+
+tr > td:first-child:hover i {
+    color: #c1c1c1;
+}
+
+tr[role="row"]  {
+    cursor: pointer;
+}
+
+.table-show, .button-show {
     display: none;
 }
 

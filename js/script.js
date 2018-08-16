@@ -204,8 +204,15 @@ $(function () {
             var rub_buy_sum = (Math.round(element.rub_buy * settings.number * 10000) / 10000 );
             var rub_sell_sum = (Math.round(element.rub_sell * settings.number * 10000) / 10000 );
 
+            var latlng = element.latlng.split(',').reverse().join(',');
+
             table.row.add([
-                '<tr><td><img src="/admin/files/img/ico/' + element.ico + '" alt="">' + element.name + '<div data-info="info" data-id="' + element.banks_id + '" style="display: none">' + element.address + '<br>Банк обновлял курсы: ' + element.time + '</div><i class="fas fa-info-circle"></i></td>',
+                '<td><img src="/admin/files/img/ico/' + element.ico + '" alt="">' + element.name + '' +
+                '<div data-info="info" data-id="' + element.banks_id + '" style="display: none">' + element.address + '<br><span>Банк обновлял курсы: ' + element.time + '</span>' +
+                '<img width="100%" src="data:image/gif;base64,R0lGODlhqAIsAZECADWz27vM0////wAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQFCgACACwAAAAAqAIsAQAC/5SPqcvtD6OctNqLs968+w+G4kiW5omm6sq27gvH8kzX9o3n+s73/g8MCofEovGITCqXzKbzCY1Kp9Sq9YrNarfcrvcLDovH5LL5jE6r1+y2+w2Py+f0uv2Oz+v3/L7/DxgoOEhYaHiImKi4yNjo+AgZKTlJWWl5iZmpucnZ6fkJGio6SlpqeoqaqrrK2ur6ChsrO0tba3uLm6u7y9vr+wscLDxMXGx8jJysvMzc7PwMHS09TV1tfY2drb3N3e39DR4uPk5ebn6Onq6+zt7u/g4fLz9PX29/j5+vv8/f7/8PMKDAgQQLGjyIMKHChQwbOnwIMaLEiRQrWryIMaPGjf8cO3r8CDKkyJEkS5o8iTKlypUsW7p8CTOmzJk0a9q8iTOnzp08e/r8CTSo0KFEixo9ijSp0qVMmzp9CjWq1KlUq1q9ijWr1q1cu3r9Cjas2LFky5o9izat2rVs27p9Czeu3Ll069q9izev3r18+/r9Cziw4MGECxs+jDix4sWMGzt+DDmy5MmUK1u+jDmz5s2cO3v+DDq06NGkS5s+jTq16tWsW7t+DTu27Nm0a9u+jTu37t28e/vuGCC48OAMhg8vbpz4guTKFTAPgDx5dOPTjy9nXl347yzPszdP0P26dPHUyVt3jt28dvXfEYTfbuU9+PTox9cvf//8fPv78ff/1+8eff+tB18V8gXIH4L+KQjgAQc6KCCDBA7YHoQJWrhggVE8aACHAngIYoQYNtihiCVeeGKGKZKooRMhovihiTHC+KKKM9pYI4setshEjhNKWOGKP444pJBB3qijjD4eyeMSS0LHHpT5FYkklU96JyWFWQK5ZZNNXBkllmKGSeaUR4Lp5RNoajmmmV0a+WaVZypJJ4xpIrEml22yWSafbu6p550u1okjoUnSaKiVic5pp6COPgpppJJOSmmlll6Kaaaabsppp55+Cmqooo5Kaqmmnopqqqquymqrrr4Ka6yyzkprrbbeimuuuu7Ka6++/gpssMIOS2yxxh6LbLLKly7LbLPOPgtttNJOS2211l6Lbbbabsttt95+C2644o5Lbrnmnotuuuquy2677r4Lb7zyzktvvfbei2+++u7Lb7/+/gtwwAIPTHDBBh+McMIKL8xwww4/DHHEEk9MccUWX4xxxhpvzHHHHn8Mcsgij0xyySafjHLKKq/McssuvwxzzDLPTHPNNt+Mc84678xzzz7/DHRXBQAAIfkEBQoAAgAsCAGQAAgADAAAAgiEj6nL7Q9jKgAh+QQFCgACACwYAZAACAAMAAACCISPqcvtD2MqACH5BAUKAAIALCgBkAAIAAwAAAIIhI+py+0PYyoAIfkEBQoAAgAsOAGQAAgADAAAAgiEj6nL7Q9jKgAh+QQFCgACACxIAZAACAAMAAACCISPqcvtD2MqACH5BAUKAAIALFgBkAAIAAwAAAIIhI+py+0PYyoAIfkEBQoAAgAsaAGQAAgADAAAAgiEj6nL7Q9jKgAh+QQFCgACACx4AZAACAAMAAACCISPqcvtD2MqACH5BAUKAAIALIgBkAAIAAwAAAIIhI+py+0PYyoAIfkEBQoAAgAsmAGQAAgADAAAAgiEj6nL7Q9jKgAh+QQFCgACACwAAAAAAQABAAACAlQBADs=" alt="Местонахождение банка" data-pic="https://static-maps.yandex.ru/1.x/?l=map&pt=' + latlng + ',pm2rdl&size=514,300&z=16&lang=ru_RU">' +
+                '</div>' +
+                '<i class="fas fa-info-circle"></i>' +
+                '</td>',
                 '<td>' + usd_buy + '</td>',
                 '<td>' + usd_sell + '</td>',
                 '<td class="usd_buy_sum">' + usd_buy_sum + ' р.</td>',
@@ -217,7 +224,7 @@ $(function () {
                 '<td>' + rub_buy + '</td>',
                 '<td>' + rub_sell + '</td>',
                 '<td class="rub_buy_sum">' + rub_buy_sum + ' р.</td>',
-                '<td class="rub_sell_sum">' + rub_sell_sum + ' р.</td></tr>'
+                '<td class="rub_sell_sum">' + rub_sell_sum + ' р.</td>'
             ]).draw(true);
 
             showInfoBank();
@@ -230,15 +237,27 @@ $(function () {
         $('tbody>tr').off('click');
         table.draw();
         $('tbody>tr').on('click', function () {
-            $(this).toggleClass("active");
+            //$(this).toggleClass("active");
             var value = $(this).find('div').html();
             console.log(value);
 
             var id = $(this).find('div').data("id");
 
-            $(this).after('<tr data-id-bank="bank' + id + '"><td colspan="3">' + value + '</td></tr>').slideDown(1000);
 
-            $(this).not('.active').parent().find('[data-id-bank="bank' + id + '"]').slideUp(2000).remove();
+            if ($(this).parent().find('[data-id-bank="bank' + id + '"]').is('[data-id-bank="bank' + id + '"]')) {
+
+                $(this).parent().find('[data-id-bank="bank' + id + '"]').remove();
+            } else {
+                $(this).after('<tr data-id-bank="bank' + id + '"><td  colspan="3"><p style="display: none" data-id-bank="bank' + id + '">' + value + '</p></td></tr>');
+
+                $(this).parent().find('[data-id-bank="bank' + id + '"]').slideDown(300);
+
+
+            }
+            var kx = $(this).parent().find('[data-id-bank="bank' + id + '"] img').data('pic');
+            $(this).parent().find('[data-id-bank="bank' + id + '"] img').attr('src', kx);
+
+            //$('.dataTable tr:empty').remove();
 
         });
     }
@@ -359,8 +378,6 @@ $(function () {
         settingsApply();
     });
 
-
-    //console.log('Тест2');
 
     $("a").click(function () {
         $(this).toggleClass("open");
@@ -490,4 +507,8 @@ $(function () {
         console.log(settings);
 
     };
+
+
 });
+
+

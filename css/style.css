@@ -463,6 +463,9 @@ table.dataTable img {
     margin-right: 2px;
     padding-bottom: 3px;
 }
+table.dataTable p img {
+
+}
 
 tr > td:first-child {
 
@@ -485,6 +488,11 @@ tr > td:first-child:hover i {
 
 tr[role="row"]  {
     cursor: pointer;
+}
+
+tbody p{
+
+    margin-bottom: 0;
 }
 
 .table-show, .button-show {

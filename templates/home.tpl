@@ -20,6 +20,8 @@
     <script src="../libs/chart.js/custom-tooltips.min.js"></script>
     <script src="../libs/chart.js/chart.min.js"></script>
 
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+
     <title>Курсы валют в Бобруйске</title>
 </head>
 <body>
@@ -188,16 +190,11 @@
                     </thead>
                     <tbody></tbody>
                 </table>
-                Показать: <a href="#" id="show-10">10</a> | <a href="#" id="show-all">ВСЕ</a>
             </div>
         </div>
 
         <div class="col-sm-12 col-md-12 col-lg-6">
-            <div>
-                <!--<script type="text/javascript" charset="utf-8" async
-                        src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A4bf92ec3122f25a92f96574179ea40a04ecdfc45a1eba920e34b6faab6f074e2&amp;height=450&amp;lang=ru_RU&amp;scroll=true"></script>
-            --></div>
-
+            <div id="map"></div>
         </div>
 
     </div>

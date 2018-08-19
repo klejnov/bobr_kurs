@@ -16,43 +16,39 @@ function mtbank_by($banks_id)
 			$usd = '';
 			$rub = '';
 			$eur = '';
-			foreach ($tmp->currency as $tmp2) {
-				if ($tmp2->code == 'BYN' && $tmp2->codeTo == 'USD') {
-					$usd = array(
-						'purchase' => $tmp2->purchase,
-						'sale' => $tmp2->sale,
-					);
-				} elseif ($tmp2->code == 'BYN' && $tmp2->codeTo == 'EUR') {
-					$eur = array(
-						'purchase' => $tmp2->purchase,
-						'sale' => $tmp2->sale,
-					);
-				} elseif ($tmp2->code == 'BYN' && $tmp2->codeTo == 'RUB') {
-					$rub = array(
-						'purchase' => $tmp2->purchase,
-						'sale' => $tmp2->sale,
-					);
-				}
-			}
-			/*echo "<tr>
-				<td>{$tmp->attributes()['label']}</td>
-				<td>{$tmp->attributes()['address']}</td>
-	
-				<td>USD</td>
-				<td>{$usd['purchase']}</td>
-				<td>{$usd['sale']}</td>
-	
-				<td>EUR</td>
-				<td>{$eur['purchase']}</td>
-				<td>{$eur['sale']}</td>
-	
-				<td>RUB</td>
-				<td>{$rub['purchase']}</td>
-				<td>{$rub['sale']}</td>
-			</tr>";*/
-
-           //global $banks_id;
-
+            foreach ($tmp->currency as $tmp2) {
+                if ($tmp2->codeTo == 'BYN' && $tmp2->code == 'USD' && $tmp2->cacheless == '0') {
+                    $usd = array(
+                        'purchase' => $tmp2->purchase,
+                        'sale' => $tmp2->sale,
+                    );
+                } elseif ($tmp2->code == 'BYN' && $tmp2->codeTo == 'USD' && $tmp2->cacheless == '0') {
+                    $usd = array(
+                        'purchase' => $tmp2->sale,
+                        'sale' => $tmp2->purchase,
+                    );
+                } elseif ($tmp2->codeTo == 'BYN' && $tmp2->code == 'EUR' && $tmp2->cacheless == '0') {
+                    $eur = array(
+                        'purchase' => $tmp2->purchase,
+                        'sale' => $tmp2->sale,
+                    );
+                } elseif ($tmp2->code == 'BYN' && $tmp2->codeTo == 'EUR' && $tmp2->cacheless == '0') {
+                    $eur = array(
+                        'purchase' => $tmp2->sale,
+                        'sale' => $tmp2->purchase,
+                    );
+                } elseif ($tmp2->codeTo == 'BYN' && $tmp2->code == 'RUB' && $tmp2->cacheless == '0') {
+                    $rub = array(
+                        'purchase' => $tmp2->purchase,
+                        'sale' => $tmp2->sale,
+                    );
+                } elseif ($tmp2->code == 'BYN' && $tmp2->codeTo == 'RUB' && $tmp2->cacheless == '0') {
+                    $rub = array(
+                        'purchase' => $tmp2->sale,
+                        'sale' => $tmp2->purchase,
+                    );
+                }
+            }
 
 		}
 	}
@@ -88,12 +84,12 @@ function mtbank_by($banks_id)
     }
 
     $data = array(array(
-        'usd_buy' => (string)$usd['sale'],
-        'usd_sell' => (string)$usd['purchase'],
-        'eur_buy' => (string)$eur['sale'],
-        'eur_sell' => (string)$eur['purchase'],
-        'rub_buy' => (string)$rub['sale'],
-        'rub_sell' => (string)$rub['purchase'],
+        'usd_buy' => (string)$usd['purchase'],
+        'usd_sell' => (string)$usd['sale'],
+        'eur_buy' => (string)$eur['purchase'],
+        'eur_sell' => (string)$eur['sale'],
+        'rub_buy' => (string)$rub['purchase'],
+        'rub_sell' => (string)$rub['sale'],
         'banks_id' => (string)$banks_id,
         'status' => $status,
     ));

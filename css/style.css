@@ -548,7 +548,17 @@ div.dataTables_wrapper div.dataTables_filter, div.dataTables_wrapper div.dataTab
     text-align: right !important;
 }
 
+#map{
+    height: 600px;
+    width: 99.5%;
+}
 
+.map-show {
+    border: 1px solid #c8ced3;
+    border-radius: .25rem;
+    display: inline-block;
+    width: 100%;
+}
 
 /*// Small devices (landscape phones, 576px and down)*/
 @media (max-width: 576px) {
@@ -571,8 +581,8 @@ div.dataTables_wrapper div.dataTables_filter, div.dataTables_wrapper div.dataTab
     }
 
     #map {
-        margin-top: 0px;
         height: 400px;
+        width: 99.5%;
     }
 }
 
@@ -586,8 +596,8 @@ div.dataTables_wrapper div.dataTables_filter, div.dataTables_wrapper div.dataTab
 /*// Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) {
     #map {
-        margin-top: 0px;
         height: 400px;
+        width: 99.5%;
     }
     .spinner-show {
         text-align: center;
@@ -597,9 +607,8 @@ div.dataTables_wrapper div.dataTables_filter, div.dataTables_wrapper div.dataTab
 /*// Large devices (desktops, 992px and up)*/
 @media (min-width: 992px) {
     #map {
-        margin-top: -40px;
-        width: 100%;
-        height: 600px
+        height: 600px;
+        width: 99.5%;
     }
     .spinner-show {
         text-align: right;
@@ -609,8 +618,7 @@ div.dataTables_wrapper div.dataTables_filter, div.dataTables_wrapper div.dataTab
 /*// Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
     #map {
-        margin-top: -40px;
-        width: 100%;
-        height: 600px
+        height: 600px;
+        width: 99.5%;
     }
 }

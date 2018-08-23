@@ -30,6 +30,7 @@ class DataBase
 
     /**
      * @param $sql
+     *
      * @return mixed
      */
     public function execute($sql)
@@ -48,6 +49,7 @@ class DataBase
 
     /**
      * @param $sql
+     *
      * @return array
      */
     public function query($sql)
@@ -61,10 +63,10 @@ class DataBase
         return $result;
     }
 
-
     /**
      * @param $start
      * @param $end
+     *
      * @return array
      */
     public function getCurrencyRatesWidget($start, $end)
@@ -90,7 +92,7 @@ class DataBase
 
         $sth->execute(array(
             'sql_start' => $start,
-            'sql_end' => $end,
+            'sql_end'   => $end,
         ));
 
         $result = $sth->fetchALL(PDO::FETCH_ASSOC);
@@ -120,7 +122,7 @@ class DataBase
                     bk.rub_buy,
                     bk.rub_sell,
                     bk.banks_id,
-                    DATE_FORMAT(bk.time, '%Y-%m-%d %H:%i:%s') AS time
+                    DATE_FORMAT(bk.time, '%Y-%m-%d %H:%i') AS time
                 FROM banks_kurs AS bk
                 LEFT JOIN banks AS b ON b.id = bk.banks_id)
                 UNION ALL
@@ -154,10 +156,51 @@ class DataBase
         }
 
         echo json_encode($result);
-
     }
 
+    /**
+     * @param $id_bank
+     * @param $currency
+     * @param $start
+     * @param $end
+     *
+     * @return array
+     */
+    public function getCurrencyRatesChart($id_bank, $currency, $start, $end)
+    {
 
+        if ($currency == 'usd') {
+            $currency = 'usd_buy, usd_sell';
+        } elseif ($currency == 'eur') {
+            $currency = 'eur_buy, eur_sell';
+        } elseif ($currency == 'rub') {
+            $currency = 'rub_buy, rub_sell';
+        } else {
+            exit();
+        }
+        $sth = $this->link->prepare(
+            "SELECT id, 
+                DATE_FORMAT(time, '%d.%m.%Y %H:%i') AS time,
+                $currency
+                FROM banks_kurs
+                WHERE banks_id = :sql_banks_id AND time BETWEEN :sql_start AND :sql_end
+                ORDER BY DATE_FORMAT(time, '%Y-%m-%d %H:%i')"
+        );
+
+        $sth->execute(array(
+            'sql_banks_id' => $id_bank,
+            'sql_start'    => $start,
+            'sql_end'      => $end,
+        ));
+
+        $result = $sth->fetchALL(PDO::FETCH_ASSOC);
+
+        if ($result === false) {
+            return [];
+        }
+
+        return $result;
+    }
 
     /**
      * @param $dbName
@@ -166,7 +209,7 @@ class DataBase
      */
     static function backup()
     {
-        $config = include 'config.php';
+        $config = include 'admin/config.php';
         $today = date("Y.m.d_H-i-s");
         $dir = __DIR__;
         shell_exec("mysqldump -u{$config['username']} -p{$config['password']} {$config['db_name']} > $dir/../backup/dump_$today.sql");

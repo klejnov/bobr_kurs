@@ -72,7 +72,9 @@
             <div class="brand-card usd-card">
                 <div class="brand-card-header bg-usd">
                     <i class="fas fa-dollar-sign"></i>
-                    <i class="fas fa-chart-line" title="Динамика за 2 недели"><div class="dynamics">Динамика за 2 недели</div></i>
+                    <i class="fas fa-chart-line" title="Динамика за 2 недели">
+                        <div class="dynamics">Динамика за 2 недели</div>
+                    </i>
                     <div class="chart-wrapper">
                         <canvas id="usd-box-chart-1" height="90"></canvas>
                     </div>
@@ -94,7 +96,9 @@
             <div class="brand-card eur-card">
                 <div class="brand-card-header bg-eur">
                     <i class="fas fa-euro-sign"></i>
-                    <i class="fas fa-chart-line" title="Динамика за 2 недели"><div class="dynamics">Динамика за 2 недели</div></i>
+                    <i class="fas fa-chart-line" title="Динамика за 2 недели">
+                        <div class="dynamics">Динамика за 2 недели</div>
+                    </i>
                     <div class="chart-wrapper">
                         <canvas id="eur-box-chart-2" height="90"></canvas>
                     </div>
@@ -116,7 +120,9 @@
             <div class="brand-card rub-card">
                 <div class="brand-card-header bg-rub">
                     <i class="fas fa-ruble-sign"></i>
-                    <i class="fas fa-chart-line" title="Динамика за 2 недели"><div class="dynamics">Динамика за 2 недели</div></i>
+                    <i class="fas fa-chart-line" title="Динамика за 2 недели">
+                        <div class="dynamics">Динамика за 2 недели</div>
+                    </i>
                     <div class="chart-wrapper">
                         <canvas id="rub-box-chart-3" height="90"></canvas>
                     </div>
@@ -137,70 +143,77 @@
     </div>
 </div>
 
-<div class="container button-show">
+<div class="container">
     <div class="row">
-        <div class="col-xl-2 col-lg-3 col-md-5 col-sm-6">
-            <div class="buy-sell">
-                <button type="button" class="btn btn-block btn-outline-usd btn-left">Купить</button>
-                <button type="button" class="btn btn-block btn-outline-usd btn-right">Продать</button>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+
+            <div class="spinner-show"><i class="fas fa-spinner fa-spin"></i></div>
+            <div class="row">
+
+                <div class="col-xl-4 col-lg-6 col-md-5 col-sm-6">
+                    <div class="buy-sell button-show">
+                        <button type="button" class="btn btn-block btn-outline-usd btn-left">Купить</button>
+                        <button type="button" class="btn btn-block btn-outline-usd btn-right">Продать</button>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 select-input button-show">
+                    <label class="sr-only" for="inlineFormInputGroup"></label>
+                    <div class="input-group mb-1">
+                        <input type="number" min="0" class="form-control number" id="inlineFormInputGroup" value="">
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-4 col-md-5 col-sm-4 btn-content button-show">
+                    <button type="button" class="btn btn-block btn-outline-usd" id="usd"><i
+                                class="fas fa-dollar-sign"></i></button>
+                    <button type="button" class="btn btn-block btn-outline-eur" id="eur"><i
+                                class="fas fa-euro-sign"></i></button>
+                    <button type="button" class="btn btn-block btn-outline-rub" id="rub"><i
+                                class="fas fa-ruble-sign"></i></button>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="table-show">
+                        <table class="table dataTable" id="myTable" data-page-length='10'>
+                            <thead>
+                            <tr>
+                                <th>Банк</th>
+                                <th>Курс</th>
+                                <th>Курс</th>
+                                <th>Получу</th>
+                                <th>Отдам</th>
+                                <th>Курс</th>
+                                <th>Курс</th>
+                                <th>Получу</th>
+                                <th>Отдам</th>
+                                <th>Курс</th>
+                                <th>Курс</th>
+                                <th>Получу</th>
+                                <th>Отдам</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-xl-1 col-lg-1 col-md-2 col-sm-2 select-input">
-            <label class="sr-only" for="inlineFormInputGroup"></label>
-            <div class="input-group mb-1">
-                <input type="number" min="0" class="form-control number" id="inlineFormInputGroup" value="">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+            <div class="map">
+                <div id="map"></div>
             </div>
         </div>
-        <div class="col-xl-3 col-lg-2 col-md-5 col-sm-4 btn-content">
-            <button type="button" class="btn btn-block btn-outline-usd" id="usd"><i
-                        class="fas fa-dollar-sign"></i></button>
-            <button type="button" class="btn btn-block btn-outline-eur" id="eur"><i
-                        class="fas fa-euro-sign"></i></button>
-            <button type="button" class="btn btn-block btn-outline-rub" id="rub"><i
-                        class="fas fa-ruble-sign"></i></button>
-        </div>
-        <div class="col-xl-6"></div>
     </div>
 </div>
 
 </div>
 <div class="container">
-    <div class="row">
 
-        <div class="col-lg-6 col-md-12 col-sm-12">
-            <div class="spinner-show"><i class="fas fa-spinner fa-spin"></i></div>
-            <div class="table-show">
-                <table class="table dataTable" id="myTable" data-page-length='10'>
-                    <thead>
-                    <tr>
-                        <th>Банк</th>
-                        <th>Курс</th>
-                        <th>Курс</th>
-                        <th>Получу</th>
-                        <th>Отдам</th>
-                        <th>Курс</th>
-                        <th>Курс</th>
-                        <th>Получу</th>
-                        <th>Отдам</th>
-                        <th>Курс</th>
-                        <th>Курс</th>
-                        <th>Получу</th>
-                        <th>Отдам</th>
-                    </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="col-sm-12 col-md-12 col-lg-6">
-            <div id="map"></div>
-        </div>
-
-    </div>
 </div>
 
-
 <script src="../js/script.js"></script>
+
 </body>
 </html>

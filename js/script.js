@@ -32,17 +32,17 @@ $(function () {
             data: {AjaxAction: "WidgetGet"}
         }).done(function (result) {
 
+            if ($.isEmptyObject(result)) {
+                console.log('Завершаем работу. Пустой объект JSON');
+                return;
+            }
+
             $("#current-rate-usd-buy").text(result.current_rate_usd_buy);
             $("#current-rate-usd-sell").text(result.current_rate_usd_sell);
             $("#current-rate-eur-buy").text(result.current_rate_eur_buy);
             $("#current-rate-eur-sell").text(result.current_rate_eur_sell);
             $("#current-rate-rub-buy").text(result.current_rate_rub_buy);
             $("#current-rate-rub-sell").text(result.current_rate_rub_sell);
-
-            if ($.isEmptyObject(result)) {
-                console.log('Завершаем работу. Пустой объект JSON');
-                return;
-            }
 
             Chart.defaults.global.pointHitDetectionRadius = 1;
             Chart.defaults.global.tooltips.enabled = false;
@@ -80,8 +80,8 @@ $(function () {
                     labels: brandBoxChartLabels,
                     datasets: [{
                         label: 'Продажа',
-                        backgroundColor: 'rgba(255,255,255,.1)',
-                        borderColor: 'rgba(255,255,255,.55)',
+                        backgroundColor: 'rgba(255,255,255,0.1)',
+                        borderColor: 'rgba(255,255,255,0.55)',
                         pointHoverBackgroundColor: '#fff',
                         borderWidth: 2,
                         data: result.graph_usd_sell
@@ -169,6 +169,14 @@ $(function () {
                 showInfoBank();
             });
 
+
+            ymaps.ready(function(){
+                init();
+                tableCreate();
+                tableCalc();
+                showBanksAll();
+            });
+
         }).fail(function () {
             alert('Что-то пошло не так. Повторите позже.');
         });
@@ -178,11 +186,11 @@ $(function () {
     ratesWidgetGet();
     banksTableGet();
 
-    setTimeout(function () {
 
-        ymaps.ready(init);
+        //ymaps.ready(init);
 
-    }, 1000);
+
+
 
     var tableCalc = function () {
 
@@ -254,6 +262,7 @@ $(function () {
 
         });
     }
+
 
     function showInfoBank() {
 
@@ -392,9 +401,8 @@ $(function () {
     });
 
 
-    $("a").click(function () {
+    $("a.navicon-button").click(function () {
         $(this).toggleClass("open");
-        $("h1").addClass("fade");
     });
 
 
@@ -449,6 +457,7 @@ $(function () {
 
             // Добавляем коллекцию на карту.
             myMap.geoObjects.removeAll();
+            myMap.geoObjects.add(bobrBy);
             myMap.geoObjects.add(usdSell);
             // Устанавливаем карте центр и масштаб так, чтобы охватить коллекцию целиком.
             myMap.setBounds(usdSell.getBounds());
@@ -467,6 +476,7 @@ $(function () {
 
             // Добавляем коллекцию на карту.
             myMap.geoObjects.removeAll();
+            myMap.geoObjects.add(bobrBy);
             myMap.geoObjects.add(usdBuy);
             // Устанавливаем карте центр и масштаб так, чтобы охватить коллекцию целиком.
             myMap.setBounds(usdBuy.getBounds());
@@ -486,6 +496,7 @@ $(function () {
 
             // Добавляем коллекцию на карту.
             myMap.geoObjects.removeAll();
+            myMap.geoObjects.add(bobrBy);
             myMap.geoObjects.add(eurSell);
             // Устанавливаем карте центр и масштаб так, чтобы охватить коллекцию целиком.
             myMap.setBounds(eurSell.getBounds());
@@ -504,6 +515,7 @@ $(function () {
 
             // Добавляем коллекцию на карту.
             myMap.geoObjects.removeAll();
+            myMap.geoObjects.add(bobrBy);
             myMap.geoObjects.add(eurBuy);
             // Устанавливаем карте центр и масштаб так, чтобы охватить коллекцию целиком.
             myMap.setBounds(eurBuy.getBounds());
@@ -524,6 +536,7 @@ $(function () {
 
             // Добавляем коллекцию на карту.
             myMap.geoObjects.removeAll();
+            myMap.geoObjects.add(bobrBy);
             myMap.geoObjects.add(rubSell);
             // Устанавливаем карте центр и масштаб так, чтобы охватить коллекцию целиком.
             myMap.setBounds(rubSell.getBounds());
@@ -542,6 +555,7 @@ $(function () {
 
             // Добавляем коллекцию на карту.
             myMap.geoObjects.removeAll();
+            myMap.geoObjects.add(bobrBy);
             myMap.geoObjects.add(rubBuy);
             // Устанавливаем карте центр и масштаб так, чтобы охватить коллекцию целиком.
             myMap.setBounds(rubBuy.getBounds());
@@ -597,8 +611,33 @@ $(function () {
             strokeWidth: 4,
             geodesic: true
         });
+        bobrBy = new ymaps.GeoObjectCollection({}, {
+            preset: "islands#grayStretchyIcon",
+            strokeWidth: 4,
+            geodesic: true
+        });
 
-// Добавляем в коллекцию метки и линию.
+// Добавляем в коллекцию метки.
+
+        bobrBy.add(new ymaps.Placemark(["53.13789", "29.22835"], {
+            iconContent: "BOBR.by",
+            balloonContentHeader: "Офис BOBR.by",
+            balloonContentFooter: "График работы офиса: с 9.00 до 17.30, пятница до 17.00, выходной: суббота, воскресенье.",
+            hintContent: "Подробнее о нас",
+            balloonContentBody: [
+                '<address>',
+                '<strong>Адрес</strong>',
+                ' ул. Карла Либкнехта, 25',
+                '<br/>',
+                '<strong>Телефоны</strong>',
+                ' (0225) <a href="tel:+375225707044">70-70-44</a> (гор.), (029) <a href="tel:+375291205550">120-55-50</a> (vel)',
+                '<br/>',
+                '<strong>E-mail</strong>',
+                ' <a href="mailto:admin@bobr.by">admin@bobr.by</a>',
+                '</address>'
+            ].join('')
+        }));
+
 
         $.each(tableArr, function (key, element) {
 
@@ -695,11 +734,12 @@ $(function () {
         $(".spinner-show").hide();
         $(".button-show").show();
         $(".table-show").show();
+        $(".map").addClass('map-show');
         $(".dataTable tbody").empty();
 
-        tableCreate();
-        tableCalc();
-        showBanksAll();
+
+        //tableCalc();
+        //showBanksAll();
 
     }
 
@@ -709,10 +749,10 @@ $(function () {
 
             alert("В таблице отсутствуют данные");
 
-            banksTableGet();
+           // banksTableGet();
 
         }
-    }, 1500);
+    }, 3000);
 });
 
 

@@ -143,4 +143,6 @@ HTML_BLOCK;
 
 //DataBase::backup();
 
+$year = date("Y");
+
 require "templates/home.tpl";

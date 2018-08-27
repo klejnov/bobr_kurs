@@ -7,18 +7,20 @@
     <link rel="icon" href="../img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../css/fontawesome.css">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../libs/dataTables/datatables.min.css">
+    <link rel="stylesheet" href="../libs/bootstrap-select/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 
     <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="../libs/bootstrap/popper.min.js"></script>
+    <script src="../libs/bootstrap/bootstrap.min.js"></script>
     <script src="../libs/dataTables/datatables.min.js"></script>
 
     <script src="../libs/coreui/coreui.min.js"></script>
     <script src="../libs/chart.js/custom-tooltips.min.js"></script>
     <script src="../libs/chart.js/chart.min.js"></script>
+    <script src="../libs/bootstrap-select/bootstrap-select.min.js"></script>
 
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 
@@ -209,8 +211,61 @@
 </div>
 
 </div>
-<div class="container">
 
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="wrapper-chart">
+                <div class="col-sm-12 col-md-4 col-lg-3">
+                    <select id="basic" class="selectpicker show-tick form-control" data-live-search="true">
+                    </select>
+                    <div class="address"></div>
+                </div>
+                <div class="col-sm-12 col-md-8 col-lg-9">
+                    <div class="input-group-append graph-btn">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-light active">
+                                <input type="radio" name="options" id="option1" value="usd" autocomplete="off"
+                                       checked><i
+                                        class="fas fa-dollar-sign"></i>
+                            </label>
+                            <label class="btn btn-light">
+                                <input type="radio" name="options" id="option2" value="eur" autocomplete="off"><i
+                                        class="fas fa-euro-sign"></i>
+                            </label>
+                            <label class="btn btn-light">
+                                <input type="radio" name="options" id="option3" value="rub" autocomplete="off"><i
+                                        class="fas fa-ruble-sign"></i>
+                            </label>
+
+                            <button class="btn btn-light dropdown-toggle period" type="button" data-toggle="dropdown"
+                                    data-period="week"
+                                    aria-haspopup="true" aria-expanded="false">Неделя
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" data-period="day" href="#">Сутки</a>
+                                <a class="dropdown-item" data-period="week" href="#">Неделя</a>
+                                <a class="dropdown-item" data-period="month" href="#">Месяц</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+
+                    <div>
+                        <canvas id="main-chart" style="height: 350px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row b-footer">
+        <div class="text-wrapper">
+            &copy; <a href="https://bobr.by">BOBR.BY</a>, 2006 &ndash; <?= $year ?></div>
+    </div>
 </div>
 
 <script src="../js/script.js"></script>

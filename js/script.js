@@ -165,6 +165,8 @@ $(function () {
 
             tableArr = result;
 
+            getDataSearchFormChart();
+
             $('input.form-control').on('keyup change', function () {
                 showInfoBank();
             });
@@ -269,20 +271,26 @@ $(function () {
 
             var id = $(this).find('div').data("id");
 
-            if ($(this).parent().find('[data-id-bank="bank' + id + '"]').is('[data-id-bank="bank' + id + '"]')) {
+            if ($(this).parent().find('[data-id-bank="' + id + '"]').is('[data-id-bank="' + id + '"]')) {
 
-                $(this).parent().find('[data-id-bank="bank' + id + '"]').remove();
+                var block = $(this).parent().find('[data-id-bank="' + id + '"]');
+                block.slideUp(300);
+
+                setTimeout(function () {
+                    block.remove();
+                }, 350);
+
             } else {
-                $(this).after('<tr data-id-bank="bank' + id + '"><td  colspan="3"><p style="display: none" data-id-bank="bank' + id + '">' + value + '</p></td></tr>');
+                $(this).after('<tr data-id-bank="' + id + '"><td  colspan="3"><p style="display: none" data-id-bank="' + id + '">' + value + '</p></td></tr>');
 
-                $(this).parent().find('[data-id-bank="bank' + id + '"]').slideDown(300);
+                $(this).parent().find('[data-id-bank="' + id + '"]').slideDown(300);
 
 
             }
             // var kx = $(this).parent().find('[data-id-bank="bank' + id + '"] img').data('pic');
             // $(this).parent().find('[data-id-bank="bank' + id + '"] img').attr('src', kx);
 
-            var src_pic = $(this).parent().find('[data-id-bank="bank' + id + '"] img');
+            var src_pic = $(this).parent().find('[data-id-bank="' + id + '"] img');
             src_pic.attr('src', src_pic.data('pic'));
 
         });
@@ -668,6 +676,7 @@ $(function () {
         $(".button-show").show();
         $(".table-show").show();
         $(".map").addClass('map-show');
+        $(".wrapper-chart").css("opacity", "1");
     }
 
     setTimeout(function () {
@@ -890,6 +899,157 @@ $(function () {
 
         });
         table.page.len(10).draw();
+    }
+
+
+    function banksChartGet(idBank, currency, period) {
+
+        $.ajax({
+            type: "GET",
+            url: "index.php",
+            dataType: "json",
+            data: {AjaxAction: "ChartInfoGet", AjaxIdBank: idBank, AjaxCurrency: currency, AjaxPeriod: period}
+        }).done(function (result) {
+
+            if ($.isEmptyObject(result)) {
+                console.log('Завершаем работу. Пустой объект JSON');
+                return;
+            }
+
+            var ChartArr = result;
+
+            console.log(ChartArr.graph_time);
+            console.log(ChartArr.graph_buy);
+            console.log(ChartArr.graph_sell);
+
+            mainChartUpdate(ChartArr);
+
+        }).fail(function () {
+            console.log('Что-то пошло не так. Повторите позже.');
+        });
+    }
+
+    var mainChart = new Chart($('#main-chart'), {
+        type: 'line',
+        options: {
+            maintainAspectRatio: false,
+            legend: {
+                position: 'bottom'
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false
+            },
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        color: 'transparent',
+                        zeroLineColor: 'transparent'
+                    },
+                    ticks: {
+                        fontSize: 10,
+                        display: false
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        fontSize: 10,
+                        display: true
+                    }
+                }]
+            },
+            elements: {
+                line: {
+                    // tension: 0.00001,
+                    borderWidth: 1
+                },
+                point: {
+                    radius: 4,
+                    hitRadius: 10,
+                    hoverRadius: 4
+                }
+            }
+        }
+    });
+
+    function mainChartUpdate(ChartArr) {
+
+        mainChart.data.labels = ChartArr.graph_time;
+
+        mainChart.data.datasets[0] = {
+            label: 'Продажа',
+            backgroundColor: 'transparent',
+            borderColor: getStyle('--info'),
+            pointHoverBackgroundColor: '#fff',
+            pointBackgroundColor: '#fff',
+            data: ChartArr.graph_buy
+        };
+
+        mainChart.data.datasets[1] = {
+            label: 'Покупка',
+            borderDash: [5, 5],
+            backgroundColor: 'transparent',
+            borderColor: getStyle('--success'),
+            pointHoverBackgroundColor: '#fff',
+            pointBackgroundColor: '#fff',
+            data: ChartArr.graph_sell
+        };
+
+        mainChart.update();
+
+    }
+
+
+    $(".dropdown-menu .dropdown-item").on("click", function () {
+
+        var periodText = $(this).text();
+        var period = $(this).data("period");
+        $(this).parent().parent().find("button").text(periodText);
+        $(this).parent().parent().find("button").data("period", period);
+
+        getDataSearchFormChart();
+    });
+
+    $('#basic').on('change', function () {
+        getDataSearchFormChart();
+    });
+
+    $("label").on("click", function () {
+        setTimeout(function () {
+            getDataSearchFormChart();
+        }, 100)
+    });
+
+    function getDataSearchFormChart() {
+
+        tableArr.sort(function (a, b) {
+            if (a.name < b.name) return -1;
+            if (a.name > b.name) return 1;
+            return 0;
+        });
+        console.log(tableArr);
+
+        $.each(tableArr, function (key, element) {
+
+            $("select.selectpicker").append("<option value=\"" + element.id + "\">" + element.name + "</option>").selectpicker('refresh');
+
+            if ($('#basic').val() == element.id) {
+                var reg = /Адрес: (.*?) Тел.:/;
+                var address = element.address.split(reg);
+                $(".address").html(address[1]);
+            }
+        });
+
+
+        var period = $(".graph-btn button").data("period");
+        var idBank = $('#basic').val();
+        var currency = $(".graph-btn input:checked").val();
+
+        console.log('id банка: ' + idBank + ' Валюта: ' + currency + ' Период: ' + period);
+
+
+        banksChartGet(idBank, currency, period);
+
     }
 
 });

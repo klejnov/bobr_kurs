@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../files/img/favicon.ico">
+    <link rel="icon" href="../admin/files/img/favicon.ico">
 
     <title>Курсы валют в Бобруйске</title>
 
@@ -53,6 +53,9 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
     <![endif]-->
+
+    <link href="files/css/style.css" rel="stylesheet">
+
   </head>
 
   <body>
@@ -69,28 +72,24 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="../index.php">Главная</a>
+            <a class="navbar-brand" href="index.php">Главная</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <!--<li><a href="#">123</a></li>-->
               <li<?=$active_stats?>><a href="index.php?action=stats">Графики</a></li>
-              <li<?=$active_statsavr?>><a href="index.php?action=statsavr">Статистика</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Настройки<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li<?=$active_banks?>><a href="index.php?action=bank">Банки</a></li>
                   <li><a href="index.php?action=cron">Обновить курсы</a></li>
-                  <li><a href="#">Тест 2</a></li>
                   <li role="separator" class="divider"></li>
-                  <li class="dropdown-header">Разработка</li>
-                  <li><a href="#">Разработка 1</a></li>
-                  <li><a href="#">Разработка 2</a></li>
+                  <li class="dropdown-header">Архив</li>
+                  <li<?=$active_statsavr?>><a href="index.php?action=statsavr">Статистика</a></li>
                 </ul>
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <!--<li class="active"><a href="#">Тест <span class="sr-only">(current)</span></a></li>-->
+              <li><a href="../">На сайт</a></li>
               <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   <div class="chip">
                     <img src="files/img/avatars/<?=$user_data2['avatar']?>" alt="Person" width="50" height="50">

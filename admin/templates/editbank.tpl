@@ -92,7 +92,7 @@ echo "
         //Определяем карту, координаты центра и начальный масштаб
         var map = L.map('map').setView([" . $bank_data['latlng'] . "], 16);
         L.marker([" . $bank_data['latlng'] . "]).addTo(map)
-            .bindPopup(\"<strong><img src='files/img/ico/" . $bank_data['ico'] . "'> " . $bank_data['name'] . "</strong><br>" . $bank_data['address'] . "\").openPopup();
+            .bindPopup(\"<strong><img width='25px' src='files/img/ico/" . $bank_data['ico'] . "'> " . $bank_data['name'] . "</strong><br>" . $bank_data['address'] . "\").openPopup();
         //Добавляем на нашу карту слой OpenStreetMap
         L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a rel=\"nofollow\" href=\"http://osm.org/copyright\">OpenStreetMap</a> contributors'

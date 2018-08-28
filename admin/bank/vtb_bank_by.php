@@ -6,7 +6,7 @@ function vtb_bank_by($banks_id)
     //header('Content-Type: text/html; charset=utf-8');
 
     $html = file_get_contents("https://www.vtb-bank.by/");
-    if (preg_match("/<td class='usd'><span><\/span><100<\/td>.*?<span>([^<]*)<\/span>.*?<span>([^<]*)<\/span>.*?<td class='usd'><span><\/span>101 - 1000<\/td>.*?<td class='eur'><span><\/span><100<\/td>.*?<span>([^<]*)<\/span>.*?<span>([^<]*)<\/span>.*?<td class='eur'><span><\/span>105 - 1000<\/td>.*?<td class='rub'><span><\/span><1000<\/td>.*?<span>([^<]*)<\/span>.*?<span>([^<]*)<\/span>.*?<td class='rub'><span><\/span>1010 - 30000<\/td>/ms", $html, $valuta)) {
+    if (preg_match("/<td class='usd'><span><\/span><101<\/td>.*?<span>([^<]*)<\/span>.*?<span>([^<]*)<\/span>.*?<td class='usd'><span><\/span>101 - 1001<\/td>.*?<td class='usd'><span><\/span><105<\/td>.*?<span>([^<]*)<\/span>.*?<span>([^<]*)<\/span>.*?<td class='usd'><span><\/span>105 - 1005<\/td>.*?<td class='usd'><span><\/span><1010<\/td>.*?<span>([^<]*)<\/span>.*?<span>([^<]*)<\/span>.*?<td class='usd'><span><\/span>1010 - 30010<\/td>/ms", $html, $valuta)) {
         $status = 1;
 
     //echo $id_pages;

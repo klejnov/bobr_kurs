@@ -6,7 +6,7 @@ function belgazprombank_by($banks_id)
     //header('Content-Type: text/html; charset=utf-8');
 
     $html = file_get_contents("http://i.belgazprombank.by/index_mobile.php");
-    if (preg_match("/<div class=\"box-t-in\">Курсы валют.*?<th>USD<\/th>.*?<td>1<\/td>\n.*?<td>([^<]*)<.*?<td>([^<]*)<.*?<th>EUR<\/th>.*?<td>1<\/td>\n.*?<td>([^<]*)<.*?<td>([^<]*)<.*?<th>RUR<\/th>.*?<td>100<\/td>\n.*?<td>([^<]*)<.*?<td>([^<]*)<.*?Держателям карточек/ms", $html, $valuta)) {
+    if (preg_match("/<div class=\"box-t-in\">Курсы валют USD.*?<td>1<\/td>\n.*?<td>([^<]*)<.*?<td>([^<]*)<.*?<div class=\"box-t-in\">Курсы валют EUR.*?<td>1<\/td>\n.*?<td>([^<]*)<.*?<td>([^<]*)<.*?<div class=\"box-t-in\">Курсы валют RUB.*?<td>100<\/td>\n.*?<td>([^<]*)<.*?<td>([^<]*)<.*?Держателям карточек/ms", $html, $valuta)) {
         $status = 1;
         $data = array(array(
         'usd_buy' => trim($valuta[1]),

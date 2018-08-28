@@ -579,6 +579,13 @@ div.dataTables_wrapper div.dataTables_filter, div.dataTables_wrapper div.dataTab
     padding-top: 0.5em;
 }
 
+[data-bank] img, address img {
+    width: 18px;
+}
+
+address img {
+    margin-bottom: 2px;
+}
 
 [data-bank]:hover img {
     transform: scale(1.1);
@@ -627,7 +634,7 @@ div.dataTables_wrapper div.dataTables_filter, div.dataTables_wrapper div.dataTab
 
 .wrapper-chart .address {
     margin-left: 14px;
-    margin-top: -3px;
+    margin-top: -1px;
     margin-bottom: 0px;
     font-size: 11px;
     z-index: 1;

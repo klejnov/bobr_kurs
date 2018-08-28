@@ -5,8 +5,8 @@ function bps_sberbank_by($banks_id)
     error_reporting(E_ALL);
     //header('Content-Type: text/html; charset=utf-8');
 
-    $html = file_get_contents("http://www.bps-sberbank.by/43257F17004E948D/currency_rates?OpenForm&tabnum=1&city=%D0%9C%D0%BE%D0%B3%D0%B8%D0%BB%D0%B5%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C&bankbranch=369-601");
-    if (preg_match("/ДОЛЛАР США < 200.*?Покупка<\/div><\/div>([^<]*)<.*?Продажа<\/div><\/div>([^<]*)<.*?ЕВРО < 200.*?Покупка<\/div><\/div>([^<]*)<.*?Продажа<\/div><\/div>([^<]*)<.*?РОССИЙСКИЙ РУБЛЬ.*?Покупка<\/div><\/div>([^<]*)<.*?Продажа<\/div><\/div>([^<]*)</ms", $html, $valuta)) {
+    $html = file_get_contents("https://www.bps-sberbank.by/43257F17004E948D/currency_rates?OpenForm&tabnum=1&city=%D0%9C%D0%BE%D0%B3%D0%B8%D0%BB%D0%B5%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C&bankbranch=369-601");
+    if (preg_match("/Доллар США < 200.*?Покупка<\/div><\/div>([^<]*)<.*?Продажа<\/div><\/div>([^<]*)<.*?Eвро < 200.*?Покупка<\/div><\/div>([^<]*)<.*?Продажа<\/div><\/div>([^<]*)<.*?Российские рубли.*?Покупка<\/div><\/div>([^<]*)<.*?Продажа<\/div><\/div>([^<]*)</ms", $html, $valuta)) {
     $status = 1;
 
     //echo $id_pages;
@@ -41,5 +41,5 @@ function bps_sberbank_by($banks_id)
     return $data;
 
 }
-//bps_sberbank_by()
+//bps_sberbank_by();
 ?>

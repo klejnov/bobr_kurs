@@ -98,7 +98,7 @@
                   </a>
                 <ul class="dropdown-menu">
                   <li<?=$active_edituser?>><a href="index.php?action=edituser"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i> Редактировать</a></li>
-                  <li><a href="../index.php?action=logout"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Выйти</a></li>
+                  <li><a href="../admin/index.php?action=logout"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Выйти</a></li>
                 </ul></li>
             </ul>
           </div><!--/.nav-collapse -->

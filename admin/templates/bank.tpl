@@ -19,7 +19,7 @@
             </tbody>
         </table>
         <p>
-            <a class="btn btn-lg btn-primary" href="../index.php?action=editbank&id=0" role="button">Добавить банк &raquo;</a>
+            <a class="btn btn-lg btn-primary" href="../admin/index.php?action=editbank&id=0" role="button">Добавить банк &raquo;</a>
         </p>
     </div>
 </div>

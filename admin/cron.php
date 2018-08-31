@@ -136,13 +136,16 @@ if ($bank_data['auto'] == 1) {
     addkurs($belgazprombank_by);
 }
 
-$banks_id = 38;
-$bank_data = getbanksinfo($banks_id);
-if ($bank_data['auto'] == 1) {
-    require 'bank/belinvestbank_by.php';
-    $belinvestbank_by = belinvestbank_by($banks_id);
-    addkurs($belinvestbank_by);
+//Удаляет из массива $belinvestbank_by банки для которых установлено ручное обновление
+require 'bank/belinvestbank_by.php';
+$belinvestbank_by = belinvestbank_by();
+foreach ($belinvestbank_by as $key => $belinvestbank_by2) {
+    $bank_data = getbanksinfo($belinvestbank_by2['banks_id']);
+    if ($bank_data['auto'] == 0) {
+        unset($belinvestbank_by[$key]);
+    }
 }
+addkurs($belinvestbank_by);
 
 $banks_id = 39;
 $bank_data = getbanksinfo($banks_id);
@@ -176,10 +179,13 @@ if ($bank_data['auto'] == 1) {
     addkurs($vtb_bank_by);
 }
 
-$banks_id = 34;
-$bank_data = getbanksinfo($banks_id);
-if ($bank_data['auto'] == 1) {
-    require 'bank/belapb_by.php';
-    $belapb_by = belapb_by($banks_id);
-    addkurs($belapb_by);
+//Удаляет из массива $belapb_by банки для которых установлено ручное обновление
+require 'bank/belapb_by.php';
+$belapb_by = belapb_by();
+foreach ($belapb_by as $key => $belapb_by2) {
+    $bank_data = getbanksinfo($belapb_by2['banks_id']);
+    if ($bank_data['auto'] == 0) {
+        unset($belapb_by[$key]);
+    }
 }
+addkurs($belapb_by);

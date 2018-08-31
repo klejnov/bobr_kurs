@@ -1,45 +1,61 @@
 <?php
 
-function belinvestbank_by($banks_id)
+function belinvestbank_by()
 {
     error_reporting(E_ALL);
     //header('Content-Type: text/html; charset=utf-8');
 
-    $html = file_get_contents("https://www.belinvestbank.by/bank-profile/courses.php?print=y");
-    if (preg_match("/<td rowspan=\"4\">Доллар США \(за 1 USD\)<\/td>.*?<td>До 200<\/td>.*?<td align=\"center\"><b>([^ ]*) BYN<\/b>.*?<td align=\"center\"><b>([^ ]*) BYN<\/b>.*?<td rowspan=\"4\">ЕВРО \(за 1 EUR\)<\/td>.*?<td>До 200<\/td>.*?<td align=\"center\"><b>([^ ]*) BYN<\/b>.*?<td align=\"center\"><b>([^ ]*) BYN<\/b>.*?<td rowspan=\"4\">Российский рубль \(за 100 RUB\)<\/td>.*?<td>До 12000<\/td>.*?<td align=\"center\"><b>([^ ]*) BYN<\/b>.*?<td align=\"center\"><b>([^ ]*) BYN<\/b>/ms", iconv( "windows-1251", "UTF-8", $html ), $valuta)) {
-        $status = 1;
+    $xml = simplexml_load_file("https://ibank.belinvestbank.by/api/cashCourses.php");
 
-    //echo iconv( "windows-1251", "UTF-8", $html );
-    //echo $id_pages;
-    //print_r($valuta);
-    //print_r($eur);
-    //global $banks_id;
+    $valuta[0] = $xml->BankSvcRs->ForExRateInqRs[0]->ForExRateRec->ForExRateInfo->CurRate;
+    $valuta[1] = $xml->BankSvcRs->ForExRateInqRs[1]->ForExRateRec->ForExRateInfo->CurRate;
+    $valuta[2] = $xml->BankSvcRs->ForExRateInqRs[8]->ForExRateRec->ForExRateInfo->CurRate;
+    $valuta[3] = $xml->BankSvcRs->ForExRateInqRs[9]->ForExRateRec->ForExRateInfo->CurRate;
+    $valuta[4] = $xml->BankSvcRs->ForExRateInqRs[16]->ForExRateRec->ForExRateInfo->CurRate;
+    $valuta[5] = $xml->BankSvcRs->ForExRateInqRs[17]->ForExRateRec->ForExRateInfo->CurRate;
 
-    $data = array(array(
-        'usd_buy' => trim($valuta[1]),
-        'usd_sell' => trim($valuta[2]),
-        'eur_buy' => trim($valuta[3]),
-        'eur_sell' => trim($valuta[4]),
-        'rub_buy' => trim($valuta[5]),
-        'rub_sell' => trim($valuta[6]),
-        'banks_id' => $banks_id,
-        'status' => $status,
-    ));
-    } else {
+    $data = [];
+    $array_banks_id = [38, 45, 46, 47, 48];
+
+    if (
+        (string)$valuta[0] == '' &&
+        (string)$valuta[1] == '' &&
+        (string)$valuta[2] == '' &&
+        (string)$valuta[3] == '' &&
+        (string)$valuta[4] == '' &&
+        (string)$valuta[5] == ''
+    ) {
         $status = 0;
-        $data = array(array(
-            'usd_buy' => 0,
-            'usd_sell' => 0,
-            'eur_buy' => 0,
-            'eur_sell' => 0,
-            'rub_buy' => 0,
-            'rub_sell' => 0,
-            'banks_id' => $banks_id,
-            'status' => $status,
-        ));
+        foreach ($array_banks_id as $banks_id) {
+            $data[] = array(
+                'usd_buy'  => 0,
+                'usd_sell' => 0,
+                'eur_buy'  => 0,
+                'eur_sell' => 0,
+                'rub_buy'  => 0,
+                'rub_sell' => 0,
+                'banks_id' => $banks_id,
+                'status'   => $status,
+            );
+        }
+    } else {
+        $status = 1;
+        foreach ($array_banks_id as $banks_id) {
+            $data[] = array(
+                'usd_buy'  => trim($valuta[0]),
+                'usd_sell' => trim($valuta[1]),
+                'eur_buy'  => trim($valuta[2]),
+                'eur_sell' => trim($valuta[3]),
+                'rub_buy'  => trim($valuta[4]),
+                'rub_sell' => trim($valuta[5]),
+                'banks_id' => $banks_id,
+                'status'   => $status,
+            );
+        }
     }
     //print_r($data);
     return $data;
 }
-//belinvestbank_by()
+
+//belinvestbank_by();
 ?>

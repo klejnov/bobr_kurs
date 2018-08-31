@@ -81,7 +81,7 @@ if (isset($_GET['action']) and $_GET['action'] == 'authpost'){
     $ico_select = $_POST['icojs'];
     if ($ico_select == 1){
         if (isset($_FILES["file"])) {
-           move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/files/img/ico/".$_FILES['file']['name']);
+           move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/files/img/ico/".$_FILES['file']['name']);
            $file_ico_bank = $_FILES['file']['name'];
          }
     } else {
@@ -114,7 +114,7 @@ if (isset($_GET['action']) and $_GET['action'] == 'authpost'){
     if (isset($_FILES["file"])) {
         $extension = pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
         $new_name_file = $id.'.'.$extension;
-        move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/files/img/avatars/".$new_name_file);
+        move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/files/img/avatars/".$new_name_file);
         $file_user_avatars = $new_name_file;
     }
     $user_data = edituser($id, $login_user, $name_user, $file_user_avatars);

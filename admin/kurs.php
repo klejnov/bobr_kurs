@@ -113,7 +113,7 @@ function addbank ($func_name, $func_auto, $func_latlng, $func_url, $func_address
 //    }
     $query = $db->prepare(
         "INSERT INTO 
-              banks (name, auto, latlng, url, address, ico) 
+              banks (name, auto, latlng, url, address, ico, url_parser, note) 
               VALUES (:sql_name, :sql_auto, :sql_latlng, :sql_url, :sql_address, :sql_ico_bank, :sql_url_parser, :sql_note);"
     );
     $query->execute(array(

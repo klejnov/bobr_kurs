@@ -2,10 +2,10 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="icon" href="../img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Курсы валют в Бобруйске</title>
     <meta name="description" content="Актуальные курсы валют всех банков Бобруйска">
 
     <link rel="stylesheet" href="../css/fontawesome.css">
@@ -24,7 +24,6 @@
     <script src="../libs/bootstrap-select/bootstrap-select.min.js"></script>
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 
-    <title>Курсы валют в Бобруйске</title>
 </head>
 <body>
 

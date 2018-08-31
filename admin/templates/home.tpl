@@ -28,8 +28,7 @@
             top: 95px;
             background-color: #2196F3; /* Blue */
         }
-    </style>
-    <style>
+
         .btn {
             border: none; /* Remove borders */
             color: white; /* Add a text color */
@@ -77,7 +76,7 @@
             <?php foreach($banks as $key => $bank) { ?>
             <?php if ($bank['auto'] == 1) { ?>
             <tr>
-                <th scope="row"><a href="../index.php?action=editbank&id=<?=$bank['id']?>"><?=$bank['id']?></a></th>
+                <th scope="row"><a href="../admin/index.php?action=editbank&id=<?=$bank['id']?>"><?=$bank['id']?></a></th>
                 <td><a href="<?=$bank['url_parser']?>" target="_blank" rel="nofollow" rel="noopener noreferrer"><img src="files/img/ico/<?=$bank['ico']?>" data-toggle="tooltip" data-placement="auto" style="vertical-align: -3px;" title="<?=$bank['note']?>"></a> <?=htmlspecialchars($bank['name'])?></td>
                 <td><?=htmlspecialchars($bank['usd_buy'])?></td>
                 <td><?=htmlspecialchars($bank['usd_sell'])?></td>
@@ -102,7 +101,7 @@
             </tr>
             <?php } else { ?>
             <tr>
-                <th scope="row"><a href="../index.php?action=editbank&id=<?=$bank['id']?>"><?=$bank['id']?></a></th>
+                <th scope="row"><a href="../admin/index.php?action=editbank&id=<?=$bank['id']?>"><?=$bank['id']?></a></th>
                 <td><img src="files/img/ico/<?=$bank['ico']?>"> <?=htmlspecialchars($bank['name'])?></td>
                 <td><input type="text" class="usd_buy kursinput" value="<?=htmlspecialchars($bank['usd_buy'])?>"></td>
                 <td><input type="text" class="usd_sell kursinput" value="<?=htmlspecialchars($bank['usd_sell'])?>"></td>

@@ -6,34 +6,41 @@ function belgazprombank_by($banks_id)
     //header('Content-Type: text/html; charset=utf-8');
 
     $html = file_get_contents("http://i.belgazprombank.by/index_mobile.php");
-    if (preg_match("/<div class=\"box-t-in\">Курсы валют USD.*?<td>1<\/td>\n.*?<td>([^<]*)<.*?<td>([^<]*)<.*?<div class=\"box-t-in\">Курсы валют EUR.*?<td>1<\/td>\n.*?<td>([^<]*)<.*?<td>([^<]*)<.*?<div class=\"box-t-in\">Курсы валют RUB.*?<td>100<\/td>\n.*?<td>([^<]*)<.*?<td>([^<]*)<.*?Держателям карточек/ms", $html, $valuta)) {
+    if (preg_match("/<div class=\"box-t-in\">Курсы валют USD.*?<td>1<\/td>\n.*?<td>([^<]*)<.*?<td>([^<]*)<.*?<div class=\"box-t-in\">Курсы валют EUR.*?<td>1<\/td>\n.*?<td>([^<]*)<.*?<td>([^<]*)<.*?<div class=\"box-t-in\">Курсы валют RUB.*?<td>100<\/td>\n.*?<td>([^<]*)<.*?<td>([^<]*)<.*?Держателям карточек/ms",
+        $html, $valuta)) {
         $status = 1;
-        $data = array(array(
-        'usd_buy' => trim($valuta[1]),
-        'usd_sell' => trim($valuta[2]),
-        'eur_buy' => trim($valuta[3]),
-        'eur_sell' => trim($valuta[4]),
-        'rub_buy' => trim($valuta[5]),
-        'rub_sell' => trim($valuta[6]),
-        'banks_id' => $banks_id,
-        'status' => $status,
-    ));
+        $data = array(
+            array(
+                'usd_buy'  => trim($valuta[1]),
+                'usd_sell' => trim($valuta[2]),
+                'eur_buy'  => trim($valuta[3]),
+                'eur_sell' => trim($valuta[4]),
+                'rub_buy'  => trim($valuta[5]),
+                'rub_sell' => trim($valuta[6]),
+                'banks_id' => $banks_id,
+                'status'   => $status,
+                'html'     => $html,
+            )
+        );
     } else {
         $status = 0;
-        $data = array(array(
-            'usd_buy' => 0,
-            'usd_sell' => 0,
-            'eur_buy' => 0,
-            'eur_sell' => 0,
-            'rub_buy' => 0,
-            'rub_sell' => 0,
-            'banks_id' => $banks_id,
-            'status' => $status,
-        ));
+        $data = array(
+            array(
+                'usd_buy'  => 0,
+                'usd_sell' => 0,
+                'eur_buy'  => 0,
+                'eur_sell' => 0,
+                'rub_buy'  => 0,
+                'rub_sell' => 0,
+                'banks_id' => $banks_id,
+                'status'   => $status,
+                'html'     => $html,
+            )
+        );
     }
     //print_r($data);
     return $data;
-
 }
-//belgazprombank_by()
+
+//belgazprombank_by();
 ?>

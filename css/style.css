@@ -173,7 +173,7 @@ nav.bobr-menu {
 nav .navbar-nav > li > a {
     display: block;
     color: #FFFFFF;
-    padding: 10px 15px;
+    padding: 10px 13px;
 }
 
 nav .navbar-nav > li > a:hover {
@@ -460,7 +460,7 @@ thead > tr {
 }
 
 table.dataTable img {
-    margin-right: 2px;
+    margin-right: 4px;
     padding-bottom: 3px;
 }
 
@@ -496,7 +496,7 @@ tbody p {
     margin-bottom: 0;
 }
 
-.table-show, .button-show {
+.table-show, .button-show, .google-play-show {
     display: none;
 }
 
@@ -554,12 +554,35 @@ div.dataTables_wrapper div.dataTables_filter, div.dataTables_wrapper div.dataTab
 }
 
 .map-show {
-    position: sticky;
-    top: 10px;
     border: 1px solid #c8ced3;
     border-radius: .25rem;
     display: inline-block;
     width: 100%;
+}
+
+.block-map {
+    position: sticky;
+    top: 10px;
+}
+
+.google-play-show{
+    margin-left: calc(50% - 85px);
+}
+.google-play-foot {
+    display: inline-block;
+    margin-left: calc(50% - 85px);
+}
+
+
+.google-play {
+    opacity: .7;
+    width: 170px;
+    margin-top: 10px;
+    transition: all 300ms;
+}
+
+.google-play:hover {
+    opacity: 1;
 }
 
 .row.b-footer {

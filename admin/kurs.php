@@ -261,6 +261,11 @@ function addkurs ($data) {
             'sql_status' => $parser_data['status'],
             'sql_banks_id' => $parser_data['banks_id'],
         ));
+
+        $html = $parser_data['html'];
+        $id_bank = $parser_data['banks_id'];
+        writeLog($id_bank, $html);
+
         if ($parser_data['usd_buy'] == 0
             && $parser_data['eur_buy'] == 0
             && $parser_data['rub_buy'] == 0
@@ -311,6 +316,24 @@ function addkurs ($data) {
     //print_r($parser_data);
     //fetch нужен только при SELECT!!!
     //$data = $query->fetch(PDO::FETCH_ASSOC);
+}
+
+function writeLog($id_bank, $html) {
+
+    global $db;
+
+    $query = $db->prepare(
+        "INSERT INTO 
+              banks_kurs_log (id_bank, html) 
+              VALUES (
+              :sql_id_bank, 
+              :sql_html);"
+    );
+    $query->execute(array(
+        'sql_id_bank' => $id_bank,
+        'sql_html' => $html,
+    ));
+
 }
 
 // Функция получаем все банки

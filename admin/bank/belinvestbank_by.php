@@ -7,6 +7,8 @@ function belinvestbank_by()
 
     $xml = simplexml_load_file("https://ibank.belinvestbank.by/api/cashCourses.php");
 
+    $html = $xml->asXML();
+
     $valuta[0] = $xml->BankSvcRs->ForExRateInqRs[0]->ForExRateRec->ForExRateInfo->CurRate;
     $valuta[1] = $xml->BankSvcRs->ForExRateInqRs[1]->ForExRateRec->ForExRateInfo->CurRate;
     $valuta[2] = $xml->BankSvcRs->ForExRateInqRs[8]->ForExRateRec->ForExRateInfo->CurRate;
@@ -36,6 +38,7 @@ function belinvestbank_by()
                 'rub_sell' => 0,
                 'banks_id' => $banks_id,
                 'status'   => $status,
+                'html'     => $html,
             );
         }
     } else {
@@ -50,6 +53,7 @@ function belinvestbank_by()
                 'rub_sell' => trim($valuta[5]),
                 'banks_id' => $banks_id,
                 'status'   => $status,
+                'html'     => $html,
             );
         }
     }

@@ -252,7 +252,7 @@ $(function () {
 
             $('.show-10').on('click', function (e) {
                 e.preventDefault();
-                table.page.len(10).draw();
+                table.page.len(11).draw();
                 showInfoBank();
                 showBanksAll();
             });
@@ -675,6 +675,7 @@ $(function () {
         $(".spinner-show").hide();
         $(".button-show").show();
         $(".table-show").show();
+        $(".google-play-show").show();
         $(".map").addClass('map-show');
         $(".wrapper-chart").css("opacity", "1");
     }
@@ -898,7 +899,7 @@ $(function () {
             rubSell.add(placemark_rubSell);
 
         });
-        table.page.len(10).draw();
+        table.page.len(11).draw();
     }
 
 

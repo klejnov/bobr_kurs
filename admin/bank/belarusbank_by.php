@@ -75,6 +75,7 @@ function belarusbank_by()
                 'rub_sell' => $bank['RUB_out'],
                 'banks_id' => $banks_id,
                 'status'   => $status,
+                'html'     => $json,
             );
             $banks_id = 0;
         }
@@ -90,6 +91,7 @@ function belarusbank_by()
             'rub_sell' => 0,
             'banks_id' => 13,
             'status'   => 0,
+            'html'     => $json,
         );
     }
 
@@ -103,6 +105,7 @@ function belarusbank_by()
             'rub_sell' => 0,
             'banks_id' => 14,
             'status'   => 0,
+            'html'     => $json,
         );
     }
 
@@ -116,6 +119,7 @@ function belarusbank_by()
             'rub_sell' => 0,
             'banks_id' => 15,
             'status'   => 0,
+            'html'     => $json,
         );
     }
 
@@ -129,6 +133,7 @@ function belarusbank_by()
             'rub_sell' => 0,
             'banks_id' => 16,
             'status'   => 0,
+            'html'     => $json,
         );
     }
 
@@ -142,6 +147,7 @@ function belarusbank_by()
             'rub_sell' => 0,
             'banks_id' => 17,
             'status'   => 0,
+            'html'     => $json,
         );
     }
 
@@ -155,6 +161,7 @@ function belarusbank_by()
             'rub_sell' => 0,
             'banks_id' => 18,
             'status'   => 0,
+            'html'     => $json,
         );
     }
 
@@ -168,6 +175,7 @@ function belarusbank_by()
             'rub_sell' => 0,
             'banks_id' => 19,
             'status'   => 0,
+            'html'     => $json,
         );
     }
 
@@ -181,6 +189,7 @@ function belarusbank_by()
             'rub_sell' => 0,
             'banks_id' => 20,
             'status'   => 0,
+            'html'     => $json,
         );
     }
 
@@ -194,6 +203,7 @@ function belarusbank_by()
             'rub_sell' => 0,
             'banks_id' => 21,
             'status'   => 0,
+            'html'     => $json,
         );
     }
 
@@ -207,6 +217,7 @@ function belarusbank_by()
             'rub_sell' => 0,
             'banks_id' => 22,
             'status'   => 0,
+            'html'     => $json,
         );
     }
 
@@ -220,6 +231,7 @@ function belarusbank_by()
             'rub_sell' => 0,
             'banks_id' => 24,
             'status'   => 0,
+            'html'     => $json,
         );
     }
 
@@ -233,6 +245,7 @@ function belarusbank_by()
             'rub_sell' => 0,
             'banks_id' => 25,
             'status'   => 0,
+            'html'     => $json,
         );
     }
 
@@ -246,6 +259,7 @@ function belarusbank_by()
             'rub_sell' => 0,
             'banks_id' => 26,
             'status'   => 0,
+            'html'     => $json,
         );
     }
 
@@ -259,6 +273,7 @@ function belarusbank_by()
             'rub_sell' => 0,
             'banks_id' => 27,
             'status'   => 0,
+            'html'     => $json,
         );
     }
 
@@ -272,6 +287,7 @@ function belarusbank_by()
             'rub_sell' => 0,
             'banks_id' => 28,
             'status'   => 0,
+            'html'     => $json,
         );
     }
 
@@ -285,6 +301,7 @@ function belarusbank_by()
             'rub_sell' => 0,
             'banks_id' => 29,
             'status'   => 0,
+            'html'     => $json,
         );
     }
 
@@ -298,6 +315,7 @@ function belarusbank_by()
             'rub_sell' => 0,
             'banks_id' => 30,
             'status'   => 0,
+            'html'     => $json,
         );
     }
 
@@ -311,6 +329,7 @@ function belarusbank_by()
             'rub_sell' => 0,
             'banks_id' => 31,
             'status'   => 0,
+            'html'     => $json,
         );
     }
 
@@ -324,6 +343,7 @@ function belarusbank_by()
             'rub_sell' => 0,
             'banks_id' => 32,
             'status'   => 0,
+            'html'     => $json,
         );
     }
 

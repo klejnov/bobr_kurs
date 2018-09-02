@@ -5,8 +5,8 @@ function belveb_by_i($banks_id)
     //header('Content-Type: text/html; charset=utf-8');
 
     $data2 = array();
-    if (($handle = fopen("http://www.bveb.by/tutby/Curs_Main.csv", "r")) !== FALSE) {
-        while (($data = fgetcsv($handle, 10000, "\n")) !== FALSE) {
+    if (($handle = fopen("http://www.bveb.by/tutby/Curs_Main.csv", "r")) !== false) {
+        while (($data = fgetcsv($handle, 10000, "\n")) !== false) {
             $num = count($data);
             for ($c = 0; $c < $num; $c++) {
                 $line = explode(';', $data[$c]);
@@ -27,49 +27,26 @@ function belveb_by_i($banks_id)
         }
     }
 
-    //echo "<H1>«Банк БелВЭБ» Адрес: Бобруйск,  ул. Интернациональная, 49</H1>";
 
-    //echo "<table border='1'>";
     if ($arr) {
         $status = 1;
-        /*echo "<tr>
-		<td>{$arr['USD'][2]}</td>
-		<td>USD</td>
-		<td>" . ((isset($arr['USD'][0]) && $arr['USD'][0]) ? $arr['USD'][0] : 0) . "</td>
-		<td>" . ((isset($arr['USD'][1]) && $arr['USD'][1]) ? $arr['USD'][1] : 0) . "</td>
-		<td>EUR</td>
-		<td>" . ((isset($arr['EUR'][0]) && $arr['EUR'][0]) ? $arr['EUR'][0] : 0) . "</td>
-		<td>" . ((isset($arr['EUR'][1]) && $arr['EUR'][1]) ? $arr['EUR'][1] : 0) . "</td>
-		<td>RUR</td>
-		<td>" . ((isset($arr['RUR'][0]) && $arr['RUR'][0]) ? $arr['RUR'][0] : 0) . "</td>
-		<td>" . ((isset($arr['RUR'][1]) && $arr['RUR'][1]) ? $arr['RUR'][1] : 0) . "</td>
-	</tr>";*/
     } else {
         $status = 0;
-        /*echo "<tr>
-			<td>" . date('H:i:s') . "</td>
-			<td>USD</td>
-			<td>0</td>
-			<td>0</td>
-			<td>EUR</td>
-			<td>0</td>
-			<td>0</td>
-			<td>RUB</td>
-			<td>0</td>
-			<td>0</td>
-		</tr>";*/
     }
 
-    $data = array(array(
-        'usd_buy' => (string)$arr['USD'][0],
-        'usd_sell' => (string)$arr['USD'][1],
-        'eur_buy' => (string)$arr['EUR'][0],
-        'eur_sell' => (string)$arr['EUR'][1],
-        'rub_buy' => (string)$arr['RUR'][0],
-        'rub_sell' => (string)$arr['RUR'][1],
-        'banks_id' => (string)$banks_id,
-        'status' => $status,
-    ));
+    $data = array(
+        array(
+            'usd_buy'  => (string)$arr['USD'][0],
+            'usd_sell' => (string)$arr['USD'][1],
+            'eur_buy'  => (string)$arr['EUR'][0],
+            'eur_sell' => (string)$arr['EUR'][1],
+            'rub_buy'  => (string)$arr['RUR'][0],
+            'rub_sell' => (string)$arr['RUR'][1],
+            'banks_id' => (string)$banks_id,
+            'status'   => $status,
+            'html'     => '«Банк БелВЭБ» Адрес: Бобруйск,  ул. Интернациональная, 49',
+        )
+    );
 
     //print_r($data);
     return $data;
@@ -79,6 +56,6 @@ function belveb_by_i($banks_id)
 
 }
 
-//belveb_by_i()
+//belveb_by_i();
 
 ?>

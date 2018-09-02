@@ -27,13 +27,16 @@ if ($bank_data['auto'] == 1) {
     addkurs($paritetbank12);
 }
 
-$banks_id = 4;
-$bank_data = getbanksinfo($banks_id);
-if ($bank_data['auto'] == 1) {
-    require 'bank/priorbank_by.php';
-    $priorbank = priorbank_by($banks_id);
-    addkurs($priorbank);
+//Удаляет из массива $priorbank_by банки для которых установлено ручное обновление
+require 'bank/priorbank_by.php';
+$priorbank_by = priorbank_by();
+foreach ($priorbank_by as $key => $priorbank_by2) {
+    $bank_data = getbanksinfo($priorbank_by2['banks_id']);
+    if ($bank_data['auto'] == 0) {
+        unset($priorbank_by[$key]);
+    }
 }
+addkurs($priorbank_by);
 
 $banks_id = 5;
 $bank_data = getbanksinfo($banks_id);

@@ -210,8 +210,15 @@
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                <div class="map">
-                    <div id="map"></div>
+                <div class="block-map">
+                    <div class="map">
+                        <div id="map"></div>
+                    </div>
+                    <div class="d-none d-lg-block">
+                        <a href="https://play.google.com/store/apps/details?id=io.cordova.bobrby&referrer=utm_source%3Dbobrby%26utm_campaign%3Dbanner_kurs.bobr.by" target="_blank" class="google-play-show">
+                            <img class="google-play" src="/img/google-play.png" alt="Курсы валют Бобруйск. Приложение Google Play">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -263,6 +270,16 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container d-lg-none d-block">
+        <div class="row">
+            <div class="col-12">
+                <a href="https://play.google.com/store/apps/details?id=io.cordova.bobrby&referrer=utm_source%3Dbobrby%26utm_campaign%3Dbanner_kurs.bobr.by" target="_blank" class="google-play-foot">
+                    <img class="google-play" src="/img/google-play.png" alt="Курсы валют Бобруйск. Приложение Google Play">
+                </a>
             </div>
         </div>
     </div>

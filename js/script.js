@@ -2,16 +2,9 @@
 
 $(function () {
 
-    var table = '';
+    var settings = {};
 
-    var settings = {
-        btnBuy: true,
-        btnSell: false,
-        btnUsd: true,
-        btnEur: false,
-        btnRub: false,
-        number: 100
-    };
+    var table = '';
 
     var tableArr = {};
 
@@ -22,6 +15,49 @@ $(function () {
     var eurSell = '';
     var rubBuy = '';
     var rubSell = '';
+
+    function getCookie(name) {
+        var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+        return v ? v[2] : null;
+    }
+
+    function setCookie(name, value, days) {
+        var d = new Date;
+        d.setTime(d.getTime() + 24 * 60 * 60 * 1000 * days);
+        document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
+    }
+
+    function deleteCookie(name) {
+        setCookie(name, '', -1);
+    }
+
+
+    if (getCookie("s_number")) {
+        settings = {
+            btnBuy: getCookie("s_btnBuy") === 'true',
+            btnSell: getCookie("s_btnSell") === 'true',
+            btnUsd: getCookie("s_btnUsd") === 'true',
+            btnEur: getCookie("s_btnEur") === 'true',
+            btnRub: getCookie("s_btnRub") === 'true',
+            number: +getCookie("s_number")
+        };
+
+    } else {
+        settings = {
+            btnBuy: true,
+            btnSell: false,
+            btnUsd: true,
+            btnEur: false,
+            btnRub: false,
+            number: 100
+        };
+        setCookie("s_btnBuy", true, 5);
+        setCookie("s_btnSell", false, 5);
+        setCookie("s_btnUsd", true, 5);
+        setCookie("s_btnEur", false, 5);
+        setCookie("s_btnRub", false, 5);
+        setCookie("s_number", 100, 5);
+    }
 
     function ratesWidgetGet() {
 
@@ -306,6 +342,8 @@ $(function () {
 
         settings.number = +value;
 
+        setCookie("s_number", +value, 5);
+
         table.clear();
 
         tableCalc();
@@ -394,18 +432,27 @@ $(function () {
         settings.btnUsd = true;
         settings.btnEur = false;
         settings.btnRub = false;
+        setCookie("s_btnUsd", true, 5);
+        setCookie("s_btnEur", false, 5);
+        setCookie("s_btnRub", false, 5);
         settingsApply();
     });
     $('#eur').on('click', function () {
         settings.btnEur = true;
         settings.btnUsd = false;
         settings.btnRub = false;
+        setCookie("s_btnEur", true, 5);
+        setCookie("s_btnUsd", false, 5);
+        setCookie("s_btnRub", false, 5);
         settingsApply();
     });
     $('#rub').on('click', function () {
         settings.btnRub = true;
         settings.btnUsd = false;
         settings.btnEur = false;
+        setCookie("s_btnRub", true, 5);
+        setCookie("s_btnUsd", false, 5);
+        setCookie("s_btnEur", false, 5);
         settingsApply();
     });
 
@@ -418,6 +465,8 @@ $(function () {
     $('.btn-left').on('click', function () {
         settings.btnBuy = true;
         settings.btnSell = false;
+        setCookie("s_btnBuy", true, 5);
+        setCookie("s_btnSell", false, 5);
         settingsApply();
     });
 
@@ -428,6 +477,8 @@ $(function () {
     $('.btn-right').on('click', function () {
         settings.btnBuy = false;
         settings.btnSell = true;
+        setCookie("s_btnBuy", false, 5);
+        setCookie("s_btnSell", true, 5);
         settingsApply();
     });
 
@@ -662,7 +713,7 @@ $(function () {
             eurBuy.add(placemark_eurBuy);
 
             var placemark_eurSell = new ymaps.Placemark([latlng[0], latlng[1]]);
-            usdSell.add(placemark_eurSell);
+            eurSell.add(placemark_eurSell);
 
             var placemark_rubBuy = new ymaps.Placemark([latlng[0], latlng[1]]);
             rubBuy.add(placemark_rubBuy);

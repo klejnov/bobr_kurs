@@ -79,12 +79,12 @@ try {
         exit();
     }
 
-    if (isset($_GET["AjaxAction"]) && $_GET['AjaxAction'] == 'ChartInfoGet') {
+    if (isset($_POST["AjaxAction"]) && $_POST['AjaxAction'] == 'ChartInfoGet') {
 
 
-        $currency = $_GET["AjaxCurrency"];
-        $id_bank_select = $_GET["AjaxIdBank"];
-        $period_bank_select = $_GET["AjaxPeriod"];
+        $currency = $_POST["AjaxCurrency"];
+        $id_bank_select = $_POST["AjaxIdBank"];
+        $period_bank_select = $_POST["AjaxPeriod"];
 
         $start_time = new DateTime();
         $end_time = new DateTime();
@@ -126,6 +126,19 @@ try {
         //print_r($dataTotalArr);
         $dataTotalArr = json_encode($dataTotalArr);
         print_r($dataTotalArr);
+
+        exit();
+    }
+
+    if ($_GET['banksKursLog'] == 'clear') {
+
+        $db = new DataBase();
+
+        $sql = "DELETE FROM banks_kurs_log WHERE time < DATE_SUB(NOW(), INTERVAL 1 DAY);";
+
+        $db->execute($sql);
+
+        echo "Лог очищен";
 
         exit();
     }

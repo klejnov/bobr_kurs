@@ -957,7 +957,7 @@ $(function () {
     function banksChartGet(idBank, currency, period) {
 
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: "index.php",
             dataType: "json",
             data: {AjaxAction: "ChartInfoGet", AjaxIdBank: idBank, AjaxCurrency: currency, AjaxPeriod: period}

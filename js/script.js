@@ -1106,4 +1106,13 @@ $(function () {
 
     }
 
+    setTimeout(function () {
+        $(".message-wrapper").slideDown(300);
+    }, 600000);
+
+    $('#reload').on('click', function () {
+        document.getElementById('reload-wrapper').setAttribute('style','display: none;');
+        location.reload();
+    });
+
 });

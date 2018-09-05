@@ -2,7 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="icon" href="../img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Курсы валют в Бобруйске</title>
@@ -27,7 +28,20 @@
 </head>
 <body>
 
+<div class="container message-wrapper">
+    <div class="row">
+        <div class="col-12">
+            <div id="reload-wrapper" class="message">
+                <a id="reload" title="Обновить" href="/"><i class="fas fa-redo"></i></a>
+                <span>Внимание!</span> Курсы валют могли устареть. Пожалуйста, обновите страницу.
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <header>
+
     <div class="container d-none d-xl-block">
         <div class="row">
             <div class="col-12">
@@ -215,8 +229,10 @@
                         <div id="map"></div>
                     </div>
                     <div class="d-none d-lg-block">
-                        <a href="https://play.google.com/store/apps/details?id=io.cordova.bobrby&referrer=utm_source%3Dbobrby%26utm_campaign%3Dbanner_kurs.bobr.by" target="_blank" class="google-play-show">
-                            <img class="google-play" src="/img/google-play.png" alt="Курсы валют Бобруйск. Приложение Google Play">
+                        <a href="https://play.google.com/store/apps/details?id=io.cordova.bobrby&referrer=utm_source%3Dbobrby%26utm_campaign%3Dbanner_kurs.bobr.by"
+                           target="_blank" class="google-play-show">
+                            <img class="google-play" src="/img/google-play.png"
+                                 alt="Курсы валют Бобруйск. Приложение Google Play">
                         </a>
                     </div>
                 </div>
@@ -277,8 +293,10 @@
     <div class="container d-lg-none d-block">
         <div class="row">
             <div class="col-12">
-                <a href="https://play.google.com/store/apps/details?id=io.cordova.bobrby&referrer=utm_source%3Dbobrby%26utm_campaign%3Dbanner_kurs.bobr.by" target="_blank" class="google-play-foot">
-                    <img class="google-play" src="/img/google-play.png" alt="Курсы валют Бобруйск. Приложение Google Play">
+                <a href="https://play.google.com/store/apps/details?id=io.cordova.bobrby&referrer=utm_source%3Dbobrby%26utm_campaign%3Dbanner_kurs.bobr.by"
+                   target="_blank" class="google-play-foot">
+                    <img class="google-play" src="/img/google-play.png"
+                         alt="Курсы валют Бобруйск. Приложение Google Play">
                 </a>
             </div>
         </div>

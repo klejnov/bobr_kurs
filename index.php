@@ -70,7 +70,8 @@ try {
         exit();
     }
 
-    if (isset($_POST["AjaxAction"]) && $_POST['AjaxAction'] == 'TableInfoGet') {
+    if (isset($_POST["AjaxAction"]) && $_POST['AjaxAction'] == 'TableInfoGet' ||
+        isset($_GET['mobile']) && $_GET['mobile'] == 'getInfoBanks') {
 
         $db = new DataBase();
 
@@ -130,7 +131,7 @@ try {
         exit();
     }
 
-    if ($_GET['banksKursLog'] == 'clear') {
+    if (isset($_GET['banksKursLog']) && $_GET['banksKursLog'] == 'clear') {
 
         $db = new DataBase();
 

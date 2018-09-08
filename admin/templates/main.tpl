@@ -82,6 +82,7 @@
                 <ul class="dropdown-menu">
                   <li<?=$active_banks?>><a href="index.php?action=bank">Банки</a></li>
                   <li><a href="index.php?action=cron">Обновить курсы</a></li>
+                  <li><a href="../?widget=show">Виджет</a></li>
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">Архив</li>
                   <li<?=$active_statsavr?>><a href="index.php?action=statsavr">Статистика</a></li>

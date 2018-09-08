@@ -21,11 +21,27 @@ try {
 
     if (isset($_POST["AjaxAction"]) && $_POST['AjaxAction'] == 'WidgetGet') {
 
+        if ($_POST['AjaxPeriod'] == 'WidgetWeek') {
+
+            print_r(file_get_contents("js/widget.json"));
+
+            exit();
+        }
+
         $start_time = new DateTime();
         $end_time = new DateTime();
 
-        $start_time->modify('-14 day');
-        $end_time->modify('+1 day');
+        if ($_POST['AjaxPeriod'] == 'WidgetMonth') {
+
+            $start_time->modify('-30 day');
+            $end_time->modify('+1 day');
+        }
+        if ($_POST['AjaxPeriod'] == 'WidgetYear') {
+
+            $start_time->modify('-365 day');
+            $end_time->modify('+1 day');
+
+        }
 
         $db = new DataBase();
 
@@ -65,6 +81,7 @@ try {
         ];
 
         $dataTotalArr = json_encode($dataTotalArr);
+
         print_r($dataTotalArr);
 
         exit();
@@ -143,6 +160,14 @@ try {
 
         exit();
     }
+
+    if (isset($_GET['widget']) && $_GET['widget'] == 'show') {
+
+        require "templates/widget.tpl";
+
+        exit();
+    }
+
 } catch (Throwable $e) {
     print <<<HTML_BLOCK
 Выброшено исключение:   <b>{$e->getMessage()}</b><br>

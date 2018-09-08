@@ -513,7 +513,7 @@ i.fas.fa-chart-line {
     font-size: 1rem;
     padding: 5px;
     cursor: pointer;
-    opacity: .8;
+    opacity: .5;
     z-index: 1;
     transition: opacity .3s ease .1s;
 }

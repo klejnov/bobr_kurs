@@ -59,13 +59,15 @@ $(function () {
         setCookie("s_number", 100, 5);
     }
 
-    function ratesWidgetGet() {
+    function ratesWidgetGet(period) {
+
+        var periodWidget = period;
 
         $.ajax({
             type: "POST",
             url: "index.php",
             dataType: "json",
-            data: {AjaxAction: "WidgetGet"}
+            data: {AjaxAction: "WidgetGet", AjaxPeriod: periodWidget}
         }).done(function (result) {
 
             if ($.isEmptyObject(result)) {
@@ -221,7 +223,7 @@ $(function () {
     }
 
 
-    ratesWidgetGet();
+    ratesWidgetGet("WidgetWeek");
     banksTableGet();
 
     var tableCalc = function () {

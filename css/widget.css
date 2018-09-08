@@ -1,0 +1,190 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+.brand-card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    margin-bottom: 1.5rem;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #c8ced3;
+    border-radius: .25rem
+}
+
+.bg-usd {
+    background-color: #4dbd74 !important
+}
+
+.bg-eur {
+    background-color: #2eadd3 !important
+}
+
+.bg-rub {
+    background-color: #f86c6b !important
+}
+
+.usd-card .fa-spin {
+    color: rgba(79, 189, 116, 0.25);
+}
+
+.eur-card .fa-spin {
+    color: rgba(46, 173, 211, 0.25);
+}
+
+.rub-card .fa-spin {
+    color: rgba(248, 108, 107, 0.25);
+}
+
+.brand-card-header {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 6rem;
+    border-radius: .25rem .25rem 0 0
+}
+
+.brand-card-header i {
+    font-size: 2rem;
+    color: #fff
+}
+
+.brand-card-header .chart-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%
+}
+
+.brand-card-body {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    padding: .75rem 0;
+    text-align: center
+}
+
+.brand-card-body > * {
+    -ms-flex: 1;
+    flex: 1;
+    padding: .1875rem 0
+}
+
+.brand-card-body > *:not(:last-child) {
+    border-right: 1px solid #c8ced3
+}
+
+.text-value {
+    font-size: 1.3125rem;
+    font-weight: 600
+}
+
+.chartjs-tooltip {
+    position: absolute;
+    z-index: 1021;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding: .25rem .5rem;
+    color: #fff;
+    pointer-events: none;
+    background: rgba(0, 0, 0, .7);
+    opacity: 0;
+    transition: all .25s ease;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    border-radius: .25rem
+}
+
+.chartjs-tooltip .tooltip-header {
+    margin-bottom: .5rem
+}
+
+.chartjs-tooltip .tooltip-header-item {
+    font-size: .765625rem;
+    font-weight: 700
+}
+
+.chartjs-tooltip .tooltip-body-item {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    font-size: .765625rem;
+    white-space: nowrap
+}
+
+.chartjs-tooltip .tooltip-body-item-color {
+    display: inline-block;
+    width: .875rem;
+    height: .875rem;
+    margin-right: .875rem
+}
+
+.chartjs-tooltip .tooltip-body-item-value {
+    padding-left: 1rem;
+    margin-left: auto;
+    font-weight: 700
+}
+
+
+i.fas.fa-chart-line {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1rem;
+    padding: 5px;
+    cursor: pointer;
+    opacity: .5;
+    z-index: 1;
+    transition: opacity .3s ease .1s;
+}
+
+i.fas.fa-chart-line:hover {
+    opacity: 1;
+}
+
+.dynamics {
+    display: none;
+    font-size: .8rem;
+    font-weight: 400;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.fa-chevron-left, .fa-chevron-right {
+    color: white;
+    font-size: x-large;
+    position: absolute;
+    top: 30px;
+    opacity: .5;
+    padding: 5px 15px 15px 15px;
+}
+
+.fa-chevron-left:hover, .fa-chevron-right:hover {
+    opacity: .8;
+}
+.carousel-control-next, .carousel-control-prev {
+    height: 0;
+}
+
+.container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.brand-card {
+    cursor: pointer;
+}

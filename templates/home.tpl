@@ -13,11 +13,13 @@
     <link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../libs/dataTables/datatables.min.css">
     <link rel="stylesheet" href="../libs/bootstrap-select/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../libs/sweetalert2/sweetalert2.min.css">
     <link rel="stylesheet" href="../css/style.css">
 
     <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="../libs/bootstrap/popper.min.js"></script>
     <script src="../libs/bootstrap/bootstrap.min.js"></script>
+    <script src="../libs/sweetalert2/sweetalert2.min.js"></script>
     <script src="../libs/dataTables/datatables.min.js"></script>
     <script src="../libs/coreui/coreui.min.js"></script>
     <script src="../libs/chart.js/custom-tooltips.min.js"></script>
@@ -313,6 +315,16 @@
 </footer>
 
 <script src="../js/script.js"></script>
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-4090834-1', 'auto');
+    ga('require', 'displayfeatures');
+    ga('send', 'pageview');
+</script>
 
 </body>
 </html>

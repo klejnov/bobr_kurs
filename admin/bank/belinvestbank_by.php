@@ -38,7 +38,7 @@ function belinvestbank_by()
                 'rub_sell' => 0,
                 'banks_id' => $banks_id,
                 'status'   => $status,
-                'html'     => $html,
+                'html'     => 'Лог отключён',
             );
         }
     } else {
@@ -53,7 +53,7 @@ function belinvestbank_by()
                 'rub_sell' => trim($valuta[5]),
                 'banks_id' => $banks_id,
                 'status'   => $status,
-                'html'     => $html,
+                'html'     => 'Лог отключён',
             );
         }
     }

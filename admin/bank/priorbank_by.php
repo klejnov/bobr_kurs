@@ -34,7 +34,7 @@ function priorbank_by()
             'rub_sell' => $rub_sell,
             'banks_id' => $banks_id,
             'status'   => $status,
-            'html'     => $json,
+            'html'     => 'Лог отключён', //json
         );
     };
     //print_r($data);

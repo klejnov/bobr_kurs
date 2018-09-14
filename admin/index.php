@@ -81,7 +81,7 @@ if (isset($_GET['action']) and $_GET['action'] == 'authpost'){
     $ico_select = $_POST['icojs'];
     if ($ico_select == 1){
         if (isset($_FILES["file"])) {
-           move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/files/img/ico/".$_FILES['file']['name']);
+           move_uploaded_file($_FILES["file"]["tmp_name"], __DIR__ . "/files/img/ico/".$_FILES['file']['name']);
            $file_ico_bank = $_FILES['file']['name'];
          }
     } else {
@@ -114,7 +114,7 @@ if (isset($_GET['action']) and $_GET['action'] == 'authpost'){
     if (isset($_FILES["file"])) {
         $extension = pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
         $new_name_file = $id.'.'.$extension;
-        move_uploaded_file($_FILES["file"]["tmp_name"], "/var/www/html/admin/files/img/avatars/".$new_name_file);
+        move_uploaded_file($_FILES["file"]["tmp_name"], __DIR__ . "/files/img/avatars/".$new_name_file);
         $file_user_avatars = $new_name_file;
     }
     $user_data = edituser($id, $login_user, $name_user, $file_user_avatars);
@@ -187,7 +187,7 @@ if (isset($_GET['action']) and $_GET['action'] == 'auth') {
     $user_data2 = userinfo($_SESSION['id']);
     $bank_data = getbanksinfo($_GET['id']);
 
-    $dir_ico = '/var/www/html/admin/files/img/ico';
+    $dir_ico = __DIR__ . "/files/img/ico/";
     $files_ico = scandir($dir_ico);
     //print_r($files_ico);
 
@@ -221,7 +221,6 @@ if (isset($_GET['action']) and $_GET['action'] == 'auth') {
     setcookie("user", $user_data2['name'], time() + (86400 * 30), '/');
     setcookie("avatar", $user_data2['avatar'], time() + (86400 * 30), '/');
 
-    // екхо не печатает массив. echo $user_data2;
     //print_r($user_data);
     ob_start();
     require "templates/edituser.tpl";
@@ -348,7 +347,7 @@ else {
        exit;
    }
     $user_data2 = userinfo($_SESSION['id']);
-    // екхо не печатает массив. echo $user_data2;
+
     //print_r($user_data2);
 
     $start_time = new DateTime();

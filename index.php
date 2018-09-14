@@ -180,7 +180,7 @@ HTML_BLOCK;
  * Вызов метода резервного копирования текущей базы данных
  */
 
-//DataBase::backup();
+DataBase::backup();
 
 $year = date("Y");
 

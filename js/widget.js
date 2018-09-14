@@ -124,7 +124,7 @@ $(function () {
 
 
         }).fail(function () {
-            alert('Что-то пошло не так. Повторите позже.');
+            console.log('Что-то пошло не так. Повторите позже.');
         });
     }
 
@@ -139,7 +139,7 @@ $(function () {
         var target = $(event.target);
         if (!target.hasClass('fa-chart-line')) {
 
-            window.top.location.href='http://klejnov.ga:81/'
+            window.top.location.href='https://kurs.bobr.by/';
         }
     });
 });

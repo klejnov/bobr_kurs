@@ -13,7 +13,9 @@ function rbank_by($banks_id)
     $id_pages = $matches0[1];
     //echo $id_pages;
 
-    $html = file_get_contents("https://rbank.by/currency/?dept=$id_pages");
+    $date = date("d.m.Y");
+
+    $html = file_get_contents("https://rbank.by/currency/?date=$date&dept=$id_pages");
 
     // Вырежем tab-1
     preg_match("/<div id=\"tab-1\"(.*)<div id=\"tab-2\"/ms", $html, $matches);
@@ -50,7 +52,7 @@ function rbank_by($banks_id)
             'rub_sell' => $rub[2],
             'banks_id' => $banks_id,
             'status'   => $status,
-            'html'     => $html,
+            'html'     => 'Лог отключён',
         )
     );
     //print_r($data);

@@ -181,7 +181,7 @@ $(function () {
 
 
         }).fail(function () {
-            alert('Что-то пошло не так. Повторите позже.');
+            console.log('Что-то пошло не так. Повторите позже.');
         });
     }
 
@@ -199,7 +199,7 @@ $(function () {
                 return;
             }
 
-            console.log(result);
+            //console.log(result);
 
             tableArr = result;
 
@@ -218,15 +218,17 @@ $(function () {
             });
 
         }).fail(function () {
-            alert('Что-то пошло не так. Повторите позже.');
+            console.log('Что-то пошло не так. Повторите позже.');
         });
     }
 
 
-    ratesWidgetGet("WidgetWeek");
+    ratesWidgetGet("WidgetWeek"); // WidgetWeek, WidgetMonth, WidgetYear
+
     banksTableGet();
 
     var tableCalc = function () {
+
 
         $.each(tableArr, function (key, element) {
 
@@ -246,9 +248,12 @@ $(function () {
 
             var latlng = element.latlng.split(',').reverse().join(',');
 
+            var reg = /Адрес: (.*?) Тел.:/;
+            var address = element.address.split(reg);
+
             table.row.add([
                 '<td data-id-bank="' + element.banks_id + '"><img src="/admin/files/img/ico/' + element.ico + '" alt="Иконка ' + element.name + '">' + element.name + '' +
-                '<div data-info="info" data-id="' + element.banks_id + '" style="display: none">' + element.address + '<br><span>Банк обновлял курсы: <time>' + element.time + '</time></span>' +
+                '<div data-info="info" data-id="' + element.banks_id + '" style="display: none">Адрес: ' + address[1] + '<br>Тел.:' + address[2] + '<br><input type="button" value="Неверный курс?" onclick="infoMessage(\'' + element.banks_id + '\', \'' + element.name + '\', \'' + address[1] + '\', \'' + usd_buy + '\', \'' + usd_sell + '\', \'' + eur_buy + '\', \'' + eur_sell + '\', \'' + rub_buy + '\', \'' + rub_sell + '\')"><span>Банк обновлял курсы: <time>' + element.time + '</time></span>' +
                 '<img width="100%" src="data:image/gif;base64,R0lGODlhqAIsAZECADWz27vM0////wAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQFCgACACwAAAAAqAIsAQAC/5SPqcvtD6OctNqLs968+w+G4kiW5omm6sq27gvH8kzX9o3n+s73/g8MCofEovGITCqXzKbzCY1Kp9Sq9YrNarfcrvcLDovH5LL5jE6r1+y2+w2Py+f0uv2Oz+v3/L7/DxgoOEhYaHiImKi4yNjo+AgZKTlJWWl5iZmpucnZ6fkJGio6SlpqeoqaqrrK2ur6ChsrO0tba3uLm6u7y9vr+wscLDxMXGx8jJysvMzc7PwMHS09TV1tfY2drb3N3e39DR4uPk5ebn6Onq6+zt7u/g4fLz9PX29/j5+vv8/f7/8PMKDAgQQLGjyIMKHChQwbOnwIMaLEiRQrWryIMaPGjf8cO3r8CDKkyJEkS5o8iTKlypUsW7p8CTOmzJk0a9q8iTOnzp08e/r8CTSo0KFEixo9ijSp0qVMmzp9CjWq1KlUq1q9ijWr1q1cu3r9Cjas2LFky5o9izat2rVs27p9Czeu3Ll069q9izev3r18+/r9Cziw4MGECxs+jDix4sWMGzt+DDmy5MmUK1u+jDmz5s2cO3v+DDq06NGkS5s+jTq16tWsW7t+DTu27Nm0a9u+jTu37t28e/vuGCC48OAMhg8vbpz4guTKFTAPgDx5dOPTjy9nXl347yzPszdP0P26dPHUyVt3jt28dvXfEYTfbuU9+PTox9cvf//8fPv78ff/1+8eff+tB18V8gXIH4L+KQjgAQc6KCCDBA7YHoQJWrhggVE8aACHAngIYoQYNtihiCVeeGKGKZKooRMhovihiTHC+KKKM9pYI4setshEjhNKWOGKP444pJBB3qijjD4eyeMSS0LHHpT5FYkklU96JyWFWQK5ZZNNXBkllmKGSeaUR4Lp5RNoajmmmV0a+WaVZypJJ4xpIrEml22yWSafbu6p550u1okjoUnSaKiVic5pp6COPgpppJJOSmmlll6Kaaaabsppp55+Cmqooo5Kaqmmnopqqqquymqrrr4Ka6yyzkprrbbeimuuuu7Ka6++/gpssMIOS2yxxh6LbLLKly7LbLPOPgtttNJOS2211l6Lbbbabsttt95+C2644o5Lbrnmnotuuuquy2677r4Lb7zyzktvvfbei2+++u7Lb7/+/gtwwAIPTHDBBh+McMIKL8xwww4/DHHEEk9MccUWX4xxxhpvzHHHHn8Mcsgij0xyySafjHLKKq/McssuvwxzzDLPTHPNNt+Mc84678xzzz7/DHRXBQAAIfkEBQoAAgAsCAGQAAgADAAAAgiEj6nL7Q9jKgAh+QQFCgACACwYAZAACAAMAAACCISPqcvtD2MqACH5BAUKAAIALCgBkAAIAAwAAAIIhI+py+0PYyoAIfkEBQoAAgAsOAGQAAgADAAAAgiEj6nL7Q9jKgAh+QQFCgACACxIAZAACAAMAAACCISPqcvtD2MqACH5BAUKAAIALFgBkAAIAAwAAAIIhI+py+0PYyoAIfkEBQoAAgAsaAGQAAgADAAAAgiEj6nL7Q9jKgAh+QQFCgACACx4AZAACAAMAAACCISPqcvtD2MqACH5BAUKAAIALIgBkAAIAAwAAAIIhI+py+0PYyoAIfkEBQoAAgAsmAGQAAgADAAAAgiEj6nL7Q9jKgAh+QQFCgACACwAAAAAAQABAAACAlQBADs=" alt="Карта ' + element.name + '" data-pic="https://static-maps.yandex.ru/1.x/?l=map&pt=' + latlng + ',pm2rdl&size=514,300&z=16&lang=ru_RU">' +
                 '</div>' +
                 '<i class="fas fa-info-circle"></i>' +
@@ -737,7 +742,7 @@ $(function () {
         var find = $(".dataTables_empty").html();
         if (find == "В таблице отсутствуют данные") {
 
-            alert("В таблице отсутствуют данные");
+            console.log("В таблице отсутствуют данные");
         }
     }, 3000);
 
@@ -972,9 +977,9 @@ $(function () {
 
             var ChartArr = result;
 
-            console.log(ChartArr.graph_time);
-            console.log(ChartArr.graph_buy);
-            console.log(ChartArr.graph_sell);
+            // console.log(ChartArr.graph_time);
+            // console.log(ChartArr.graph_buy);
+            // console.log(ChartArr.graph_sell);
 
             mainChartUpdate(ChartArr);
 
@@ -1113,8 +1118,98 @@ $(function () {
     }, 600000);
 
     $('#reload').on('click', function () {
-        document.getElementById('reload-wrapper').setAttribute('style','display: none;');
+        document.getElementById('reload-wrapper').setAttribute('style', 'display: none;');
         location.reload();
     });
 
 });
+
+
+function infoMessage(banks_id, name, address, usd_buy, usd_sell, eur_buy, eur_sell, rub_buy, rub_sell) {
+    console.log('TEST');
+
+    swal.mixin({
+        confirmButtonText: 'Дальше &rarr;',
+        showCancelButton: false,
+        showCloseButton: true,
+        progressSteps: ['<i class="fas fa-dollar-sign">', '<i class="fas fa-euro-sign">', '<i class="fas fa-ruble-sign">']
+    }).queue([
+        {
+            title: name,
+            html:
+            '<small>Адрес: ' + address + '</small><br><br>' +
+            'Курс покупки: ' + usd_buy + '<br>' +
+            'Курс продажи: ' + usd_sell,
+            input: 'checkbox',
+            inputValue: 0,
+            inputPlaceholder: 'Подтверждаю, что курс <i class="fas fa-dollar-sign"></i> ошибочный'
+        },
+        {
+            title: name,
+            html:
+            '<small>Адрес: ' + address + '</small><br><br>' +
+            'Курс покупки: ' + eur_buy + '<br>' +
+            'Курс продажи: ' + eur_sell,
+            input: 'checkbox',
+            inputValue: 0,
+            inputPlaceholder: 'Подтверждаю, что курс <i class="fas fa-euro-sign"></i> ошибочный'
+        },
+        {
+            title: name,
+            html:
+            '<small>Адрес: ' + address + '</small><br><br>' +
+            'Курс покупки: ' + rub_buy + '<br>' +
+            'Курс продажи: ' + rub_sell,
+            input: 'checkbox',
+            inputValue: 0,
+            inputPlaceholder: 'Подтверждаю, что курс <i class="fas fa-ruble-sign"></i> ошибочный'
+        },
+        {
+            title: 'Оставьте свои замечания',
+            text: 'поле можно оставить пустым',
+            input: 'textarea',
+            inputPlaceholder: 'поле можно оставить пустым...',
+            confirmButtonText: 'Сообщить!'
+        }
+    ]).then(function (result) {
+
+        if (result.value) {
+            swal({
+                type: 'success',
+                title: 'Ваше сообщение отправлено',
+                timer: 2000
+                //html:
+                // 'Your answers: <pre><code>' +
+                // JSON.stringify(result.value) +
+                // '</code></pre>'
+            });
+
+            var msg = "Сообщаю, что на вашем сайте ";
+            msg += "курсы покупки/продажи USD составляют " + usd_buy + " / " + usd_sell;
+            if (result.value[0]) {
+                msg += " и это не верные курсы! ";
+            } else {
+                msg += " и это верные курсы. ";
+            }
+            msg += "Курсы покупки/продажи EUR составляют " + eur_buy + " / " + eur_sell;
+            if (result.value[1]) {
+                msg += " и это не верные курсы! ";
+            } else {
+                msg += " и это верные курсы. ";
+            }
+            msg += "Курсы покупки/продажи RUB составляют " + rub_buy + " / " + rub_sell;
+            if (result.value[2]) {
+                msg += " и это не верные курсы! ";
+            } else {
+                msg += " и это верные курсы. ";
+            }
+            if (result.value[3]) {
+                var text = result.value[3].replace(/\r?\n/g, " ");
+                msg += "Дополнительно хочу сообщить: " + text;
+            }
+            console.log(msg);
+        }
+    })
+}
+
+

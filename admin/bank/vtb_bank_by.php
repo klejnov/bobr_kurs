@@ -25,7 +25,7 @@ function vtb_bank_by($banks_id)
                 'rub_sell' => trim($valuta[6]),
                 'banks_id' => $banks_id,
                 'status'   => $status,
-                'html'     => $html,
+                'html'     => 'Лог отключён',
             )
         );
     } else {
@@ -40,7 +40,7 @@ function vtb_bank_by($banks_id)
                 'rub_sell' => 0,
                 'banks_id' => $banks_id,
                 'status'   => $status,
-                'html'     => $html,
+                'html'     => 'Лог отключён',
             )
         );
     }

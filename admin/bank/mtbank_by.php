@@ -90,7 +90,7 @@ function mtbank_by($banks_id)
             'rub_sell' => (string)$rub['sale'],
             'banks_id' => (string)$banks_id,
             'status'   => $status,
-            'html'     => $html,
+            'html'     => 'Лог отключён',
         )
     );
 

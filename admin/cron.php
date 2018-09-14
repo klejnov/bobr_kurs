@@ -238,7 +238,7 @@ function widgetGet()
 
     $dataTotalArr = json_encode($dataTotalArr);
 
-    $fileName = '../js/widget.json';
+    $fileName = __DIR__ . '/../js/widget.json';
     file_put_contents($fileName, $dataTotalArr);
 }
 

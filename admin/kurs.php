@@ -8,36 +8,45 @@
 
 $config = require "config.php";
 
-$db = new PDO('mysql:host=' . $config['host'] . ';dbname=' . $config['db_name'] ,$config['username'], $config['password'], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'"));
+$db = new PDO('mysql:host=' . $config['host'] . ';dbname=' . $config['db_name'], $config['username'],
+    $config['password'], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'"));
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
-function authuser($func_login, $func_password) {
+function authuser($func_login, $func_password)
+{
     global $db;
     $query = $db->prepare(
         "SELECT id,
                     role,
                     name,
-                    avatar         
+                    avatar,
+                    password        
                 FROM user
-                WHERE login = :sql_login
-                AND password = :sql_password"
+                WHERE login = :sql_login"
     );
     $query->execute(array(
         'sql_login' => $func_login,
-        'sql_password' => md5($func_password),
     ));
     $data = $query->fetch(PDO::FETCH_ASSOC);
 
-    if ($data['id'] > 0) {
+    if (password_verify($func_password, $data['password'])) {
         return $data;
     } else {
         return false;
     }
+
+    //для генерации пароля к новому пользователю:
+    //    $options = [
+    //        'cost' => 11,
+    //    ];
+    //    echo password_hash("pass", PASSWORD_BCRYPT, $options);
+
 }
 
 // Функция возвращает имя, avatar и id
-function userinfo ($func_id) {
+function userinfo($func_id)
+{
     global $db;
     $query = $db->prepare(
         "SELECT id, 
@@ -57,7 +66,8 @@ function userinfo ($func_id) {
 }
 
 // Функция меняем имя, логин или аватарку
-function edituser ($func_id, $func_login, $func_name, $func_avatar) {
+function edituser($func_id, $func_login, $func_name, $func_avatar)
+{
     //echo $func_name;
     global $db;
     $avatar_mysql = '';
@@ -75,32 +85,34 @@ function edituser ($func_id, $func_login, $func_name, $func_avatar) {
     );
     $query->execute(array(
         'sql_login' => $func_login,
-        'sql_id' => $func_id,
+        'sql_id'    => $func_id,
     ));
     $data = $query->fetch(PDO::FETCH_ASSOC);
     //При одинаковых логинах в data запишется одномерный массив с id пользователя.
     //При разных логинах вернется null
     //Далее делаю условие если не массив, то выполняю update.
-    if (!$data)  {
+    if (!$data) {
         $query = $db->prepare(
             "UPDATE user
                     SET name = :sql_name, login = :sql_login $avatar_mysql
                     WHERE id = :sql_id"
         );
         $query->execute(array(
-            'sql_name' => $func_name,
-            'sql_login' => $func_login,
-            'sql_id' => $func_id,
-        )+$avatar_arr);
+                            'sql_name'  => $func_name,
+                            'sql_login' => $func_login,
+                            'sql_id'    => $func_id,
+                        ) + $avatar_arr);
         //$data = $query->fetch(PDO::FETCH_ASSOC);
         return true;
     } else {
-         return false;
+        return false;
     }
 }
 
 // Функция добавляем банк
-function addbank ($func_name, $func_auto, $func_latlng, $func_url, $func_address, $func_ico_bank, $func_url_parser, $func_note) {
+function addbank(
+    $func_name, $func_auto, $func_latlng, $func_url, $func_address, $func_ico_bank, $func_url_parser, $func_note
+) {
     //echo $func_name;
     global $db;
 //    $ico_mysql = ', (NULL)';
@@ -117,20 +129,21 @@ function addbank ($func_name, $func_auto, $func_latlng, $func_url, $func_address
               VALUES (:sql_name, :sql_auto, :sql_latlng, :sql_url, :sql_address, :sql_ico_bank, :sql_url_parser, :sql_note);"
     );
     $query->execute(array(
-        'sql_name' => $func_name,
-        'sql_auto' => $func_auto,
-        'sql_latlng' => $func_latlng,
-        'sql_url' => $func_url,
-        'sql_address' => $func_address,
-        'sql_ico_bank' => $func_ico_bank,
+        'sql_name'       => $func_name,
+        'sql_auto'       => $func_auto,
+        'sql_latlng'     => $func_latlng,
+        'sql_url'        => $func_url,
+        'sql_address'    => $func_address,
+        'sql_ico_bank'   => $func_ico_bank,
         'sql_url_parser' => $func_url_parser,
-        'sql_note' => $func_note,
+        'sql_note'       => $func_note,
     ));
     //$data = $query->fetch(PDO::FETCH_ASSOC);
 }
 
 // Функция возвращает имя и id банка
-function getbanks () {
+function getbanks()
+{
     global $db;
     $query = $db->prepare(
         "SELECT * FROM ((SELECT 
@@ -177,11 +190,13 @@ function getbanks () {
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
     //print_r($data);
     return $data;
-
 }
 
 // Редактируем банк
-function editbank ($func_id, $func_name, $func_auto, $func_latlng, $func_url, $func_address, $func_ico_bank, $func_url_parser, $func_note) {
+function editbank(
+    $func_id, $func_name, $func_auto, $func_latlng, $func_url, $func_address, $func_ico_bank, $func_url_parser,
+    $func_note
+) {
     //echo $func_name;
     global $db;
     $ico_mysql = '';
@@ -197,21 +212,22 @@ function editbank ($func_id, $func_name, $func_auto, $func_latlng, $func_url, $f
                 SET name = :sql_name, auto = :sql_auto, latlng = :sql_latlng, url = :sql_url, address = :sql_address, url_parser = :sql_url_parser, note = :sql_note $ico_mysql
                 WHERE id = :sql_id"
     );
-        $query->execute(array(
-        'sql_name' => $func_name,
-        'sql_id' => $func_id,
-        'sql_auto' => $func_auto,
-        'sql_latlng' => $func_latlng,
-        'sql_url' => $func_url,
-        'sql_address' => $func_address,
-        'sql_url_parser' => $func_url_parser,
-        'sql_note' => $func_note,
-    )+$ico_arr);
+    $query->execute(array(
+                        'sql_name'       => $func_name,
+                        'sql_id'         => $func_id,
+                        'sql_auto'       => $func_auto,
+                        'sql_latlng'     => $func_latlng,
+                        'sql_url'        => $func_url,
+                        'sql_address'    => $func_address,
+                        'sql_url_parser' => $func_url_parser,
+                        'sql_note'       => $func_note,
+                    ) + $ico_arr);
     //$data = $query->fetch(PDO::FETCH_ASSOC);
 }
 
 // Функция получаем информацию о банке
-function getbanksinfo ($func_id) {
+function getbanksinfo($func_id)
+{
     global $db;
     $query = $db->prepare(
         "SELECT id, 
@@ -234,7 +250,8 @@ function getbanksinfo ($func_id) {
     return $data;
 }
 
-function delbank($func_dddddeelll_bank) {
+function delbank($func_dddddeelll_bank)
+{
     global $db;
     $query2 = $db->prepare(
         "DELETE FROM banks
@@ -242,13 +259,13 @@ function delbank($func_dddddeelll_bank) {
     );
     $query2->execute(array(
         'sql_func_db' => $func_dddddeelll_bank,
-    ));
-    ;
+    ));;
 }
 
 //заносит курсы с проверкой
 
-function addkurs ($data) {
+function addkurs($data)
+{
     //echo $func_name;
     global $db;
     foreach ($data as $parser_data) {
@@ -258,7 +275,7 @@ function addkurs ($data) {
                     WHERE id = :sql_banks_id"
         );
         $query->execute(array(
-            'sql_status' => $parser_data['status'],
+            'sql_status'   => $parser_data['status'],
             'sql_banks_id' => $parser_data['banks_id'],
         ));
 
@@ -304,11 +321,11 @@ function addkurs ($data) {
             );
             $query->execute(array(
                 'sql_banks_id' => $parser_data['banks_id'],
-                'sql_usd_buy' => $parser_data['usd_buy'],
+                'sql_usd_buy'  => $parser_data['usd_buy'],
                 'sql_usd_sell' => $parser_data['usd_sell'],
-                'sql_eur_buy' => $parser_data['eur_buy'],
+                'sql_eur_buy'  => $parser_data['eur_buy'],
                 'sql_eur_sell' => $parser_data['eur_sell'],
-                'sql_rub_buy' => $parser_data['rub_buy'],
+                'sql_rub_buy'  => $parser_data['rub_buy'],
                 'sql_rub_sell' => $parser_data['rub_sell'],
             ));
         }
@@ -318,7 +335,8 @@ function addkurs ($data) {
     //$data = $query->fetch(PDO::FETCH_ASSOC);
 }
 
-function writeLog($id_bank, $html) {
+function writeLog($id_bank, $html)
+{
 
     global $db;
 
@@ -331,13 +349,13 @@ function writeLog($id_bank, $html) {
     );
     $query->execute(array(
         'sql_id_bank' => $id_bank,
-        'sql_html' => $html,
+        'sql_html'    => $html,
     ));
-
 }
 
 // Функция получаем все банки
-function getbankslist () {
+function getbankslist()
+{
     global $db;
     $query = $db->prepare(
         "SELECT id, 
@@ -353,7 +371,8 @@ function getbankslist () {
 }
 
 // Функция возвращает список курсов в зависимости от периода
-function getstats($id_bank, $start, $end) {
+function getstats($id_bank, $start, $end)
+{
     global $db;
     $query = $db->prepare(
         "SELECT id, 
@@ -370,8 +389,8 @@ function getstats($id_bank, $start, $end) {
     );
     $query->execute(array(
         'sql_banks_id' => $id_bank,
-        'sql_start' => $start,
-        'sql_end' => $end,
+        'sql_start'    => $start,
+        'sql_end'      => $end,
     ));
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
     //print_r($data);
@@ -379,7 +398,8 @@ function getstats($id_bank, $start, $end) {
 }
 
 // Функция возвращает среднесуточное значение курса в зависимости от периода
-function getstatsavg($start, $end) {
+function getstatsavg($start, $end)
+{
     global $db;
     $query = $db->prepare(
         "SELECT DATE_FORMAT(time, '%d.%m') AS time,
@@ -401,7 +421,7 @@ function getstatsavg($start, $end) {
     );
     $query->execute(array(
         'sql_start' => $start,
-        'sql_end' => $end,
+        'sql_end'   => $end,
     ));
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
     //print_r($data);
@@ -422,9 +442,9 @@ function bash()
     return $valuta[1];
 }
 
-
 // Функция возвращает количество изменинй курса за текущие сутки
-function statscount($start, $end) {
+function statscount($start, $end)
+{
     global $db;
     $query = $db->prepare(
         "SELECT COUNT(*)
@@ -434,14 +454,15 @@ function statscount($start, $end) {
     );
     $query->execute(array(
         'sql_start' => $start,
-        'sql_end' => $end,
+        'sql_end'   => $end,
     ));
     $data = $query->fetch(PDO::FETCH_ASSOC);
     //print_r($data);
     return $data;
 }
 
-function getCurrencyRatesWidget($start, $end) {
+function getCurrencyRatesWidget($start, $end)
+{
     global $db;
     $query = $db->prepare(
         "SELECT DATE_FORMAT(time, '%d.%m') AS time,

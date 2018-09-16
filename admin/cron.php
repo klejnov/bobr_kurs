@@ -242,4 +242,17 @@ function widgetGet()
     file_put_contents($fileName, $dataTotalArr);
 }
 
+
+function tableGet()
+{
+
+    $dataTotalArr = getBanksRatesTable();
+
+    $dataTotalArr = json_encode($dataTotalArr);
+
+    $fileName = __DIR__ . '/../js/table.json';
+    file_put_contents($fileName, $dataTotalArr);
+}
+
 widgetGet();
+tableGet();

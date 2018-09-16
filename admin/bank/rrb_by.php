@@ -25,7 +25,7 @@ function rrb_by($banks_id)
                 'rub_sell' => trim($valuta[6]),
                 'banks_id' => $banks_id,
                 'status'   => $status,
-                'html'     => 'Лог отключён',
+                'html'     => $html,
             )
         );
     } else {
@@ -40,7 +40,7 @@ function rrb_by($banks_id)
                 'rub_sell' => 0,
                 'banks_id' => $banks_id,
                 'status'   => $status,
-                'html'     => 'Лог отключён',
+                'html'     => $html,
             )
         );
     }

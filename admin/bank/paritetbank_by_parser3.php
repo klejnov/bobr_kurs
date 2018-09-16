@@ -24,7 +24,7 @@ function paritetbank_by_parser3($banks_id) {
 			'rub_sell' => $matches[6],
 			'banks_id' => $banks_id,
             'status' => $status,
-            'html'     => 'Лог отключён',
+            'html'     => $html,
 		));
     } else {
         $status = 0;
@@ -37,7 +37,7 @@ function paritetbank_by_parser3($banks_id) {
             'rub_sell' => 0,
             'banks_id' => $banks_id,
             'status' => $status,
-            'html'     => 'Лог отключён',
+            'html'     => $html,
         ));
     }
 		//print_r($data);

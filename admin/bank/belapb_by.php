@@ -32,7 +32,7 @@ function belapb_by()
                 'rub_sell' => str_replace(",", ".", trim($valuta[6])),
                 'banks_id' => $banks_id,
                 'status'   => $status,
-                'html'     => 'Лог отключён',
+                'html'     => $html,
             );
         };
     } else {
@@ -47,7 +47,7 @@ function belapb_by()
                 'rub_sell' => 0,
                 'banks_id' => $banks_id,
                 'status'   => $status,
-                'html'     => 'Лог отключён',
+                'html'     => $html,
             );
         };
     }

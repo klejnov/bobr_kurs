@@ -52,7 +52,7 @@ function rbank_by($banks_id)
             'rub_sell' => $rub[2],
             'banks_id' => $banks_id,
             'status'   => $status,
-            'html'     => 'Лог отключён',
+            'html'     => $html,
         )
     );
     //print_r($data);

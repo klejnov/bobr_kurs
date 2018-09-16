@@ -39,7 +39,7 @@ function ideabank_by_16_id56($banks_id)
             'rub_sell' => (string)$arr['data']['rates'][$first_key]['100 RUB'][2]['Value'],
             'banks_id' => (string)$banks_id,
             'status'   => $status,
-            'html'     => 'Лог отключён', //json
+            'html'     => $json, //json
         )
     );
     //print_r($data);

@@ -90,9 +90,7 @@ try {
     if (isset($_POST["AjaxAction"]) && $_POST['AjaxAction'] == 'TableInfoGet' ||
         isset($_GET['mobile']) && $_GET['mobile'] == 'getInfoBanks') {
 
-        $db = new DataBase();
-
-        print_r($db->getBanksRatesTable());
+        print_r(file_get_contents("js/table.json"));
 
         exit();
     }
@@ -168,6 +166,14 @@ try {
         exit();
     }
 
+    if (isset($_GET['classic']) && $_GET['classic'] == 'show') {
+
+        $year = date("Y");
+
+        require "templates/old_table.tpl";
+
+        exit();
+    }
 } catch (Throwable $e) {
     print <<<HTML_BLOCK
 Выброшено исключение:   <b>{$e->getMessage()}</b><br>
@@ -180,7 +186,7 @@ HTML_BLOCK;
  * Вызов метода резервного копирования текущей базы данных
  */
 
-DataBase::backup();
+//DataBase::backup();
 
 $year = date("Y");
 

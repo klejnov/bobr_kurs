@@ -27,6 +27,19 @@
     <script src="../libs/bootstrap-select/bootstrap-select.min.js"></script>
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 
+    <script>
+
+        function getCookie(name) {
+            var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+            return v ? v[2] : null;
+        }
+
+        if (getCookie("show_view")) {
+            window.location.href = "/?classic=show";
+        }
+
+    </script>
+
 </head>
 <body>
 
@@ -92,7 +105,7 @@
                     <div class="brand-card-header bg-usd">
                         <i class="fas fa-dollar-sign"></i>
                         <i class="fas fa-chart-line" title="Динамика за 2 недели">
-                            <div class="dynamics">Динамика за 2 недели</div>
+                            <div class="dynamics dynamics-usd">Динамика за 2 недели</div>
                         </i>
                         <div class="chart-wrapper">
                             <canvas id="usd-box-chart-1" height="90"></canvas>
@@ -303,6 +316,18 @@
             </div>
         </div>
     </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="show-view">
+                    <span>Перейти в</span>
+                    <button type="button" class="btn btn-outline-secondary show-classic">классический</button>
+                    <span>вид</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 
 <footer>
@@ -317,10 +342,15 @@
 <script src="../js/script.js"></script>
 
 <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    (function (i, s, o, g, r, a, m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)}, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+    })
+    (window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
     ga('create', 'UA-4090834-1', 'auto');
     ga('require', 'displayfeatures');
     ga('send', 'pageview');

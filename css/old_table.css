@@ -1,0 +1,250 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+span.logo-title {
+    text-transform: uppercase;
+    color: #555555;
+    font-weight: bold;
+}
+
+.logo {
+    font-size: .9rem;
+    text-align: center;
+    margin: 20px 0px 5px;
+}
+
+nav.bobr-menu {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    background-color: #CC3433;
+    border-color: #CC3433;
+    min-height: 45px;
+    border-radius: 5px;
+}
+
+.navbar-nav {
+    margin: -5px -15px;
+}
+
+.nav > li {
+    position: relative;
+    display: block;
+}
+
+nav .navbar-nav > li > a {
+    display: block;
+    color: #FFFFFF;
+    padding: 10px 13px;
+}
+
+nav .navbar-nav > li > a:hover {
+    color: #CC3433;
+    background-color: #FFFFFF;
+    text-decoration: none;
+}
+
+.navicon-button {
+    display: inline-block;
+    position: relative;
+    padding: 1.1rem 1.5rem;
+    transition: 0.25s;
+    cursor: pointer;
+    user-select: none;
+    opacity: .8;
+    right: -10px;
+}
+
+.navicon-button .navicon:before, .navicon-button .navicon:after {
+    transition: 0.25s;
+}
+
+.navicon-button:hover {
+    transition: 0.5s;
+    opacity: 1;
+}
+
+.navicon-button:hover .navicon:before, .navicon-button:hover .navicon:after {
+    transition: 0.25s;
+}
+
+.navicon-button:hover .navicon:before {
+    top: .825rem;
+}
+
+.navicon-button:hover .navicon:after {
+    top: -.825rem;
+}
+
+.navicon {
+    position: relative;
+    width: 2.5em;
+    height: .3125rem;
+    background: #FFF;
+    transition: 0.5s;
+    border-radius: 2.5rem;
+}
+
+.navicon:before, .navicon:after {
+    display: block;
+    content: "";
+    height: .3125rem;
+    width: 2.5rem;
+    background: #FFF;
+    position: absolute;
+    z-index: 1;
+    transition: 0.5s 0.25s;
+    border-radius: 1rem;
+}
+
+.navicon:before {
+    top: .625rem;
+}
+
+.navicon:after {
+    top: -.625rem;
+}
+
+.btn-left, .btn-right {
+    width: 50%;
+}
+
+.open:not(.steps) .navicon:before,
+.open:not(.steps) .navicon:after {
+    top: 0 !important;
+}
+
+.open .navicon:before,
+.open .navicon:after {
+    transition: 0.5s;
+}
+
+/* Minus */
+.open {
+    transform: scale(0.75);
+}
+
+/* × and + */
+.open.plus .navicon,
+.open.x .navicon {
+    background: transparent;
+}
+
+.open.plus .navicon:before,
+.open.x .navicon:before {
+    transform: rotate(-45deg);
+}
+
+.open.plus .navicon:after,
+.open.x .navicon:after {
+    transform: rotate(45deg);
+}
+
+.open.plus {
+    transform: scale(0.75) rotate(45deg);
+}
+
+.google-play-show {
+    margin-left: calc(50% - 85px);
+}
+
+.google-play-foot {
+    display: inline-block;
+    margin-left: calc(50% - 85px);
+}
+
+.google-play {
+    opacity: .7;
+    width: 170px;
+    margin-top: 10px;
+    margin-bottom: -5px;
+    transition: all 300ms;
+}
+
+.google-play:hover {
+    opacity: 1;
+}
+
+.row.b-footer {
+    margin: 1em 0;
+    text-align: center;
+}
+
+.row.b-footer .text-wrapper {
+    margin: 0 auto;
+    width: 43%;
+    white-space: nowrap;
+}
+
+.row.b-footer .text-wrapper, .row.b-footer div {
+    border-top: solid 1px #CCCCCC;
+    font-size: 90%;
+    padding-top: 0.5em;
+}
+
+img.load {
+    width: 50%;
+    margin: auto 25%;
+}
+
+.show-view{
+    color: #777;
+    font-size: .9rem;
+    white-space: nowrap;
+    margin-top: 20px;
+    text-align: center;
+    margin-right: 40px;
+}
+.show-new {
+    border-color: #ced4da;
+    padding: 1px 0px;
+    width: 120px;
+    text-transform: uppercase;
+    padding-top: 2px;
+}
+
+/*// Small devices (landscape phones, 576px and down)*/
+@media (max-width: 576px) {
+    .scroll {
+        overflow-x: scroll;
+        border-radius: 5px;
+    }
+
+    .address {
+        padding-left: 5px;
+    }
+}
+
+/*// Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+    .scroll {
+        overflow-x: scroll;
+        border-radius: 5px;
+    }
+    .address {
+        padding-left: 5px;
+    }
+}
+
+/*// Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+    .scroll {
+        overflow-x: auto;
+        border-radius: 5px;
+    }
+    .address {
+        padding-left: 23px;
+    }
+}
+
+/*// Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+
+}
+
+/*// Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+
+}
+

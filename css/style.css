@@ -529,6 +529,14 @@ i.fas.fa-chart-line:hover {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+.dynamics-usd {
+    display: inline-block;
+    position: relative;
+    top: -2px;
+    left: 2px;
+}
+
+
 .show-all, .show-10 {
     border-color: #ced4da;
     padding: 4px 0px;
@@ -548,7 +556,7 @@ div.dataTables_wrapper div.dataTables_filter, div.dataTables_wrapper div.dataTab
     text-align: right !important;
 }
 
-#map{
+#map {
     height: 600px;
     width: 99.5%;
 }
@@ -565,14 +573,14 @@ div.dataTables_wrapper div.dataTables_filter, div.dataTables_wrapper div.dataTab
     top: 10px;
 }
 
-.google-play-show{
+.google-play-show {
     margin-left: calc(50% - 85px);
 }
+
 .google-play-foot {
     display: inline-block;
     margin-left: calc(50% - 85px);
 }
-
 
 .google-play {
     opacity: .7;
@@ -647,13 +655,12 @@ address img {
     margin-bottom: -5px;
 }
 
-
 .btn-light:not(:disabled):not(.disabled):active:focus, .show > .btn-light.dropdown-toggle:focus {
     box-shadow: 0 0 0 0 rgba(248, 249, 250, .5);
 }
 
 .wrapper-chart .bootstrap-select button:focus {
-    outline: none!important;
+    outline: none !important;
 }
 
 .wrapper-chart .address {
@@ -665,9 +672,8 @@ address img {
     white-space: nowrap;
 }
 
-
 /* базовый контейнер уведомлений */
-.message{
+.message {
     background-size: 40px 40px;
     background-image: -moz-linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%,
     transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%,
@@ -678,11 +684,11 @@ address img {
     background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%,
     transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%,
     transparent 75%, transparent);
-    box-shadow: 0 0 8px rgba(0,0,0,.3);
-    font:16px 'Open Sans';
+    box-shadow: 0 0 8px rgba(0, 0, 0, .3);
+    font: 16px 'Open Sans';
     width: 100%;
     margin: 20px auto;
-    padding:15px;
+    padding: 15px;
     -moz-animation: bg-animate 5s linear infinite;
     -webkit-animation: bg-animate 5s linear infinite;
     -ms-animation: bg-animate 5s linear infinite;
@@ -697,16 +703,22 @@ address img {
 }
 
 /* заголовок сообщения */
-.message span{font-weight:600;}
+.message span {
+    font-weight: 600;
+}
 
 /* кнопка закрытия */
-.message #reload{float:right; color:inherit; text-decoration:none;}
+.message #reload {
+    float: right;
+    color: inherit;
+    text-decoration: none;
+}
 
 /* сообщение об ошибке */
-.message#reload-wrapper{
-    background-color:tomato;
-    border-left:7px #dc3d21 solid;
-    color:white;
+.message#reload-wrapper {
+    background-color: tomato;
+    border-left: 7px #dc3d21 solid;
+    color: white;
 }
 
 /* анимация */
@@ -737,6 +749,23 @@ address img {
     }
 }
 
+.show-view {
+    color: #777;
+    font-size: .9rem;
+    white-space: nowrap;
+    margin-top: 20px;
+    text-align: center;
+    margin-right: 40px;
+}
+
+.show-classic {
+    border-color: #ced4da;
+    padding: 1px 0px;
+    width: 150px;
+    text-transform: uppercase;
+    padding-top: 2px;
+}
+
 /*// Small devices (landscape phones, 576px and down)*/
 @media (max-width: 576px) {
     .select-input {
@@ -751,7 +780,6 @@ address img {
     .allbanks span:first-child {
         display: none;
     }
-
 
     .spinner-show {
         text-align: center;
@@ -778,6 +806,7 @@ address img {
     .period {
         width: 25%;
     }
+
     .wrapper-chart .address {
         margin-bottom: 10px;
     }
@@ -817,6 +846,7 @@ address img {
         height: 400px;
         width: 99.5%;
     }
+
     .spinner-show {
         text-align: center;
     }
@@ -850,6 +880,7 @@ address img {
         height: 600px;
         width: 99.5%;
     }
+
     .spinner-show {
         text-align: right;
     }

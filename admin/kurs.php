@@ -281,6 +281,11 @@ function addkurs($data)
 
         $html = $parser_data['html'];
         $id_bank = $parser_data['banks_id'];
+
+        if ($_SERVER['SERVER_NAME'] == "kurs.bobr.by") {
+            $html = 'Лог отключён';
+        }
+
         writeLog($id_bank, $html);
 
         if ($parser_data['usd_buy'] == 0
@@ -487,6 +492,61 @@ function getCurrencyRatesWidget($start, $end)
         'sql_start' => $start,
         'sql_end'   => $end,
     ));
+
+    $result = $query->fetchALL(PDO::FETCH_ASSOC);
+
+    if ($result === false) {
+        return [];
+    }
+
+    return $result;
+}
+
+function getBanksRatesTable()
+{
+    global $db;
+    $query = $db->prepare(
+        "SELECT * FROM ((SELECT 
+                    b.id, 
+                    b.name,
+                    b.ico,
+                    b.url,
+                    b.latlng,
+                    b.address,
+                    b.status,
+                    bk.usd_buy,
+                    bk.usd_sell,
+                    bk.eur_buy,
+                    bk.eur_sell,
+                    bk.rub_buy,
+                    bk.rub_sell,
+                    bk.banks_id,
+                    DATE_FORMAT(bk.time, '%Y-%m-%d %H:%i') AS time
+                FROM banks_kurs AS bk
+                LEFT JOIN banks AS b ON b.id = bk.banks_id)
+                UNION ALL
+                (SELECT id,
+                name,
+                ico,
+                url,
+                latlng,
+                address,
+                status,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,                
+                id,
+                '0000-00-00 00:00:00'
+                FROM banks WHERE status = 1)
+                ORDER BY time DESC
+                ) AS bk2 WHERE status = 1 AND name NOT LIKE '%Банк для тестирования%'
+                GROUP BY bk2.banks_id"
+    );
+
+    $query->execute();
 
     $result = $query->fetchALL(PDO::FETCH_ASSOC);
 

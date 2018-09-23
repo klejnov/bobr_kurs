@@ -9,7 +9,7 @@
     <title>Курсы валют в Бобруйске</title>
     <meta name="description" content="Актуальные курсы валют всех банков Бобруйска">
 
-    <link rel="stylesheet" href="../css/fontawesome.css">
+    <link rel="stylesheet" href="../css/fontawesome.min.css">
     <link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../css/widget.css">
 
@@ -31,7 +31,7 @@
                                 <div class="brand-card-header bg-usd">
                                     <i class="fas fa-dollar-sign"></i>
                                     <i class="fas fa-chart-line" title="Динамика за 2 недели">
-                                        <div class="dynamics">Динамика за 2 недели</div>
+                                        <div class="dynamics dynamics-usd">Динамика за 2 недели</div>
                                     </i>
                                     <div class="chart-wrapper">
                                         <canvas id="usd-box-chart-1" height="90"></canvas>

@@ -202,6 +202,25 @@ class DataBase
         return $result;
     }
 
+    function saveMessage($banks_id, $text, $ip)
+    {
+
+        $sth = $this->link->prepare(
+            "INSERT INTO 
+              messages (banks_id, text, ip) 
+              VALUES (
+              :sql_banks_id,
+              :sql_text,
+              :sql_ip
+              );"
+        );
+        $sth->execute(array(
+            'sql_banks_id' => $banks_id,
+            'sql_text' => $text,
+            'sql_ip' => $ip
+        ));
+    }
+
     /**
      * @param $dbName
      *

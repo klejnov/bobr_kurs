@@ -282,7 +282,7 @@ function addkurs($data)
         $html = $parser_data['html'];
         $id_bank = $parser_data['banks_id'];
 
-        if ($_SERVER['SERVER_NAME'] == "kurs.bobr.by") {
+        if ($_SERVER['SCRIPT_FILENAME'] == "/var/www/kurs.bobr.by/admin/cron.php") {
             $html = 'Лог отключён';
         }
 
@@ -555,5 +555,75 @@ function getBanksRatesTable()
     }
 
     return $result;
+}
+
+// Функция получаем все сообщения
+function getMessageList()
+{
+    global $db;
+    $query = $db->prepare(
+        "SELECT  messages.id, 
+                          time,
+                          text,
+                          ip,
+                          banks_id,
+                          banks.name,   
+                          banks.ico   
+                            FROM messages INNER JOIN banks ON messages.banks_id = banks.id
+                            ORDER BY time DESC LIMIT 50"
+    );
+    $query->execute();
+    $data = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $data;
+}
+
+// Функция получаем все сообщения
+function getMessageBank($id)
+{
+    global $db;
+    $query = $db->prepare(
+        "SELECT  messages.id, 
+                          time,
+                          text,
+                          ip
+                            FROM messages INNER JOIN banks ON messages.banks_id = banks.id WHERE banks_id = $id
+                            ORDER BY time DESC LIMIT 20"
+    );
+    $query->execute();
+    $data = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $data;
+}
+
+// Функция получаем курсы валют по ID банка
+function getCoursesBank($id)
+{
+    global $db;
+    $query = $db->prepare(
+        "SELECT    id,
+                            usd_buy,
+                            usd_sell,
+                            eur_buy,
+                            eur_sell,
+                            rub_buy,
+                            rub_sell,
+                            DATE_FORMAT(time, '%Y-%m-%d %H:%i') AS time 
+                                FROM banks_kurs WHERE banks_id = $id
+                                ORDER BY time DESC LIMIT 20"
+    );
+    $query->execute();
+    $data = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $data;
+}
+
+// Функция получаем последнее ID из таблицы messages
+function getLastIdMessage()
+{
+    global $db;
+    $query = $db->prepare(
+        "SELECT id FROM messages ORDER BY id DESC LIMIT 1;"
+    );
+    $query->execute();
+    $data = $query->fetch(PDO::FETCH_ASSOC);
+    return $data;
 }
 

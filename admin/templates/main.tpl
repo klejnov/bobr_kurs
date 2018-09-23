@@ -76,6 +76,7 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+              <li<?=$active_message?>><a href="index.php?action=message">Сообщения<span id="info-message" class="badge pull-right label-danger">0</span></a></li>
               <li<?=$active_stats?>><a href="index.php?action=stats">Графики</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Настройки<span class="caret"></span></a>

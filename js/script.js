@@ -205,16 +205,19 @@ $(function () {
 
             getDataSearchFormChart();
 
-            $('input.form-control').on('keyup change', function () {
-                showInfoBank();
-            });
+            // Отключил
+            // $('input.form-control').on('keyup change', function () {
+            //     showInfoBank();
+            // });
 
 
             ymaps.ready(function () {
+                var flag = true;
                 init();
                 tableCreate();
-                tableCalc();
+                tableCalc(flag);
                 showBanksAll();
+                placemarkHoverSelect();
             });
 
         }).fail(function () {
@@ -227,7 +230,7 @@ $(function () {
 
     banksTableGet();
 
-    var tableCalc = function () {
+    var tableCalc = function (flag) {
 
 
         $.each(tableArr, function (key, element) {
@@ -253,7 +256,7 @@ $(function () {
 
             table.row.add([
                 '<td data-id-bank="' + element.banks_id + '"><img src="/admin/files/img/ico/' + element.ico + '" alt="Иконка ' + element.name + '">' + element.name + '' +
-                '<div data-info="info" data-id="' + element.banks_id + '" style="display: none">Адрес: ' + address[1] + '<br>Тел.:' + address[2] + '<br><!--<input type="button" value="Неверный курс?" onclick="infoMessage(\'' + element.banks_id + '\', \'' + element.name + '\', \'' + address[1] + '\', \'' + usd_buy + '\', \'' + usd_sell + '\', \'' + eur_buy + '\', \'' + eur_sell + '\', \'' + rub_buy + '\', \'' + rub_sell + '\')">--><span>Банк обновлял курсы: <time>' + element.time + '</time></span>' +
+                '<div data-info="info" data-id="' + element.banks_id + '" style="display: none">Адрес: ' + address[1] + '<br>Тел.:' + address[2] + '<br><input type="button" value="Неверный курс?" onclick="infoMessage(\'' + element.banks_id + '\', \'' + element.name + '\', \'' + address[1] + '\', \'' + usd_buy + '\', \'' + usd_sell + '\', \'' + eur_buy + '\', \'' + eur_sell + '\', \'' + rub_buy + '\', \'' + rub_sell + '\')"><span>Банк обновлял курсы: <time>' + element.time + '</time></span>' +
                 '<img width="100%" src="data:image/gif;base64,R0lGODlhqAIsAZECADWz27vM0////wAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQFCgACACwAAAAAqAIsAQAC/5SPqcvtD6OctNqLs968+w+G4kiW5omm6sq27gvH8kzX9o3n+s73/g8MCofEovGITCqXzKbzCY1Kp9Sq9YrNarfcrvcLDovH5LL5jE6r1+y2+w2Py+f0uv2Oz+v3/L7/DxgoOEhYaHiImKi4yNjo+AgZKTlJWWl5iZmpucnZ6fkJGio6SlpqeoqaqrrK2ur6ChsrO0tba3uLm6u7y9vr+wscLDxMXGx8jJysvMzc7PwMHS09TV1tfY2drb3N3e39DR4uPk5ebn6Onq6+zt7u/g4fLz9PX29/j5+vv8/f7/8PMKDAgQQLGjyIMKHChQwbOnwIMaLEiRQrWryIMaPGjf8cO3r8CDKkyJEkS5o8iTKlypUsW7p8CTOmzJk0a9q8iTOnzp08e/r8CTSo0KFEixo9ijSp0qVMmzp9CjWq1KlUq1q9ijWr1q1cu3r9Cjas2LFky5o9izat2rVs27p9Czeu3Ll069q9izev3r18+/r9Cziw4MGECxs+jDix4sWMGzt+DDmy5MmUK1u+jDmz5s2cO3v+DDq06NGkS5s+jTq16tWsW7t+DTu27Nm0a9u+jTu37t28e/vuGCC48OAMhg8vbpz4guTKFTAPgDx5dOPTjy9nXl347yzPszdP0P26dPHUyVt3jt28dvXfEYTfbuU9+PTox9cvf//8fPv78ff/1+8eff+tB18V8gXIH4L+KQjgAQc6KCCDBA7YHoQJWrhggVE8aACHAngIYoQYNtihiCVeeGKGKZKooRMhovihiTHC+KKKM9pYI4setshEjhNKWOGKP444pJBB3qijjD4eyeMSS0LHHpT5FYkklU96JyWFWQK5ZZNNXBkllmKGSeaUR4Lp5RNoajmmmV0a+WaVZypJJ4xpIrEml22yWSafbu6p550u1okjoUnSaKiVic5pp6COPgpppJJOSmmlll6Kaaaabsppp55+Cmqooo5Kaqmmnopqqqquymqrrr4Ka6yyzkprrbbeimuuuu7Ka6++/gpssMIOS2yxxh6LbLLKly7LbLPOPgtttNJOS2211l6Lbbbabsttt95+C2644o5Lbrnmnotuuuquy2677r4Lb7zyzktvvfbei2+++u7Lb7/+/gtwwAIPTHDBBh+McMIKL8xwww4/DHHEEk9MccUWX4xxxhpvzHHHHn8Mcsgij0xyySafjHLKKq/McssuvwxzzDLPTHPNNt+Mc84678xzzz7/DHRXBQAAIfkEBQoAAgAsCAGQAAgADAAAAgiEj6nL7Q9jKgAh+QQFCgACACwYAZAACAAMAAACCISPqcvtD2MqACH5BAUKAAIALCgBkAAIAAwAAAIIhI+py+0PYyoAIfkEBQoAAgAsOAGQAAgADAAAAgiEj6nL7Q9jKgAh+QQFCgACACxIAZAACAAMAAACCISPqcvtD2MqACH5BAUKAAIALFgBkAAIAAwAAAIIhI+py+0PYyoAIfkEBQoAAgAsaAGQAAgADAAAAgiEj6nL7Q9jKgAh+QQFCgACACx4AZAACAAMAAACCISPqcvtD2MqACH5BAUKAAIALIgBkAAIAAwAAAIIhI+py+0PYyoAIfkEBQoAAgAsmAGQAAgADAAAAgiEj6nL7Q9jKgAh+QQFCgACACwAAAAAAQABAAACAlQBADs=" alt="Карта ' + element.name + '" data-pic="https://static-maps.yandex.ru/1.x/?l=map&pt=' + latlng + ',pm2rdl&size=514,300&z=16&lang=ru_RU">' +
                 '</div>' +
                 '<i class="fas fa-info-circle"></i>' +
@@ -274,8 +277,12 @@ $(function () {
 
             showInfoBank();
         });
-        placemarkHoverSelect();
 
+        if (flag != true){
+            setTimeout(function () {
+                placemarkHoverSelect();
+            },4000);
+        }
     };
 
     var showBanksAll = function () {
@@ -288,7 +295,7 @@ $(function () {
 
         $('.show-all').on('click', function (e) {
             e.preventDefault();
-            table.page.len(100).draw();
+            table.page.len(tableArr.length).draw(); //50
             showInfoBank();
             var pageText = '<button type="button" class="btn btn-outline-secondary show-10">Свернуть</button> <span class="align-middle">банки</span>';
             $('.allbanks').html(pageText);
@@ -630,8 +637,8 @@ $(function () {
 
         $(".number").val(settings.number);
 
-
-        showInfoBank();
+        //Отключил!!!
+        //showInfoBank();
 
         //console.log('Настройки в функции:');
         //console.log(settings);
@@ -747,7 +754,9 @@ $(function () {
     }, 3000);
 
     function placemarkHoverSelect() {
-        table.page.len(100).draw();
+
+
+        table.page.len(tableArr.length).draw(); //50
         $.each(tableArr, function (key, element) {
 
             var latlng = element.latlng.split(',');
@@ -772,15 +781,7 @@ $(function () {
                 ].join('')
             });
 
-            $('#myTable').find('[data-bank="' + element.id + '"]').on('contextmenu', function () {
-                if (!placemark_usdBuy.balloon.isOpen()) {
-                    placemark_usdBuy.balloon.open();
-                } else {
-                    placemark_usdBuy.balloon.close();
-                }
-                return false;
-            })
-                .on('mouseenter', function () {
+            $('#myTable').find('[data-bank="' + element.id + '"]').on('mouseenter', function () {
                     placemark_usdBuy.options.set('preset', 'islands#orangeStretchyIcon');
                     placemark_usdBuy.options.set('zIndex', 1000);
                 })
@@ -805,15 +806,7 @@ $(function () {
                 ].join('')
             });
 
-            $('#myTable').find('[data-bank="' + element.id + '"]').on('contextmenu', function () {
-                if (!placemark_usdSell.balloon.isOpen()) {
-                    placemark_usdSell.balloon.open();
-                } else {
-                    placemark_usdSell.balloon.close();
-                }
-                return false;
-            })
-                .on('mouseenter', function () {
+            $('#myTable').find('[data-bank="' + element.id + '"]').on('mouseenter', function () {
                     placemark_usdSell.options.set('preset', 'islands#orangeStretchyIcon');
                     placemark_usdSell.options.set('zIndex', 1000);
                 })
@@ -838,15 +831,7 @@ $(function () {
                 ].join('')
             });
 
-            $('#myTable').find('[data-bank="' + element.id + '"]').on('contextmenu', function () {
-                if (!placemark_eurBuy.balloon.isOpen()) {
-                    placemark_eurBuy.balloon.open();
-                } else {
-                    placemark_eurBuy.balloon.close();
-                }
-                return false;
-            })
-                .on('mouseenter', function () {
+            $('#myTable').find('[data-bank="' + element.id + '"]').on('mouseenter', function () {
                     placemark_eurBuy.options.set('preset', 'islands#orangeStretchyIcon');
                     placemark_eurBuy.options.set('zIndex', 1000);
                 })
@@ -871,15 +856,7 @@ $(function () {
                 ].join('')
             });
 
-            $('#myTable').find('[data-bank="' + element.id + '"]').on('contextmenu', function () {
-                if (!placemark_eurSell.balloon.isOpen()) {
-                    placemark_eurSell.balloon.open();
-                } else {
-                    placemark_eurSell.balloon.close();
-                }
-                return false;
-            })
-                .on('mouseenter', function () {
+            $('#myTable').find('[data-bank="' + element.id + '"]').on('mouseenter', function () {
                     placemark_eurSell.options.set('preset', 'islands#orangeStretchyIcon');
                     placemark_eurSell.options.set('zIndex', 1000);
                 })
@@ -904,15 +881,7 @@ $(function () {
                 ].join('')
             });
 
-            $('#myTable').find('[data-bank="' + element.id + '"]').on('contextmenu', function () {
-                if (!placemark_rubBuy.balloon.isOpen()) {
-                    placemark_rubBuy.balloon.open();
-                } else {
-                    placemark_rubBuy.balloon.close();
-                }
-                return false;
-            })
-                .on('mouseenter', function () {
+            $('#myTable').find('[data-bank="' + element.id + '"]').on('mouseenter', function () {
                     placemark_rubBuy.options.set('preset', 'islands#orangeStretchyIcon');
                     placemark_rubBuy.options.set('zIndex', 1000);
                 })
@@ -937,15 +906,7 @@ $(function () {
                 ].join('')
             });
 
-            $('#myTable').find('[data-bank="' + element.id + '"]').on('contextmenu', function () {
-                if (!placemark_rubSell.balloon.isOpen()) {
-                    placemark_rubSell.balloon.open();
-                } else {
-                    placemark_rubSell.balloon.close();
-                }
-                return false;
-            })
-                .on('mouseenter', function () {
+            $('#myTable').find('[data-bank="' + element.id + '"]').on('mouseenter', function () {
                     placemark_rubSell.options.set('preset', 'islands#orangeStretchyIcon');
                     placemark_rubSell.options.set('zIndex', 1000);
                 })
@@ -1128,7 +1089,42 @@ $(function () {
         window.location.href = "/?classic=show";
     });
 
+
 });
+
+
+function messageSend(banks_id, text) {
+
+    $.ajax({
+        type: "POST",
+        url: "index.php",
+        dataType: "json",
+        data: {AjaxAction: "Message", AjaxText: text, AjaxBanksId: banks_id}
+    }).done(function (result) {
+        console.log(result);
+
+        if ($.isEmptyObject(result)) {
+            console.log('Завершаем работу. Пустой объект JSON');
+            return;
+        }
+
+        swal({
+            type: 'success',
+            title: 'Ваше сообщение отправлено',
+            timer: 2500
+        });
+
+    }).fail(function () {
+
+        swal({
+            type: 'error',
+            title: 'Ошибка отправки',
+            timer: 2500
+        });
+
+        console.log('Что-то пошло не так. Повторите позже.');
+    });
+}
 
 
 function infoMessage(banks_id, name, address, usd_buy, usd_sell, eur_buy, eur_sell, rub_buy, rub_sell) {
@@ -1174,21 +1170,12 @@ function infoMessage(banks_id, name, address, usd_buy, usd_sell, eur_buy, eur_se
             title: 'Оставьте свои замечания',
             text: 'поле можно оставить пустым',
             input: 'textarea',
-            inputPlaceholder: 'поле можно оставить пустым...',
+            inputPlaceholder: 'Можете указать верный курс в банке, либо просто оставить поле пустым...',
             confirmButtonText: 'Сообщить!'
         }
     ]).then(function (result) {
 
         if (result.value) {
-            swal({
-                type: 'success',
-                title: 'Ваше сообщение отправлено',
-                timer: 2000
-                //html:
-                // 'Your answers: <pre><code>' +
-                // JSON.stringify(result.value) +
-                // '</code></pre>'
-            });
 
             var msg = "Сообщаю, что на вашем сайте ";
             msg += "курсы покупки/продажи USD составляют " + usd_buy + " / " + usd_sell;
@@ -1213,7 +1200,9 @@ function infoMessage(banks_id, name, address, usd_buy, usd_sell, eur_buy, eur_se
                 var text = result.value[3].replace(/\r?\n/g, " ");
                 msg += "Дополнительно хочу сообщить: " + text;
             }
-            console.log(msg);
+            console.log(banks_id + '' + msg);
+
+            messageSend(banks_id, msg);
         }
     })
 }

@@ -9,7 +9,7 @@
     <title>Курсы валют в Бобруйске</title>
     <meta name="description" content="Актуальные курсы валют всех банков Бобруйска">
 
-    <link rel="stylesheet" href="../css/fontawesome.css">
+    <link rel="stylesheet" href="../css/fontawesome.min.css">
     <link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../libs/dataTables/datatables.min.css">
     <link rel="stylesheet" href="../libs/bootstrap-select/bootstrap-select.min.css">
@@ -50,7 +50,6 @@
                 <a id="reload" title="Обновить" href="/"><i class="fas fa-redo"></i></a>
                 <span>Внимание!</span> Курсы валют могли устареть. Пожалуйста, обновите страницу.
             </div>
-
         </div>
     </div>
 </div>
@@ -177,7 +176,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -295,7 +293,6 @@
                         </div>
                     </div>
                     <div class="col-12">
-
                         <div>
                             <canvas id="main-chart" style="height: 350px;"></canvas>
                         </div>

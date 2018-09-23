@@ -11,3 +11,22 @@
     height: 500px;
     z-index: 0;
 }
+
+.bank-title {
+    white-space: nowrap;
+}
+
+#info-message {
+    display: none;
+    background-color: #d9534f;
+    margin-left: 3px;
+    margin-top: 1px;
+}
+
+.navbar-nav li:hover{
+    background-color: #e7e7e7;
+}
+
+.navbar-right li:hover {
+    background-color: #f8f8f8;
+}

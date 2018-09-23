@@ -150,7 +150,7 @@ try {
 
         $db = new DataBase();
 
-        $sql = "DELETE FROM banks_kurs_log WHERE time < DATE_SUB(NOW(), INTERVAL 1 DAY);";
+        $sql = "DELETE FROM banks_kurs_log WHERE time < DATE_SUB(NOW(), INTERVAL 5 DAY);";
 
         $db->execute($sql);
 
@@ -174,6 +174,22 @@ try {
 
         exit();
     }
+
+    if (isset($_POST["AjaxAction"]) && $_POST['AjaxAction'] == 'Message') {
+
+        $text = $_POST["AjaxText"];
+        $banks_id = $_POST["AjaxBanksId"];
+        $ip = $_SERVER['REMOTE_ADDR'];
+
+        $db = new DataBase();
+
+        $db->saveMessage($banks_id, $text, $ip);
+
+        echo '{"send":"true"}';
+
+        exit();
+    }
+
 } catch (Throwable $e) {
     print <<<HTML_BLOCK
 Выброшено исключение:   <b>{$e->getMessage()}</b><br>

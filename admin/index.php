@@ -131,6 +131,7 @@ $active_stats = '';
 $active_banks = '';
 $active_statsavr = '';
 $active_edituser = '';
+$active_message = '';
 
 if (isset($_GET['action']) and $_GET['action'] == 'auth') {
 
@@ -204,6 +205,11 @@ if (isset($_GET['action']) and $_GET['action'] == 'auth') {
     } else {
     $display_none = ' style="display: none"';
         }
+
+    $messages = getMessageBank($_GET['id']);
+
+    $courses = getCoursesBank($_GET['id']);
+
     ob_start();
     require "templates/editbank.tpl";
     $content = ob_get_clean();
@@ -337,6 +343,36 @@ if (isset($_GET['action']) and $_GET['action'] == 'auth') {
     }
     require "cron.php";
     header('location:index.php');
+} else if (isset($_GET['action']) and $_GET['action'] == 'message'){
+    if (!isset($_SESSION['sessionauth']) or $_SESSION['sessionauth'] == false) {
+        header('location:index.php?action=auth');
+        exit;
+    } else if ($_SESSION['role'] == 0 ){
+        header('location:index.php?action=closed');
+        exit;
+    }
+    $user_data2 = userinfo($_SESSION['id']);
+    $messages = getMessageList();
+    $active_message = ' class="active"';
+    //print_r($banks);
+    ob_start();
+    require "templates/message.tpl";
+    $content = ob_get_clean();
+    require 'templates/main.tpl';
+} else if (isset($_POST['AjaxAction']) and $_POST['AjaxAction'] == 'lastIdMessage'){
+    if (!isset($_SESSION['sessionauth']) or $_SESSION['sessionauth'] == false) {
+        header('location:index.php?action=auth');
+        exit;
+    } else if ($_SESSION['role'] == 0 ){
+        header('location:index.php?action=closed');
+        exit;
+    }
+    $id = getLastIdMessage();
+    $id = json_encode($id);
+
+    print_r($id);
+
+    exit();
 }
 else {
    if (!isset($_SESSION['sessionauth']) or $_SESSION['sessionauth'] == false) {

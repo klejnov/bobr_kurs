@@ -74,13 +74,81 @@
     </div>
 </div>
 
+<?php if ($bank_data['id'] > 0 && $messages) { ?>
+
+<div class="jumbotron">
+    <h4>Сообщения</h4>
+    <table class="table table-bordered table-home">
+        <thead>
+        <tr>
+            <th>Сообщение</th>
+            <th>IP</th>
+            <th style="width: 90px;">Время</th>
+        </tr>
+        </thead>
+        <tbody>
+
+<?php foreach($messages as $message)  { ?>
+        <tr>
+            <td style="text-align:left;"><?=htmlspecialchars($message['text'])?></td>
+            <td><?=$message['ip']?></td>
+            <td><?=$message['time']?></td>
+        </tr>
+<?php }?>
+
+        </tbody>
+    </table>
+</div>
+
+<?php }?>
+
+
+<?php if ($bank_data['id'] > 0 && $courses) { ?>
+
+<div class="jumbotron" style="max-width: 100%; margin: auto;">
+    <h4>Курсы валют <?=$bank_data['name']?></h4>
+    <table class="table table-bordered table-home">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>USD, покупка</th>
+            <th>USD, продажа</th>
+            <th>EUR, покупка</th>
+            <th>EUR, продажа</th>
+            <th>RUB, покупка</th>
+            <th>RUB, продажа</th>
+            <th>UPD</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <?php foreach($courses as $course)  { ?>
+        <tr>
+            <td><?=htmlspecialchars($course['id'])?></td>
+            <td><?=htmlspecialchars($course['usd_buy'])?></td>
+            <td><?=htmlspecialchars($course['usd_sell'])?></td>
+            <td><?=htmlspecialchars($course['eur_buy'])?></td>
+            <td><?=htmlspecialchars($course['eur_sell'])?></td>
+            <td><?=htmlspecialchars($course['rub_buy'])?></td>
+            <td><?=htmlspecialchars($course['rub_sell'])?></td>
+            <td><?=$course['time']?></td>
+        </tr>
+        <?php }?>
+
+        </tbody>
+    </table>
+</div>
+
+<?php }?>
+
+
 <?php if ($bank_data['id'] > 0) {
 echo "
 <link rel=\"stylesheet\" href=\"libs/leaflet/leaflet.css\" />
 <!--[if lte IE 8]>
 <link rel=\"stylesheet\" href=\"libs/leaflet/leaflet.ie.css\" />
 <![endif]-->
-<div>
+<div style=\"margin-top: 25px\">
     <h4>Карта</h4>
     <div>
         <p>

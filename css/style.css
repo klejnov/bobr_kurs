@@ -766,6 +766,33 @@ address img {
     padding-top: 2px;
 }
 
+
+.btn-outline-info {
+    border-color: #2eadd3;
+    padding: 4px;
+
+}
+
+.block-message span {
+    display: block;
+    font-size: 10px;
+    text-align: center;
+}
+
+.block-address-message {
+    display: flex;
+    justify-content: space-between;
+}
+
+.block-address {
+
+}
+
+.block-message {
+
+}
+
+
 /*// Small devices (landscape phones, 576px and down)*/
 @media (max-width: 576px) {
     .select-input {

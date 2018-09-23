@@ -627,3 +627,15 @@ function getLastIdMessage()
     return $data;
 }
 
+// Функция получаем последнее ID из таблицы banks_kurs
+function getLastIdCurrency()
+{
+    global $db;
+    $query = $db->prepare(
+        "SELECT id FROM banks_kurs ORDER BY id DESC LIMIT 1;"
+    );
+    $query->execute();
+    $data = $query->fetch(PDO::FETCH_ASSOC);
+    return $data;
+}
+

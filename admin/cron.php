@@ -242,7 +242,6 @@ function widgetGet()
     file_put_contents($fileName, $dataTotalArr);
 }
 
-
 function tableGet()
 {
 
@@ -254,5 +253,18 @@ function tableGet()
     file_put_contents($fileName, $dataTotalArr);
 }
 
+function lastIdCurrencyGet()
+{
+
+    $id = getLastIdCurrency();
+
+    $id = json_encode($id);
+
+    $fileName = __DIR__ . '/../js/lastID.json';
+    file_put_contents($fileName, $id);
+}
+
 widgetGet();
 tableGet();
+lastIdCurrencyGet();
+

@@ -221,78 +221,8 @@ var count_msg = '';
 
 $(function () {
 
-    function getCookie(name) {
-        var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-        return v ? v[2] : null;
-    }
-
-    function setCookie(name, value, days) {
-        var d = new Date;
-        d.setTime(d.getTime() + 24 * 60 * 60 * 1000 * days);
-        document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
-    }
-
-    function deleteCookie(name) {
-        setCookie(name, '', -1);
-    }
-
     setCookie("message_audio", false, 30);
-
-    function getLastIdMessage(flag) {
-
-        $.ajax({
-            type: "POST",
-            url: "index.php",
-            dataType: "json",
-            data: {AjaxAction: "lastIdMessage"}
-        }).done(function (result) {
-
-            if ($.isEmptyObject(result)) {
-                console.log('Завершаем работу. Пустой объект JSON');
-                return;
-            }
-
-            var id = result["id"];
-
-            if(!getCookie("message_counter")){
-                setCookie("message_counter", id, 30);
-            }
-
-            if (window.location.href.indexOf('message') !== -1 && flag == true) {
-                count_msg = id - getCookie("message_counter");
-                $('tbody tr:lt('+count_msg+')').css( "backgroundColor", "#57c34a4a" );
-                setCookie("message_counter", id, 30);
-
-            }
-
-            clearInterval(timerId);
-
-            var text_count_1 = $('#info-message').text();
-
-            if (id > getCookie("message_counter")) {
-
-                count_msg = id - getCookie("message_counter");
-                $("#info-message").fadeIn(400).text(count_msg);
-                $("button.reload").fadeIn(200);
-
-                timerId = setInterval('titleAlert(count_msg)', 1000);
-
-            }
-
-            var text_count_2 = $('#info-message').text();
-
-            if(text_count_1 != text_count_2 && getCookie("message_audio") == 'true') {
-                    soundClick();
-            }
-
-            setCookie("message_audio", true, 30);
-
-
-        }).fail(function () {
-            console.log('Что-то пошло не так. Повторите позже.');
-        });
-    }
-
+    
     var flag = '';
 
     getLastIdMessage(flag = true);
@@ -301,17 +231,90 @@ $(function () {
         getLastIdMessage(flag = false);
     }, 10000);
 
-    function soundClick() {
-        var audio = new Audio();
-        audio.preload = 'auto';
-        audio.src = '/admin/files/audio/alert.mp3';
-        audio.play();
-    }
 
 });
 
 
+function getCookie(name) {
+    var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return v ? v[2] : null;
+}
+
+function setCookie(name, value, days) {
+    var d = new Date;
+    d.setTime(d.getTime() + 24 * 60 * 60 * 1000 * days);
+    document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
+}
+
+function deleteCookie(name) {
+    setCookie(name, '', -1);
+}
+
+
+function getLastIdMessage(flag) {
+
+    $.ajax({
+        type: "POST",
+        url: "index.php",
+        dataType: "json",
+        data: {AjaxAction: "lastIdMessage"}
+    }).done(function (result) {
+
+        if ($.isEmptyObject(result)) {
+            console.log('Завершаем работу. Пустой объект JSON');
+            return;
+        }
+
+        var id = result["id"];
+
+        if (!getCookie("message_counter")) {
+            setCookie("message_counter", id, 30);
+        }
+
+        if (window.location.href.indexOf('message') !== -1 && flag == true) {
+            count_msg = id - getCookie("message_counter");
+            $('tbody tr:lt(' + count_msg + ')').css("backgroundColor", "#57c34a4a");
+            setCookie("message_counter", id, 30);
+
+        }
+
+        clearInterval(timerId);
+
+        var text_count_1 = $('#info-message').text();
+
+        if (id > getCookie("message_counter")) {
+
+            count_msg = id - getCookie("message_counter");
+            $("#info-message").fadeIn(400).text(count_msg);
+            $("button.reload").fadeIn(200);
+
+            timerId = setInterval('titleAlert(count_msg)', 1000);
+
+        }
+
+        var text_count_2 = $('#info-message').text();
+
+        if (text_count_1 != text_count_2 && getCookie("message_audio") == 'true') {
+            soundPlay();
+        }
+
+        setCookie("message_audio", true, 30);
+
+    }).fail(function () {
+        console.log('Что-то пошло не так. Повторите позже.');
+    });
+}
+
+function soundPlay() {
+    var audio = new Audio();
+    audio.preload = 'auto';
+    audio.src = '/admin/files/audio/alert.mp3';
+    audio.play();
+}
+
+
 var title = document.title;
+
 function titleAlert(msgCount) {
 
     var r = 'Новое сообщение (' + msgCount + ')';

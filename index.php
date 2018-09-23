@@ -40,7 +40,6 @@ try {
 
             $start_time->modify('-365 day');
             $end_time->modify('+1 day');
-
         }
 
         $db = new DataBase();
@@ -181,11 +180,30 @@ try {
         $banks_id = $_POST["AjaxBanksId"];
         $ip = $_SERVER['REMOTE_ADDR'];
 
-        $db = new DataBase();
+        try {
+            $db = new DataBase();
+            $db->saveMessage($banks_id, $text, $ip);
 
-        $db->saveMessage($banks_id, $text, $ip);
+            $result = [
+                'send' => true
+            ];
+            $result = json_encode($result);
+            echo $result;
+        } catch (Throwable $e) {
+            $result = [
+                'send' => false,
+                'error-msg' => $e->getMessage()
+            ];
+            $result = json_encode($result);
+            echo $result;
+        }
 
-        echo '{"send":"true"}';
+        exit();
+    }
+
+    if (isset($_POST['AjaxAction']) && $_POST['AjaxAction'] == 'lastIdCurrency') {
+
+        print_r(file_get_contents("js/lastID.json"));
 
         exit();
     }

@@ -48,7 +48,7 @@
         <div class="col-12">
             <div id="reload-wrapper" class="message">
                 <a id="reload" title="Обновить" href="/"><i class="fas fa-redo"></i></a>
-                <span>Внимание!</span> Курсы валют могли устареть. Пожалуйста, обновите страницу.
+                <span>Внимание!</span> Получены новые данные. Курсы валют устарели. Пожалуйста, обновите страницу.
             </div>
         </div>
     </div>

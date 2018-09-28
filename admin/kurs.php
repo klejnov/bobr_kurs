@@ -250,7 +250,7 @@ function getbanksinfo($func_id)
     return $data;
 }
 
-function delbank($func_dddddeelll_bank)
+function delbank($func_dell_bank)
 {
     global $db;
     $query2 = $db->prepare(
@@ -258,7 +258,7 @@ function delbank($func_dddddeelll_bank)
                 WHERE id = :sql_func_db"
     );
     $query2->execute(array(
-        'sql_func_db' => $func_dddddeelll_bank,
+        'sql_func_db' => $func_dell_bank,
     ));;
 }
 

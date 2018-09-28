@@ -3,7 +3,26 @@
 function priorbank_by()
 {
     //global $banks_id;
-    $json = file_get_contents("https://www.priorbank.by/?p_p_id=exchangeliferayspringmvcportlet_WAR_exchangeliferayspringmvcportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=ajaxGetReportForMainPageAjax&p_p_cacheability=cacheLevelPage&p_p_col_id=_118_INSTANCE_7La20uxMthb5__column-2&p_p_col_count=1");
+    $url = 'https://www.priorbank.by/?p_p_id=exchangeliferayspringmvcportlet_WAR_exchangeliferayspringmvcportlet&p_p_lifecycle=2&p_p_resource_id=ajaxGetReportForMainPageAjax';
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array("X-Requested-With: XMLHttpRequest"));
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+
+    if (curl_exec($ch) === false) {
+        //echo 'Ошибка curl: ' . curl_error($ch);
+        $result = "error";
+    } else {
+        //echo 'Операция завершена без каких-либо ошибок';
+        $result = "";
+    }
+
+    $json = curl_exec($ch);
+    curl_close($ch);
+
     $arr = json_decode($json, true);
 
     $data = [];
@@ -35,6 +54,7 @@ function priorbank_by()
             'banks_id' => $banks_id,
             'status'   => $status,
             'html'     => $json, //json
+            'result'   => $result
         );
     };
     //print_r($data);

@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /admin
+Sitemap: https://kurs.bobr.by/sitemap.xml
+Host: https://kurs.bobr.by

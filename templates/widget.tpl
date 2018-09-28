@@ -6,8 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="icon" href="../img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Курсы валют в Бобруйске</title>
-    <meta name="description" content="Актуальные курсы валют всех банков Бобруйска">
+    <title>Курсы валют в Бобруйске / Бобруйский портал BOBR.BY</title>
+    <meta name="description" content="Виджет курсов валют всех банков Бобруйска. Динамика изменения курсов валют в Бобруйске">
+    <meta name="keywords" content="Курсы валют в Бобруйске, Бобруйск, курсы валют, виджет, динамика курсов, график">
 
     <link rel="stylesheet" href="../css/fontawesome.min.css">
     <link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">

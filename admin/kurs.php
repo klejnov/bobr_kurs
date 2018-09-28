@@ -269,6 +269,11 @@ function addkurs($data)
     //echo $func_name;
     global $db;
     foreach ($data as $parser_data) {
+
+        if (isset($parser_data['result']) && $parser_data['result'] == "error") {
+            continue;
+        }
+
         $query = $db->prepare(
             "UPDATE banks
                     SET status = :sql_status
@@ -282,8 +287,11 @@ function addkurs($data)
         $html = $parser_data['html'];
         $id_bank = $parser_data['banks_id'];
 
-        if ($_SERVER['SCRIPT_FILENAME'] == "/var/www/kurs.bobr.by/admin/cron.php") {
-            $html = 'Лог отключён';
+        if ($_SERVER['SCRIPT_FILENAME'] == "/var/www/kurs.bobr.by/admin/cron.php" && $parser_data['status'] == 1) {
+            $html = 'Курсы получены';
+        }
+        if ($_SERVER['SCRIPT_FILENAME'] == "/var/www/kurs.bobr.by/admin/cron.php" && $parser_data['status'] == 0) {
+            $html = 'Ошибка получения курсов';
         }
 
         writeLog($id_bank, $html);

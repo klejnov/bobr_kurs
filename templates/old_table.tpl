@@ -6,10 +6,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="icon" href="../img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Курсы валют в Бобруйске</title>
-    <meta name="description" content="Актуальные курсы валют всех банков Бобруйска">
+    <title>Курсы валют в Бобруйске / Бобруйский портал BOBR.BY</title>
+    <meta name="description"
+          content="Актуальные курсы валют всех банков Бобруйска. Обновления каждые 10 мин. Подробная информация о банках Бобруйска.">
+    <meta name="keywords" content="Курсы валют в Бобруйске, Бобруйск, курсы валют">
 
-    <link rel="stylesheet" href="../css/fontawesome.css">
+    <link rel="stylesheet" href="../css/fontawesome.min.css">
     <link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../libs/tablesorter/theme.blue.css">
     <link rel="stylesheet" href="../css/old_table.css">
@@ -18,13 +20,21 @@
     <script src="../libs/bootstrap/bootstrap.min.js"></script>
     <script src="../libs/tablesorter/jquery.tablesorter.min.js"></script>
 
-    <script type="text/javascript">
-
-    </script>
-
-
 </head>
 <body>
+
+<!--noindex-->
+<div class="container message-wrapper">
+    <div class="row">
+        <div class="col-12">
+            <div id="reload-wrapper" class="message">
+                <a id="reload" title="Обновить" href="/?classic=show"><i class="fas fa-redo"></i></a>
+                <span>Внимание!</span> Получены новые данные. Курсы валют устарели. Пожалуйста, обновите страницу.
+            </div>
+        </div>
+    </div>
+</div>
+<!--/noindex-->
 
 <header>
 
@@ -69,7 +79,6 @@
 </header>
 
 <main>
-
 
     <div class="container">
         <div class="row">

@@ -193,4 +193,40 @@ $(function () {
         deleteCookie("show_view");
         window.location.href = "/";
     });
+
+    var idCurrency = 0;
+
+    function getLastIdCurrency() {
+
+        $.ajax({
+            type: "POST",
+            url: "index.php",
+            dataType: "json",
+            data: {AjaxAction: "lastIdCurrency"}
+        }).done(function (result) {
+
+            if ($.isEmptyObject(result)) {
+                console.log('Завершаем работу. Пустой объект JSON');
+                return;
+            }
+
+            if (idCurrency == 0) {
+                idCurrency = result['id'];
+            }
+            if (result['id'] > idCurrency) {
+                idCurrency = result['id'];
+                $(".message-wrapper").slideDown(300);
+            }
+
+        }).fail(function () {
+            console.log('Что-то пошло не так. Повторите позже.');
+        });
+    }
+
+    getLastIdCurrency();
+
+    setInterval(function () {
+        getLastIdCurrency();
+    }, 300000);
+
 });

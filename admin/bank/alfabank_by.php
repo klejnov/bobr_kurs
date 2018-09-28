@@ -5,43 +5,74 @@ function alfabank_by($banks_id)
     error_reporting(E_ALL);
     //header('Content-Type: text/html; charset=utf-8');
 
-    $html = file_get_contents("https://www.alfabank.by/online/banking/insync/");
+    try {
+        $xml = simplexml_load_file("https://www.alfabank.by/personal/currency/office/");
 
-    if (preg_match("/.*?<div class=\"informer_tab js-tabs_tab\" data-tab=\"1\">.*?<span class=\"informer-currencies_name\">USD<\/span>.*?<span class=\"informer-currencies_value-txt\">([^<]*)<\/span>.*?<span class=\"informer-currencies_value-txt\">([^<]*)<\/span>.*?<span class=\"informer-currencies_name\">EUR<\/span>.*?<span class=\"informer-currencies_value-txt\">([^<]*)<\/span>.*?<span class=\"informer-currencies_value-txt\">([^<]*)<\/span>.*?<span class=\"informer-currencies_name\">RUB<\/span>.*?<span class=\"informer-currencies_value-txt\">([^<]*)<\/span>.*?<span class=\"informer-currencies_value-txt\">([^<]*)<\/span>.*?<div class=\"informer_tab js-tabs_tab\" data-tab=\"2\">/ms",
-        $html, $valuta)) {
-        $status = 1;
-        $data = array(
-            array(
-                'usd_buy'  => str_replace(",", ".", trim($valuta[1])),
-                'usd_sell' => str_replace(",", ".", trim($valuta[2])),
-                'eur_buy'  => str_replace(",", ".", trim($valuta[3])),
-                'eur_sell' => str_replace(",", ".", trim($valuta[4])),
-                'rub_buy'  => str_replace(",", ".", trim($valuta[5])),
-                'rub_sell' => str_replace(",", ".", trim($valuta[6])),
-                'banks_id' => $banks_id,
-                'status'   => $status,
-                'html'     => $html,
-                )
-        );
-    } else {
-        $status = 0;
-        $data = array(
-            array(
-                'usd_buy'  => 0,
-                'usd_sell' => 0,
-                'eur_buy'  => 0,
-                'eur_sell' => 0,
-                'rub_buy'  => 0,
-                'rub_sell' => 0,
-                'banks_id' => $banks_id,
-                'status'   => $status,
-                'html'     => $html,
-            )
-        );
+        $html = $xml->asXML();
+
+        foreach ($xml as $arr) {
+            if ($arr->city == "Бобруйск") {
+                $usd = $arr->rates->exch_rate->exch_rate_record[0];
+                $atts_object = $usd->attributes();
+                $atts_array = (array)$atts_object;
+                $valuta[0] = $atts_array['@attributes']['rate_buy'];
+                $valuta[1] = $atts_array['@attributes']['rate_sell'];
+
+                $eur = $arr->rates->exch_rate->exch_rate_record[1];
+                $atts_object = $eur->attributes();
+                $atts_array = (array)$atts_object;
+                $valuta[2] = $atts_array['@attributes']['rate_buy'];
+                $valuta[3] = $atts_array['@attributes']['rate_sell'];
+
+                $rub = $arr->rates->exch_rate->exch_rate_record[2];
+                $atts_object = $rub->attributes();
+                $atts_array = (array)$atts_object;
+                $valuta[4] = $atts_array['@attributes']['rate_buy'];
+                $valuta[5] = $atts_array['@attributes']['rate_sell'];
+
+                //print_r($valuta);
+            }
+        }
+    } catch (Throwable $e) {
+        $valuta = ['', '', '', '', '', ''];
     }
 
-    //echo $id_pages;
-    //print_r($valuta);
+    $data = [];
+
+    if (
+        (string)$valuta[0] == '' &&
+        (string)$valuta[1] == '' &&
+        (string)$valuta[2] == '' &&
+        (string)$valuta[3] == '' &&
+        (string)$valuta[4] == '' &&
+        (string)$valuta[5] == ''
+    ) {
+        $status = 0;
+        $data[] = array(
+            'usd_buy'  => 0,
+            'usd_sell' => 0,
+            'eur_buy'  => 0,
+            'eur_sell' => 0,
+            'rub_buy'  => 0,
+            'rub_sell' => 0,
+            'banks_id' => $banks_id,
+            'status'   => $status,
+            'html'     => $html,
+        );
+    } else {
+        $status = 1;
+        $data[] = array(
+            'usd_buy'  => trim($valuta[0]),
+            'usd_sell' => trim($valuta[1]),
+            'eur_buy'  => trim($valuta[2]),
+            'eur_sell' => trim($valuta[3]),
+            'rub_buy'  => trim($valuta[4]),
+            'rub_sell' => trim($valuta[5]),
+            'banks_id' => $banks_id,
+            'status'   => $status,
+            'html'     => $html,
+        );
+    }
     //print_r($data);
     return $data;
 }

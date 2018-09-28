@@ -2,7 +2,6 @@
 
 function ideabank_by_16_id56($banks_id)
 {
-//header('Content-Type: text/html; charset=utf-8');
     $databank = date('d-m-Y');
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_HTTPHEADER, array("X-Requested-With: XMLHttpRequest"));
@@ -12,8 +11,7 @@ function ideabank_by_16_id56($banks_id)
     curl_setopt($curl, CURLOPT_POSTFIELDS, "date=$databank&id=56");
     $json = curl_exec($curl);
     curl_close($curl);
-    //print_r($json);
-//$json = file_get_contents("json16_id56.txt");
+
     $arr = json_decode($json, true);
 
 //echo "<H1>Идея Банк РКЦ №16 Адрес:ул. 50 лет ВЛКСМ, 33 (ТЦ «Корона»)</H1>";
@@ -22,26 +20,41 @@ function ideabank_by_16_id56($banks_id)
         $status = 1;
         foreach ($arr['data']['rates'] as $date => $tmp) {
         }
+
+        //возвращает первый ключ массива
+        $first_key = array_keys($arr['data']['rates'])[0];
+        //global $banks_id;
+        $data = array(
+            array(
+                'usd_buy'  => (string)$arr['data']['rates'][$first_key]['1 USD'][1]['Value'],
+                'usd_sell' => (string)$arr['data']['rates'][$first_key]['1 USD'][2]['Value'],
+                'eur_buy'  => (string)$arr['data']['rates'][$first_key]['1 EUR'][1]['Value'],
+                'eur_sell' => (string)$arr['data']['rates'][$first_key]['1 EUR'][2]['Value'],
+                'rub_buy'  => (string)$arr['data']['rates'][$first_key]['100 RUB'][1]['Value'],
+                'rub_sell' => (string)$arr['data']['rates'][$first_key]['100 RUB'][2]['Value'],
+                'banks_id' => (string)$banks_id,
+                'status'   => $status,
+                'html'     => $json, //json
+            )
+        );
     } else {
         $status = 0;
+
+        $data = array(
+            array(
+                'usd_buy'  => 0,
+                'usd_sell' => 0,
+                'eur_buy'  => 0,
+                'eur_sell' => 0,
+                'rub_buy'  => 0,
+                'rub_sell' => 0,
+                'banks_id' => (string)$banks_id,
+                'status'   => $status,
+                'html'     => $json, //json
+            )
+        );
     }
 
-    //возвращает первый ключ массива
-    $first_key = array_keys($arr['data']['rates'])[0];
-    //global $banks_id;
-    $data = array(
-        array(
-            'usd_buy'  => (string)$arr['data']['rates'][$first_key]['1 USD'][1]['Value'],
-            'usd_sell' => (string)$arr['data']['rates'][$first_key]['1 USD'][2]['Value'],
-            'eur_buy'  => (string)$arr['data']['rates'][$first_key]['1 EUR'][1]['Value'],
-            'eur_sell' => (string)$arr['data']['rates'][$first_key]['1 EUR'][2]['Value'],
-            'rub_buy'  => (string)$arr['data']['rates'][$first_key]['100 RUB'][1]['Value'],
-            'rub_sell' => (string)$arr['data']['rates'][$first_key]['100 RUB'][2]['Value'],
-            'banks_id' => (string)$banks_id,
-            'status'   => $status,
-            'html'     => $json, //json
-        )
-    );
     //print_r($data);
     //print_r($arr['data']['rates']);
     return $data;

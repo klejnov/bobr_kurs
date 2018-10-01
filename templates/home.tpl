@@ -7,7 +7,7 @@
     <link rel="icon" href="../img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Курсы валют в Бобруйске / Бобруйский портал BOBR.BY</title>
-    <meta name="description" content="Курсы валют в Бобруйске на 29.09.2018: 1 USD 2.1 / 2.127 1 EUR 2.434 / 2.477 100 RUB 3.134 / 3.238. Актуальные курсы валют всех банков Бобруйска. Обновления каждые 10 мин. Карта и подробная информация о банках Бобруйска. Калькулятор валют.">
+    <meta name="description" content="Актуальные курсы валют всех банков Бобруйска. Обновления каждые 10 мин. Карта и подробная информация о банках Бобруйска. Калькулятор валют.">
     <meta name="keywords" content="Курсы валют в Бобруйске, Бобруйск, курсы валют, карта банков, калькулятор валют">
 
     <link rel="stylesheet" href="../css/fontawesome.min.css">
@@ -217,6 +217,7 @@
                         <div class="table-show">
                             <table class="table dataTable" id="myTable" data-page-length='10'>
                                 <thead>
+                                <!--noindex-->
                                 <tr>
                                     <th>Банк</th>
                                     <th>Курс</th>
@@ -232,6 +233,7 @@
                                     <th>Получу</th>
                                     <th>Отдам</th>
                                 </tr>
+                                <!--/noindex-->
                                 </thead>
                                 <tbody></tbody>
                             </table>

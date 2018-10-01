@@ -109,7 +109,7 @@
                         </tr>
                         <tr class="chapka cveth">
                             <th class="td1" width="40%">
-                                &nbsp;
+
                             </th>
                             <th width="10%">
                                 покупка

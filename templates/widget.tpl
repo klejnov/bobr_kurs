@@ -10,7 +10,6 @@
     <meta name="description" content="Виджет курсов валют всех банков Бобруйска. Динамика изменения курсов валют в Бобруйске">
     <meta name="keywords" content="Курсы валют в Бобруйске, Бобруйск, курсы валют, виджет, динамика курсов, график">
 
-    <link rel="stylesheet" href="../css/fontawesome.min.css">
     <link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../css/widget.css">
 
@@ -30,9 +29,9 @@
                         <div class="carousel-item active">
                             <div class="brand-card usd-card">
                                 <div class="brand-card-header bg-usd">
-                                    <i class="fas fa-dollar-sign"></i>
-                                    <i class="fas fa-chart-line" title="Динамика за 2 недели">
-                                        <div class="dynamics dynamics-usd">Динамика за 2 недели</div>
+                                    <i class="fontello-icon icon-dollar">&#xf155;</i>
+                                    <i class="fas fa-chart-line fontello-icon icon-chart-line" title="Динамика за 2 недели">
+                                        <span class="dynamics dynamics-usd">Динамика за 2 недели</span>
                                     </i>
                                     <div class="chart-wrapper">
                                         <canvas id="usd-box-chart-1" height="90"></canvas>
@@ -40,14 +39,14 @@
                                 </div>
                                 <div class="brand-card-body">
                                     <div>
-                                        <div class="text-value" id="current-rate-usd-buy"><i
-                                                    class="fas fa-spinner fa-spin"></i>
+                                        <div class="text-value" id="current-rate-usd-buy">
+                                            <i class="fontello-icon icon-spinner animate-spin">&#xf110;</i>
                                         </div>
                                         <div class="text-uppercase text-muted small">Покупка</div>
                                     </div>
                                     <div>
-                                        <div class="text-value" id="current-rate-usd-sell"><i
-                                                    class="fas fa-spinner fa-spin"></i>
+                                        <div class="text-value" id="current-rate-usd-sell">
+                                            <i class="fontello-icon icon-spinner animate-spin">&#xf110;</i>
                                         </div>
                                         <div class="text-uppercase text-muted small">Продажа</div>
                                     </div>
@@ -58,9 +57,9 @@
                         <div class="carousel-item">
                             <div class="brand-card eur-card">
                                 <div class="brand-card-header bg-eur">
-                                    <i class="fas fa-euro-sign"></i>
-                                    <i class="fas fa-chart-line" title="Динамика за 2 недели">
-                                        <div class="dynamics">Динамика за 2 недели</div>
+                                    <i class="fontello-icon icon-euro">&#xf153;</i>
+                                    <i class="fas fa-chart-line fontello-icon icon-chart-line" title="Динамика за 2 недели">
+                                        <span class="dynamics">Динамика за 2 недели</span>
                                     </i>
                                     <div class="chart-wrapper">
                                         <canvas id="eur-box-chart-2" height="90"></canvas>
@@ -68,14 +67,14 @@
                                 </div>
                                 <div class="brand-card-body">
                                     <div>
-                                        <div class="text-value" id="current-rate-eur-buy"><i
-                                                    class="fas fa-spinner fa-spin"></i>
+                                        <div class="text-value" id="current-rate-eur-buy">
+                                            <i class="fontello-icon icon-spinner animate-spin">&#xf110;</i>
                                         </div>
                                         <div class="text-uppercase text-muted small">Покупка</div>
                                     </div>
                                     <div>
-                                        <div class="text-value" id="current-rate-eur-sell"><i
-                                                    class="fas fa-spinner fa-spin"></i>
+                                        <div class="text-value" id="current-rate-eur-sell">
+                                            <i class="fontello-icon icon-spinner animate-spin">&#xf110;</i>
                                         </div>
                                         <div class="text-uppercase text-muted small">Продажа</div>
                                     </div>
@@ -86,9 +85,9 @@
                         <div class="carousel-item">
                             <div class="brand-card rub-card">
                                 <div class="brand-card-header bg-rub">
-                                    <i class="fas fa-ruble-sign"></i>
-                                    <i class="fas fa-chart-line" title="Динамика за 2 недели">
-                                        <div class="dynamics">Динамика за 2 недели</div>
+                                    <i class="fontello-icon icon-rouble">&#xf158;</i>
+                                    <i class="fas fa-chart-line fontello-icon icon-chart-line" title="Динамика за 2 недели">
+                                        <span class="dynamics">Динамика за 2 недели</span>
                                     </i>
                                     <div class="chart-wrapper">
                                         <canvas id="rub-box-chart-3" height="90"></canvas>
@@ -96,14 +95,14 @@
                                 </div>
                                 <div class="brand-card-body">
                                     <div>
-                                        <div class="text-value" id="current-rate-rub-buy"><i
-                                                    class="fas fa-spinner fa-spin"></i>
+                                        <div class="text-value" id="current-rate-rub-buy">
+                                            <i class="fontello-icon icon-spinner animate-spin">&#xf110;</i>
                                         </div>
                                         <div class="text-uppercase text-muted small">Покупка</div>
                                     </div>
                                     <div>
-                                        <div class="text-value" id="current-rate-rub-sell"><i
-                                                    class="fas fa-spinner fa-spin"></i>
+                                        <div class="text-value" id="current-rate-rub-sell">
+                                            <i class="fontello-icon icon-spinner animate-spin">&#xf110;</i>
                                         </div>
                                         <div class="text-uppercase text-muted small">Продажа</div>
                                     </div>
@@ -112,10 +111,10 @@
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                        <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                        <i class="fa-chevron-left fontello-icon icon-left-open" aria-hidden="true">&#xe801;</i>
                     </a>
                     <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                        <i class="fa-chevron-right fontello-icon icon-right-open" aria-hidden="true">&#xe803;</i>
                     </a>
 
                 </div>

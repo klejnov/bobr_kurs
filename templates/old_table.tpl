@@ -2,16 +2,21 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="icon" href="../img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Курсы валют в Бобруйске / Бобруйский портал BOBR.BY</title>
-    <meta name="description"
-          content="Актуальные курсы валют всех банков Бобруйска. Обновления каждые 10 мин. Подробная информация о банках Бобруйска.">
+    <meta name="description" content="Актуальные курсы валют всех банков Бобруйска. Обновления каждые 10 мин. Подробная информация о банках Бобруйска.">
     <meta name="keywords" content="Курсы валют в Бобруйске, Бобруйск, курсы валют">
 
-    <link rel="stylesheet" href="../css/fontawesome.min.css">
+    <meta property="og:image" content="/img/social/og-image.jpg">
+    <meta property="og:image:height" content="305">
+    <meta property="og:image:width" content="583">
+    <meta property="og:url" content="https://kurs.bobr.by/">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Актуальные курсы валют всех банков Бобруйска. Обновляются каждые 10 мин. Карта и подробная информация о банках Бобруйска. Калькулятор валют.">
+    <meta property="og:title" content="Курсы валют в Бобруйске">
+
     <link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../libs/tablesorter/theme.blue.css">
     <link rel="stylesheet" href="../css/old_table.css">
@@ -28,7 +33,7 @@
     <div class="row">
         <div class="col-12">
             <div id="reload-wrapper" class="message">
-                <a id="reload" title="Обновить" href="/?classic=show"><i class="fas fa-redo"></i></a>
+                <a id="reload" title="Обновить" href="/?classic=show"><i class="fontello-icon icon-cw">&#xe800;</i></a>
                 <span>Внимание!</span> Получены новые данные. Курсы валют устарели. Пожалуйста, обновите страницу.
             </div>
         </div>
@@ -94,41 +99,27 @@
                            style="display: none">
                         <thead>
                         <tr class="chapka1 cveth">
-                            <td class="cent tablesorter-headerUnSorted tablesorter-noSort" width="40%">
+                            <td class="cent tablesorter-headerUnSorted tablesorter-noSort">
                                 Банк
                             </td>
-                            <td class="cent tablesorter-headerUnSorted tablesorter-noSort" width="20%" colspan="2">
+                            <td class="cent tablesorter-headerUnSorted tablesorter-noSort" colspan="2">
                                 USD
                             </td>
-                            <td class="cent tablesorter-headerUnSorted tablesorter-noSort" width="20%" colspan="2">
+                            <td class="cent tablesorter-headerUnSorted tablesorter-noSort" colspan="2">
                                 EUR
                             </td>
-                            <td class="cent tablesorter-headerUnSorted tablesorter-noSort" width="20%" colspan="2">
+                            <td class="cent tablesorter-headerUnSorted tablesorter-noSort" colspan="2">
                                 100 RUB
                             </td>
                         </tr>
                         <tr class="chapka cveth">
-                            <th class="td1" width="40%">
-
-                            </th>
-                            <th width="10%">
-                                покупка
-                            </th>
-                            <th width="10%">
-                                продажа
-                            </th>
-                            <th width="10%">
-                                покупка
-                            </th>
-                            <th width="10%">
-                                продажа
-                            </th>
-                            <th width="10%">
-                                покупка
-                            </th>
-                            <th width="10%">
-                                продажа
-                            </th>
+                            <th class="td1"></th>
+                            <th>покупка</th>
+                            <th>продажа</th>
+                            <th>покупка</th>
+                            <th>продажа</th>
+                            <th>покупка</th>
+                            <th>продажа</th>
                         </tr>
                         </thead>
                         <tbody>

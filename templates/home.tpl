@@ -2,15 +2,21 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="icon" href="../img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Курсы валют в Бобруйске / Бобруйский портал BOBR.BY</title>
     <meta name="description" content="Актуальные курсы валют всех банков Бобруйска. Обновления каждые 10 мин. Карта и подробная информация о банках Бобруйска. Калькулятор валют.">
     <meta name="keywords" content="Курсы валют в Бобруйске, Бобруйск, курсы валют, карта банков, калькулятор валют">
 
-    <link rel="stylesheet" href="../css/fontawesome.min.css">
+    <meta property="og:image" content="/img/social/og-image.jpg">
+    <meta property="og:image:height" content="305">
+    <meta property="og:image:width" content="583">
+    <meta property="og:url" content="https://kurs.bobr.by/">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Актуальные курсы валют всех банков Бобруйска. Обновляются каждые 10 мин. Карта и подробная информация о банках Бобруйска. Калькулятор валют.">
+    <meta property="og:title" content="Курсы валют в Бобруйске">
+
     <link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../libs/dataTables/datatables.min.css">
     <link rel="stylesheet" href="../libs/bootstrap-select/bootstrap-select.min.css">
@@ -26,7 +32,7 @@
     <script src="../libs/chart.js/custom-tooltips.min.js"></script>
     <script src="../libs/chart.js/chart.min.js"></script>
     <script src="../libs/bootstrap-select/bootstrap-select.min.js"></script>
-    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 
     <script>
 
@@ -49,7 +55,7 @@
     <div class="row">
         <div class="col-12">
             <div id="reload-wrapper" class="message">
-                <a id="reload" title="Обновить" href="/"><i class="fas fa-redo"></i></a>
+                <a id="reload" title="Обновить" href="/"><i class="fontello-icon icon-cw">&#xe800;</i></a>
                 <span>Внимание!</span> Получены новые данные. Курсы валют устарели. Пожалуйста, обновите страницу.
             </div>
         </div>
@@ -105,9 +111,9 @@
             <div class="col-sm-4 col-md-4 col-lg-4">
                 <div class="brand-card usd-card">
                     <div class="brand-card-header bg-usd">
-                        <i class="fas fa-dollar-sign"></i>
-                        <i class="fas fa-chart-line" title="Динамика за 2 недели">
-                            <div class="dynamics dynamics-usd">Динамика за 2 недели</div>
+                        <i class="fontello-icon icon-dollar">&#xf155;</i>
+                        <i class="fas fa-chart-line fontello-icon icon-chart-line" title="Динамика за 2 недели">
+                            <span class="dynamics dynamics-usd">Динамика за 2 недели</span>
                         </i>
                         <div class="chart-wrapper">
                             <canvas id="usd-box-chart-1" height="90"></canvas>
@@ -115,12 +121,12 @@
                     </div>
                     <div class="brand-card-body">
                         <div>
-                            <div class="text-value" id="current-rate-usd-buy"><i class="fas fa-spinner fa-spin"></i>
+                            <div class="text-value" id="current-rate-usd-buy"><i class="fontello-icon icon-spinner animate-spin">&#xf110;</i>
                             </div>
                             <div class="text-uppercase text-muted small">Покупка</div>
                         </div>
                         <div>
-                            <div class="text-value" id="current-rate-usd-sell"><i class="fas fa-spinner fa-spin"></i>
+                            <div class="text-value" id="current-rate-usd-sell"><i class="fontello-icon icon-spinner animate-spin">&#xf110;</i>
                             </div>
                             <div class="text-uppercase text-muted small">Продажа</div>
                         </div>
@@ -131,9 +137,9 @@
             <div class="col-sm-4 col-md-4 col-lg-4">
                 <div class="brand-card eur-card">
                     <div class="brand-card-header bg-eur">
-                        <i class="fas fa-euro-sign"></i>
-                        <i class="fas fa-chart-line" title="Динамика за 2 недели">
-                            <div class="dynamics">Динамика за 2 недели</div>
+                        <i class="fontello-icon icon-euro">&#xf153;</i>
+                        <i class="fas fa-chart-line fontello-icon icon-chart-line" title="Динамика за 2 недели">
+                            <span class="dynamics">Динамика за 2 недели</span>
                         </i>
                         <div class="chart-wrapper">
                             <canvas id="eur-box-chart-2" height="90"></canvas>
@@ -141,12 +147,12 @@
                     </div>
                     <div class="brand-card-body">
                         <div>
-                            <div class="text-value" id="current-rate-eur-buy"><i class="fas fa-spinner fa-spin"></i>
+                            <div class="text-value" id="current-rate-eur-buy"><i class="fontello-icon icon-spinner animate-spin">&#xf110;</i>
                             </div>
                             <div class="text-uppercase text-muted small">Покупка</div>
                         </div>
                         <div>
-                            <div class="text-value" id="current-rate-eur-sell"><i class="fas fa-spinner fa-spin"></i>
+                            <div class="text-value" id="current-rate-eur-sell"><i class="fontello-icon icon-spinner animate-spin">&#xf110;</i>
                             </div>
                             <div class="text-uppercase text-muted small">Продажа</div>
                         </div>
@@ -157,9 +163,9 @@
             <div class="col-sm-4 col-md-4 col-lg-4">
                 <div class="brand-card rub-card">
                     <div class="brand-card-header bg-rub">
-                        <i class="fas fa-ruble-sign"></i>
-                        <i class="fas fa-chart-line" title="Динамика за 2 недели">
-                            <div class="dynamics">Динамика за 2 недели</div>
+                        <i class="fontello-icon icon-rouble">&#xf158;</i>
+                        <i class="fas fa-chart-line fontello-icon icon-chart-line" title="Динамика за 2 недели">
+                            <span class="dynamics">Динамика за 2 недели</span>
                         </i>
                         <div class="chart-wrapper">
                             <canvas id="rub-box-chart-3" height="90"></canvas>
@@ -167,12 +173,12 @@
                     </div>
                     <div class="brand-card-body">
                         <div>
-                            <div class="text-value" id="current-rate-rub-buy"><i class="fas fa-spinner fa-spin"></i>
+                            <div class="text-value" id="current-rate-rub-buy"><i class="fontello-icon icon-spinner animate-spin">&#xf110;</i>
                             </div>
                             <div class="text-uppercase text-muted small">Покупка</div>
                         </div>
                         <div>
-                            <div class="text-value" id="current-rate-rub-sell"><i class="fas fa-spinner fa-spin"></i>
+                            <div class="text-value" id="current-rate-rub-sell"><i class="fontello-icon icon-spinner animate-spin">&#xf110;</i>
                             </div>
                             <div class="text-uppercase text-muted small">Продажа</div>
                         </div>
@@ -186,7 +192,7 @@
         <div class="row">
             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
 
-                <div class="spinner-show"><i class="fas fa-spinner fa-spin"></i></div>
+                <div class="spinner-show"><i class="fontello-icon icon-spinner animate-spin">&#xf110;</i></div>
                 <div class="row">
 
                     <div class="col-xl-4 col-lg-6 col-md-5 col-sm-6">
@@ -202,12 +208,15 @@
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-4 col-md-5 col-sm-4 btn-content button-show">
-                        <button type="button" class="btn btn-block btn-outline-usd" id="usd"><i
-                                    class="fas fa-dollar-sign"></i></button>
-                        <button type="button" class="btn btn-block btn-outline-eur" id="eur"><i
-                                    class="fas fa-euro-sign"></i></button>
-                        <button type="button" class="btn btn-block btn-outline-rub" id="rub"><i
-                                    class="fas fa-ruble-sign"></i></button>
+                        <button type="button" class="btn btn-block btn-outline-usd" id="usd">
+                            <i class="fontello-icon icon-dollar">&#xf155;</i>
+                        </button>
+                        <button type="button" class="btn btn-block btn-outline-eur" id="eur">
+                            <i class="fontello-icon icon-euro">&#xf153;</i>
+                        </button>
+                        <button type="button" class="btn btn-block btn-outline-rub" id="rub">
+                            <i class="fontello-icon icon-rouble">&#xf158;</i>
+                        </button>
                     </div>
 
                 </div>
@@ -271,17 +280,16 @@
                         <div class="input-group-append graph-btn">
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-light active">
-                                    <input type="radio" name="options" id="option1" value="usd" autocomplete="off"
-                                           checked><i
-                                            class="fas fa-dollar-sign"></i>
+                                    <input type="radio" name="options" id="option1" value="usd" checked>
+                                    <i class="fontello-icon icon-dollar">&#xf155;</i>
                                 </label>
                                 <label class="btn btn-light">
-                                    <input type="radio" name="options" id="option2" value="eur" autocomplete="off"><i
-                                            class="fas fa-euro-sign"></i>
+                                    <input type="radio" name="options" id="option2" value="eur">
+                                    <i class="fontello-icon icon-euro">&#xf153;</i>
                                 </label>
                                 <label class="btn btn-light">
-                                    <input type="radio" name="options" id="option3" value="rub" autocomplete="off"><i
-                                            class="fas fa-ruble-sign"></i>
+                                    <input type="radio" name="options" id="option3" value="rub">
+                                    <i class="fontello-icon icon-rouble">&#xf158;</i>
                                 </label>
 
                                 <button class="btn btn-light dropdown-toggle period" type="button"

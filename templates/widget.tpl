@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="icon" href="../img/favicon.ico">
+    <link rel="icon" href="../img/favicon/favicon.ico" type="image/x-icon">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Курсы валют в Бобруйске / Бобруйский портал BOBR.BY</title>
     <meta name="description" content="Виджет курсов валют всех банков Бобруйска. Динамика изменения курсов валют в Бобруйске">

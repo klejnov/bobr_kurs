@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="icon" href="../img/favicon.ico">
+    <link rel="icon" href="../img/favicon/favicon.ico" type="image/x-icon">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Курсы валют в Бобруйске / Бобруйский портал BOBR.BY</title>
     <meta name="description" content="Актуальные курсы валют всех банков Бобруйска. Обновления каждые 10 мин. Карта и подробная информация о банках Бобруйска. Калькулятор валют.">
     <meta name="keywords" content="Курсы валют в Бобруйске, Бобруйск, курсы валют, карта банков, калькулятор валют">
 
+    <!-- Open Graph -->
     <meta property="og:image" content="/img/social/og-image.jpg">
     <meta property="og:image:height" content="305">
     <meta property="og:image:width" content="583">
@@ -16,6 +17,31 @@
     <meta property="og:type" content="website">
     <meta property="og:description" content="Актуальные курсы валют всех банков Бобруйска. Обновляются каждые 10 мин. Карта и подробная информация о банках Бобруйска. Калькулятор валют.">
     <meta property="og:title" content="Курсы валют в Бобруйске">
+
+    <!-- Safari: Mac OS -->
+    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+
+    <!-- Safari: iOS -->
+    <link rel="apple-touch-icon" href="/img/favicon/apple-touch-icon.png" sizes="180x180">
+    <link rel="apple-touch-icon" href="/img/favicon/apple-touch-icon-60x60.png" sizes="60x60">
+    <link rel="apple-touch-icon" href="/img/favicon/apple-touch-icon-76x76.png" sizes="76x76">
+    <link rel="apple-touch-icon" href="/img/favicon/apple-touch-icon-120x120.png" sizes="120x120">
+    <link rel="apple-touch-icon" href="/img/favicon/apple-touch-icon-152x152.png" sizes="152x152">
+    <meta name="apple-mobile-web-app-title" content="Курсы валют в Бобруйске">
+
+    <!-- Chrome: Android-->
+    <link rel="manifest" href="/img/favicon/manifest.json">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="120x120" href="/img/favicon/favicon-120x120.png">
+
+    <!-- IE and Edge: Windows -->
+    <meta name="application-name" content="Курсы валют">
+    <meta name="msapplication-tooltip" content="Курсы валют в Бобруйске">
+    <meta name="msapplication-TileColor" content="#603cba">
+    <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144.png">
+    <meta name="msapplication-config" content="/img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
 
     <link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../libs/dataTables/datatables.min.css">

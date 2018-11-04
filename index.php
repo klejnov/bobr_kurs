@@ -173,6 +173,16 @@ try {
 
         exit();
     }
+    if (isset($_GET['action']) && $_GET['action'] == '404') {
+
+        header("HTTP/1.0 404 Not Found");
+
+        $year = date("Y");
+
+        require "templates/404.tpl";
+
+        exit();
+    }
 
     if (isset($_POST["AjaxAction"]) && $_POST['AjaxAction'] == 'Message') {
 

@@ -43,9 +43,9 @@
     <meta name="msapplication-config" content="/img/favicon/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
 
-    <link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="../libs/tablesorter/theme.blue.css">
-    <link rel="stylesheet" href="../css/old_table.css">
+    <link rel="stylesheet" href="/libs/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/libs/tablesorter/theme.blue.css">
+    <link rel="stylesheet" href="/css/old_table.css">
 
     <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="../libs/bootstrap/bootstrap.min.js"></script>

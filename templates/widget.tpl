@@ -10,8 +10,8 @@
     <meta name="description" content="Виджет курсов валют всех банков Бобруйска. Динамика изменения курсов валют в Бобруйске">
     <meta name="keywords" content="Курсы валют в Бобруйске, Бобруйск, курсы валют, виджет, динамика курсов, график">
 
-    <link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/widget.css">
+    <link rel="stylesheet" href="/libs/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/widget.css">
 
     <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="../libs/bootstrap/bootstrap.min.js"></script>

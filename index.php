@@ -218,6 +218,17 @@ try {
         exit();
     }
 
+    if ($_REQUEST) {
+
+        header("HTTP/1.0 404 Not Found");
+
+        $year = date("Y");
+
+        require "templates/404.tpl";
+
+        exit();
+    }
+
 } catch (Throwable $e) {
     print <<<HTML_BLOCK
 Выброшено исключение:   <b>{$e->getMessage()}</b><br>

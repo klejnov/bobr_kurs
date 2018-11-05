@@ -43,11 +43,11 @@
     <meta name="msapplication-config" content="/img/favicon/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
 
-    <link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="../libs/dataTables/datatables.min.css">
-    <link rel="stylesheet" href="../libs/bootstrap-select/bootstrap-select.min.css">
-    <link rel="stylesheet" href="../libs/sweetalert2/sweetalert2.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="/libs/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/libs/dataTables/datatables.min.css">
+    <link rel="stylesheet" href="/libs/bootstrap-select/bootstrap-select.min.css">
+    <link rel="stylesheet" href="/libs/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="/css/style.css">
 
     <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="../libs/bootstrap/popper.min.js"></script>

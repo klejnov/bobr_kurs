@@ -65,9 +65,9 @@ if ($bank_data['auto'] == 1) {
 $banks_id = 8;
 $bank_data = getbanksinfo($banks_id);
 if ($bank_data['auto'] == 1) {
-    require 'bank/belveb_by_i.php';
-    $belveb_by_i = belveb_by_i($banks_id);
-    addkurs($belveb_by_i);
+    require 'bank/belveb_by_m.php';
+    $belveb_by_m = belveb_by_m($banks_id);
+    addkurs($belveb_by_m);
 }
 
 $banks_id = 9;

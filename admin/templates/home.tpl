@@ -102,7 +102,7 @@
             <?php } else { ?>
             <tr>
                 <th scope="row"><a href="../admin/index.php?action=editbank&id=<?=$bank['id']?>"><?=$bank['id']?></a></th>
-                <td><img src="files/img/ico/<?=$bank['ico']?>"> <?=htmlspecialchars($bank['name'])?></td>
+                <td><a href="<?=$bank['url_parser']?>" target="_blank" rel="nofollow" rel="noopener noreferrer"><img src="files/img/ico/<?=$bank['ico']?>" data-toggle="tooltip" data-placement="auto" style="vertical-align: -3px;" title="<?=$bank['note']?>"></a> <?=htmlspecialchars($bank['name'])?></td>
                 <td><input type="text" class="usd_buy kursinput" value="<?=htmlspecialchars($bank['usd_buy'])?>"></td>
                 <td><input type="text" class="usd_sell kursinput" value="<?=htmlspecialchars($bank['usd_sell'])?>"></td>
                 <td><input type="text" class="eur_buy kursinput" value="<?=htmlspecialchars($bank['eur_buy'])?>"></td>

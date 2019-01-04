@@ -38,6 +38,7 @@ foreach ($priorbank_by as $key => $priorbank_by2) {
 }
 addkurs($priorbank_by);
 
+/*
 $banks_id = 5;
 $bank_data = getbanksinfo($banks_id);
 if ($bank_data['auto'] == 1) {
@@ -45,6 +46,7 @@ if ($bank_data['auto'] == 1) {
     $rbank_by = rbank_by($banks_id);
     addkurs($rbank_by);
 }
+*/
 
 $banks_id = 6;
 $bank_data = getbanksinfo($banks_id);

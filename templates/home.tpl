@@ -59,8 +59,14 @@
     <script src="../libs/chart.js/chart.min.js"></script>
     <script src="../libs/bootstrap-select/bootstrap-select.min.js"></script>
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+    <script src="../libs/timeago/jquery.timeago.js"></script>
+    <script src="../libs/timeago/jquery.timeago.ru.js"></script>
 
     <script>
+
+        $(function() {
+            $("time.timeago").timeago();
+        });
 
         function getCookie(name) {
             var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
@@ -291,6 +297,41 @@
                 </div>
             </div>
         </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row vertical">
+
+            <?php $i = 1; ?>
+
+            <?php foreach($arr_news as $arr_news_item)  { ?>
+
+            <?php if (count($arr_news) != $i++) { ?>
+            <div class="col-sm-6 col-md-6 col-lg-4">
+            <?php } else { ?>
+            <div class="d-md-none d-lg-block d-sm-block col-lg-4 col-sm-12">
+            <?php  } ?>
+                <div class="news-card news-card-cascade news-narrower">
+                    <div class="news-view news-view-cascade overlay">
+                        <a class="ripple" href="<?=$arr_news_item[1]?>">
+                            <img class="news-card-img-top" src="<?=$arr_news_item[2]?>" alt="">
+                        </a>
+                        <time class="news-date timeago" datetime="<?=$arr_news_item[3]?>"></time>
+                    </div>
+                    <div class="news-card-body news-card-body-cascade">
+                        <div class="news-card-body-content">
+                            <h1 class="news-card-title"><?=$arr_news_item[0]?></h1>
+                        </div>
+                        <div class="news-card-body-button">
+                            <a class="news-btn news-btn-unique ripple" href="<?=$arr_news_item[1]?>">Читать</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <?php }?>
+            </div>
+
     </div>
 
     <div class="container">

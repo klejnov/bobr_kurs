@@ -647,3 +647,34 @@ function getLastIdCurrency()
     return $data;
 }
 
+// Функция получаем последние 3 новости
+function parseExchangeRates()
+{
+
+    error_reporting(E_ALL);
+
+    $html = file_get_contents("http://bobr.by/service/feeds/rss-exchange-rates.php");
+
+    if (preg_match_all("/<title>([^<]+)<\/title>.*?<link>([^<]+)<\/link>.*?<img>([^<]+)<\/img>.*?<pubDate>([^<]+)<\/pubDate>/ms",
+        $html, $arr_news, PREG_SET_ORDER)) {
+
+    } else {
+
+        return;
+    }
+
+    $arr_news_new = [];
+    $i = 0;
+    foreach ($arr_news as $arr_news_clean) {
+        unset($arr_news_clean[0]);
+        array_values($arr_news_clean);
+        $arr_news_new[$i++] = $arr_news_clean;
+    }
+
+    if (!$arr_news_new) {
+        return;
+    }
+
+    saveExchangeRates($arr_news_new);
+
+}

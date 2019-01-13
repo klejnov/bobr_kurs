@@ -211,6 +211,14 @@ try {
         exit();
     }
 
+    if (isset($_GET['mobile']) && $_GET['mobile'] == 'getNews') {
+
+        require "js/arr_news.json";
+
+        exit();
+    }
+
+
     if (isset($_POST['AjaxAction']) && $_POST['AjaxAction'] == 'lastIdCurrency') {
 
         print_r(file_get_contents("js/lastID.json"));
@@ -229,7 +237,30 @@ try {
         exit();
     }
 
+    function extractExchangeRates()
+    {
+        $i = 0;
+        $arr_news = file_get_contents("js/arr_news.json");
+
+        $arr_news = json_decode($arr_news, true);
+        $arr_news = array_values($arr_news);
+
+        foreach ($arr_news as $arr_news_item) {
+
+            $arr_news[$i++] = array_values($arr_news_item);
+
+        }
+
+        return $arr_news;
+
+    }
+
+    $arr_news = extractExchangeRates();
+
+    //var_dump($arr_news);
+
 } catch (Throwable $e) {
+
     print <<<HTML_BLOCK
 Выброшено исключение:   <b>{$e->getMessage()}</b><br>
 Строка:                 <b>{$e->getLine()}</b><br>

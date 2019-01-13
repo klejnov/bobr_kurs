@@ -266,7 +266,18 @@ function lastIdCurrencyGet()
     file_put_contents($fileName, $id);
 }
 
+function saveExchangeRates($arr_news_new)
+{
+
+    $arr_news_new = json_encode($arr_news_new);
+
+    $fileName = __DIR__ . '/../js/arr_news.json';
+    file_put_contents($fileName, $arr_news_new);
+
+}
+
 widgetGet();
 tableGet();
 lastIdCurrencyGet();
+parseExchangeRates();
 

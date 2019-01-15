@@ -651,9 +651,7 @@ function getLastIdCurrency()
 function parseExchangeRates()
 {
 
-    error_reporting(E_ALL);
-
-    $html = file_get_contents("http://bobr.by/service/feeds/rss-exchange-rates.php");
+    $html = file_get_contents("https://bobr.by/service/feeds/rss-exchange-rates.php");
 
     if (preg_match_all("/<title>([^<]+)<\/title>.*?<link>([^<]+)<\/link>.*?<img>([^<]+)<\/img>.*?<pubDate>([^<]+)<\/pubDate>/ms",
         $html, $arr_news, PREG_SET_ORDER)) {

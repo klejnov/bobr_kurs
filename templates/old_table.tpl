@@ -161,7 +161,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <a href="https://play.google.com/store/apps/details?id=io.cordova.bobrby&referrer=utm_source%3Dbobrby%26utm_campaign%3Dbanner_kurs.bobr.by"
+                <a href="https://play.google.com/store/apps/details?id=io.cordova.bobrby&utm_source=kursbobrby&utm_medium=banner&utm_campaign=banner_google_play"
                    target="_blank" class="google-play-foot">
                     <img class="google-play" src="/img/google-play.png"
                          alt="Курсы валют Бобруйск. Приложение Google Play">

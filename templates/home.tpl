@@ -288,7 +288,7 @@
                         <div id="map"></div>
                     </div>
                     <div class="d-none d-lg-block">
-                        <a href="https://play.google.com/store/apps/details?id=io.cordova.bobrby&referrer=utm_source%3Dbobrby%26utm_campaign%3Dbanner_kurs.bobr.by"
+                        <a href="https://play.google.com/store/apps/details?id=io.cordova.bobrby&utm_source=kursbobrby&utm_medium=banner&utm_campaign=banner_google_play"
                            target="_blank" class="google-play-show">
                             <img class="google-play" src="/img/google-play.png"
                                  alt="Курсы валют Бобруйск. Приложение Google Play">
@@ -313,7 +313,7 @@
             <div class="d-md-none d-lg-block d-sm-block col-lg-4 col-sm-12">
             <?php  } ?>
                 <div class="news-card news-card-cascade news-narrower">
-                    <div class="news-view news-view-cascade overlay">
+                    <div class="news-view news-view-cascade">
                         <a class="ripple" href="<?=$arr_news_item[1]?>">
                             <img class="news-card-img-top" src="<?=$arr_news_item[2]?>" alt="">
                         </a>
@@ -385,7 +385,7 @@
     <div class="container d-lg-none d-block">
         <div class="row">
             <div class="col-12">
-                <a href="https://play.google.com/store/apps/details?id=io.cordova.bobrby&referrer=utm_source%3Dbobrby%26utm_campaign%3Dbanner_kurs.bobr.by"
+                <a href="https://play.google.com/store/apps/details?id=io.cordova.bobrby&utm_source=kursbobrby&utm_medium=banner&utm_campaign=banner_google_play"
                    target="_blank" class="google-play-foot">
                     <img class="google-play" src="/img/google-play.png"
                          alt="Курсы валют Бобруйск. Приложение Google Play">

@@ -315,13 +315,13 @@
                 <div class="news-card news-card-cascade news-narrower">
                     <div class="news-view news-view-cascade">
                         <a class="ripple" href="<?=$arr_news_item[1]?>">
-                            <img class="news-card-img-top" src="<?=$arr_news_item[2]?>" alt="">
+                            <img class="news-card-img-top" src="<?=$arr_news_item[2]?>" alt="<?=str_replace("\"", "'", $arr_news_item[0])?>">
                         </a>
                         <time class="news-date timeago" datetime="<?=$arr_news_item[3]?>"></time>
                     </div>
                     <div class="news-card-body news-card-body-cascade">
                         <div class="news-card-body-content">
-                            <h1 class="news-card-title"><?=$arr_news_item[0]?></h1>
+                            <h1 class="news-card-title"><?=htmlspecialchars($arr_news_item[0])?></h1>
                         </div>
                         <div class="news-card-body-button">
                             <a class="news-btn news-btn-unique ripple" href="<?=$arr_news_item[1]?>">Читать</a>

@@ -666,6 +666,7 @@ function parseExchangeRates()
     foreach ($arr_news as $arr_news_clean) {
         unset($arr_news_clean[0]);
         array_values($arr_news_clean);
+        $arr_news_clean[4] = date("Y-m-d\TH:i:sP", strtotime($arr_news_clean[4]));
         $arr_news_new[$i++] = $arr_news_clean;
     }
 

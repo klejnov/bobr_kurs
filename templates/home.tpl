@@ -300,6 +300,8 @@
     </div>
 
 
+    <?php if (!empty($arr_news)) { ?>
+
     <div class="container">
         <div class="row vertical">
 
@@ -333,6 +335,7 @@
             </div>
 
     </div>
+        <?php }?>
 
     <div class="container">
         <div class="row">

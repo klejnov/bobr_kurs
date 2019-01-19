@@ -243,13 +243,18 @@ try {
         $arr_news = file_get_contents("js/arr_news.json");
 
         $arr_news = json_decode($arr_news, true);
-        $arr_news = array_values($arr_news);
 
-        foreach ($arr_news as $arr_news_item) {
+        if(!empty($arr_news)) {
 
-            $arr_news[$i++] = array_values($arr_news_item);
+            $arr_news = array_values($arr_news);
 
+            foreach ($arr_news as $arr_news_item) {
+
+                $arr_news[$i++] = array_values($arr_news_item);
+
+            }
         }
+
 
         return $arr_news;
 

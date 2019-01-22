@@ -127,7 +127,7 @@
                         <li class="nav-item"><a href="https://bobr.by/relax/foto">Отдых</a></li>
                         <li class="nav-item"><a href="https://bobr.by/job/vacancy2">Работа</a></li>
                         <li class="nav-item"><a href="https://bobr.by/advertisement/categories">Объявления</a></li>
-                        <li class="nav-item"><a href="https://bobr.by/poster/kino/4293.html">Афиша</a></li>
+                        <li class="nav-item"><a href="https://bobr.by/poster/kino/4293">Афиша</a></li>
                         <li class="nav-item"><a href="https://bobr.by/communication/lastcomments">Общение</a></li>
                         <li class="nav-item"><a href="https://bobr.by/reklama">Реклама на портале</a></li>
                     </ul>

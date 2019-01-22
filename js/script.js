@@ -254,9 +254,11 @@ $(function () {
             var reg = /Адрес: (.*?) Тел.:/;
             var address = element.address.split(reg);
 
+            var timeago_time = element.time.replace(/ /g,"T") + Date().toString().match(/([-\+][0-9]+)\s/)[1];
+
             table.row.add([
                 '<td data-id-bank="' + element.banks_id + '"><img src="/admin/files/img/ico/' + element.ico + '" alt="Иконка ' + element.name + '">' + element.name + '' +
-                '<div data-info="info" data-id="' + element.banks_id + '" style="display: none"><span class="block-address-message"><span class="block-address">Адрес: ' + address[1] + '<br>Тел.:' + address[2] + '</span><span class="block-message"><span>Ошибочный курс?</span><button class="btn btn-block btn-outline-info" type="button" onclick="infoMessage(\'' + element.banks_id + '\', \'' + element.name + '\', \'' + address[1] + '\', \'' + usd_buy + '\', \'' + usd_sell + '\', \'' + eur_buy + '\', \'' + eur_sell + '\', \'' + rub_buy + '\', \'' + rub_sell + '\')">Сообщить!</button></span></span><span>Банк обновлял курсы: <time>' + element.time + '</time></span>' +
+                '<div data-info="info" data-id="' + element.banks_id + '" style="display: none"><span class="block-address-message"><span class="block-address">Адрес: ' + address[1] + '<br>Тел.:' + address[2] + '</span><span class="block-message"><span>Ошибочный курс?</span><button class="btn btn-block btn-outline-info" type="button" onclick="infoMessage(\'' + element.banks_id + '\', \'' + element.name + '\', \'' + address[1] + '\', \'' + usd_buy + '\', \'' + usd_sell + '\', \'' + eur_buy + '\', \'' + eur_sell + '\', \'' + rub_buy + '\', \'' + rub_sell + '\')">Сообщить!</button></span></span><span>Банк обновлял курсы: <time class="timeago" datetime="' + timeago_time + '">' + element.time + '</time></span>' +
                 '<img width="100%" src="data:image/gif;base64,R0lGODlhqAIsAZECADWz27vM0////wAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQFCgACACwAAAAAqAIsAQAC/5SPqcvtD6OctNqLs968+w+G4kiW5omm6sq27gvH8kzX9o3n+s73/g8MCofEovGITCqXzKbzCY1Kp9Sq9YrNarfcrvcLDovH5LL5jE6r1+y2+w2Py+f0uv2Oz+v3/L7/DxgoOEhYaHiImKi4yNjo+AgZKTlJWWl5iZmpucnZ6fkJGio6SlpqeoqaqrrK2ur6ChsrO0tba3uLm6u7y9vr+wscLDxMXGx8jJysvMzc7PwMHS09TV1tfY2drb3N3e39DR4uPk5ebn6Onq6+zt7u/g4fLz9PX29/j5+vv8/f7/8PMKDAgQQLGjyIMKHChQwbOnwIMaLEiRQrWryIMaPGjf8cO3r8CDKkyJEkS5o8iTKlypUsW7p8CTOmzJk0a9q8iTOnzp08e/r8CTSo0KFEixo9ijSp0qVMmzp9CjWq1KlUq1q9ijWr1q1cu3r9Cjas2LFky5o9izat2rVs27p9Czeu3Ll069q9izev3r18+/r9Cziw4MGECxs+jDix4sWMGzt+DDmy5MmUK1u+jDmz5s2cO3v+DDq06NGkS5s+jTq16tWsW7t+DTu27Nm0a9u+jTu37t28e/vuGCC48OAMhg8vbpz4guTKFTAPgDx5dOPTjy9nXl347yzPszdP0P26dPHUyVt3jt28dvXfEYTfbuU9+PTox9cvf//8fPv78ff/1+8eff+tB18V8gXIH4L+KQjgAQc6KCCDBA7YHoQJWrhggVE8aACHAngIYoQYNtihiCVeeGKGKZKooRMhovihiTHC+KKKM9pYI4setshEjhNKWOGKP444pJBB3qijjD4eyeMSS0LHHpT5FYkklU96JyWFWQK5ZZNNXBkllmKGSeaUR4Lp5RNoajmmmV0a+WaVZypJJ4xpIrEml22yWSafbu6p550u1okjoUnSaKiVic5pp6COPgpppJJOSmmlll6Kaaaabsppp55+Cmqooo5Kaqmmnopqqqquymqrrr4Ka6yyzkprrbbeimuuuu7Ka6++/gpssMIOS2yxxh6LbLLKly7LbLPOPgtttNJOS2211l6Lbbbabsttt95+C2644o5Lbrnmnotuuuquy2677r4Lb7zyzktvvfbei2+++u7Lb7/+/gtwwAIPTHDBBh+McMIKL8xwww4/DHHEEk9MccUWX4xxxhpvzHHHHn8Mcsgij0xyySafjHLKKq/McssuvwxzzDLPTHPNNt+Mc84678xzzz7/DHRXBQAAIfkEBQoAAgAsCAGQAAgADAAAAgiEj6nL7Q9jKgAh+QQFCgACACwYAZAACAAMAAACCISPqcvtD2MqACH5BAUKAAIALCgBkAAIAAwAAAIIhI+py+0PYyoAIfkEBQoAAgAsOAGQAAgADAAAAgiEj6nL7Q9jKgAh+QQFCgACACxIAZAACAAMAAACCISPqcvtD2MqACH5BAUKAAIALFgBkAAIAAwAAAIIhI+py+0PYyoAIfkEBQoAAgAsaAGQAAgADAAAAgiEj6nL7Q9jKgAh+QQFCgACACx4AZAACAAMAAACCISPqcvtD2MqACH5BAUKAAIALIgBkAAIAAwAAAIIhI+py+0PYyoAIfkEBQoAAgAsmAGQAAgADAAAAgiEj6nL7Q9jKgAh+QQFCgACACwAAAAAAQABAAACAlQBADs=" alt="Карта ' + element.name + '" data-pic="https://static-maps.yandex.ru/1.x/?l=map&pt=' + latlng + ',pm2rdl&size=514,300&z=16&lang=ru_RU">' +
                 '</div>' +
                 '<i class="fontello-icon icon-info-circled">&#xe802;</i>' +
@@ -276,6 +278,7 @@ $(function () {
             ]).draw(true);
 
             showInfoBank();
+
         });
 
         if (flag != true) {
@@ -317,6 +320,9 @@ $(function () {
         table.draw();
 
         $('tbody>tr').on('click', function () {
+
+            $("time.timeago").timeago();
+
             var value = $(this).find('div').html();
 
             var id = $(this).find('div').data("id");
@@ -776,7 +782,7 @@ $(function () {
                     '<br/>',
                     element.address,
                     '<br/>',
-                    'Подробнее: <a href="' + element.url + '" target="_blank">о банке</a>',
+                    'Подробнее: <a href="' + element.url + '?utm_source=kursbobrby&utm_medium=page&utm_campaign=maps_balloon" target="_blank">о банке</a>',
                     '</address>'
                 ].join('')
             });
@@ -801,7 +807,7 @@ $(function () {
                     '<br/>',
                     element.address,
                     '<br/>',
-                    'Подробнее: <a href="' + element.url + '" target="_blank">о банке</a>',
+                    'Подробнее: <a href="' + element.url + '?utm_source=kursbobrby&utm_medium=page&utm_campaign=maps_balloon" target="_blank">о банке</a>',
                     '</address>'
                 ].join('')
             });
@@ -826,7 +832,7 @@ $(function () {
                     '<br/>',
                     element.address,
                     '<br/>',
-                    'Подробнее: <a href="' + element.url + '" target="_blank">о банке</a>',
+                    'Подробнее: <a href="' + element.url + '?utm_source=kursbobrby&utm_medium=page&utm_campaign=maps_balloon" target="_blank">о банке</a>',
                     '</address>'
                 ].join('')
             });
@@ -851,7 +857,7 @@ $(function () {
                     '<br/>',
                     element.address,
                     '<br/>',
-                    'Подробнее: <a href="' + element.url + '" target="_blank">о банке</a>',
+                    'Подробнее: <a href="' + element.url + '?utm_source=kursbobrby&utm_medium=page&utm_campaign=maps_balloon" target="_blank">о банке</a>',
                     '</address>'
                 ].join('')
             });
@@ -876,7 +882,7 @@ $(function () {
                     '<br/>',
                     element.address,
                     '<br/>',
-                    'Подробнее: <a href="' + element.url + '" target="_blank">о банке</a>',
+                    'Подробнее: <a href="' + element.url + '?utm_source=kursbobrby&utm_medium=page&utm_campaign=maps_balloon" target="_blank">о банке</a>',
                     '</address>'
                 ].join('')
             });
@@ -901,7 +907,7 @@ $(function () {
                     '<br/>',
                     element.address,
                     '<br/>',
-                    'Подробнее: <a href="' + element.url + '" target="_blank">о банке</a>',
+                    'Подробнее: <a href="' + element.url + '?utm_source=kursbobrby&utm_medium=page&utm_campaign=maps_balloon" target="_blank">о банке</a>',
                     '</address>'
                 ].join('')
             });

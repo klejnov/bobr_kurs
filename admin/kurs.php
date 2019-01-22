@@ -550,7 +550,7 @@ function getBanksRatesTable()
                 '0000-00-00 00:00:00'
                 FROM banks WHERE status = 1)
                 ORDER BY time DESC
-                ) AS bk2 WHERE status = 1 AND name NOT LIKE '%Банк для тестирования%'
+                ) AS bk2 WHERE status = 1 AND name NOT LIKE '%Банк для тестирования%' AND bk2.time >= DATE_SUB(NOW(), INTERVAL  1 DAY)
                 GROUP BY bk2.banks_id"
     );
 

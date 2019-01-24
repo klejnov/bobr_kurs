@@ -65,7 +65,7 @@ $(function () {
                 });
 
                 $("#myTable tbody").append('<tr>' +
-                    '<td data-id-bank="' + element.banks_id + '"><a href="' + element.url + '" target="_blank"><img src="/admin/files/img/ico/' + element.ico + '" alt="Иконка ' + element.name + '">' + element.name + '</a>' +
+                    '<td data-id-bank="' + element.banks_id + '"><a href="' + element.url + '?utm_source=kursbobrby&utm_medium=page&utm_campaign=old_table" target="_blank"><img src="/admin/files/img/ico/' + element.ico + '" alt="Иконка ' + element.name + '">' + element.name + '</a>' +
                     '<div data-info="info" class="address" data-id="' + element.banks_id + '">Адрес: ' + address[1] + '<br>Тел.:' + address[2] + '<br><span>Банк обновлял курсы: <time>' + element.time + '</time></span>' +
                     '</div>' +
                     '</td>' +

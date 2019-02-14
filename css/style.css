@@ -1046,6 +1046,7 @@ a.ripple:hover {
 
 .news-card-body-button {
     align-self: flex-end;
+    width: 100%;
 }
 
 .news-btn-unique {
@@ -1144,6 +1145,7 @@ btn.ripple {
 .news-card-title {
     font-size:1.2rem;
 }
+
 
 
 @media (max-width: 992px) {

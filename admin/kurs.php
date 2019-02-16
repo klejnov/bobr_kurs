@@ -512,9 +512,18 @@ function getCurrencyRatesWidget($start, $end)
 
 function getBanksRatesTable()
 {
+
+    $number_days = 1;
+    if (date("N") == 7) {
+        $number_days = 2;
+    } elseif (date("N") == 1) {
+        $number_days = 3;
+    }
+
+
     global $db;
     $query = $db->prepare(
-        "SELECT * FROM ((SELECT 
+        "SELECT 
                     b.id, 
                     b.name,
                     b.ico,
@@ -531,30 +540,15 @@ function getBanksRatesTable()
                     bk.banks_id,
                     DATE_FORMAT(bk.time, '%Y-%m-%d %H:%i') AS time
                 FROM banks_kurs AS bk
-                LEFT JOIN banks AS b ON b.id = bk.banks_id)
-                UNION ALL
-                (SELECT id,
-                name,
-                ico,
-                url,
-                latlng,
-                address,
-                status,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,                
-                id,
-                '0000-00-00 00:00:00'
-                FROM banks WHERE status = 1)
-                ORDER BY time DESC
-                ) AS bk2 WHERE status = 1 AND name NOT LIKE '%Банк для тестирования%' AND bk2.time >= DATE_SUB(NOW(), INTERVAL  1 DAY)
-                GROUP BY bk2.banks_id"
+                LEFT JOIN banks AS b ON b.id = bk.banks_id
+					 WHERE status = 1 AND name NOT LIKE '%Банк для тестирования%' AND bk.time >= DATE_SUB(NOW(), INTERVAL  :sql_number_days DAY)
+                GROUP BY bk.banks_id
+                ORDER BY time DESC"
     );
 
-    $query->execute();
+    $query->execute(array(
+        'sql_number_days' => $number_days,
+    ));
 
     $result = $query->fetchALL(PDO::FETCH_ASSOC);
 

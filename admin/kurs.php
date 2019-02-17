@@ -562,7 +562,8 @@ function getBanksRatesTable()
                 ORDER BY time DESC
                 ) AS bk2 
                 where  bk2.TIME <> '0000-00-00 00:00:00'
-                GROUP BY bk2.banks_id"
+                GROUP BY bk2.banks_id
+                "
     );
 
     $query->execute(array(

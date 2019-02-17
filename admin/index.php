@@ -11,6 +11,7 @@ if (isset($_GET['action']) and $_GET['action'] == 'authpost'){
     $password = $_POST['password'];
     $a = authuser($login, $password);
 
+
     if ($a['id'] > 0) {
         $_SESSION['sessionauth'] = true;
         $_SESSION['id'] = $a['id'];

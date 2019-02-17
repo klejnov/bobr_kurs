@@ -523,14 +523,14 @@ function getBanksRatesTable()
 
     global $db;
     $query = $db->prepare(
-        "SELECT 
+        "SELECT * FROM ((SELECT 
                     b.id, 
                     b.name,
+                    b.auto,
                     b.ico,
-                    b.url,
-                    b.latlng,
-                    b.address,
                     b.status,
+                    b.url_parser,
+                    b.note,
                     bk.usd_buy,
                     bk.usd_sell,
                     bk.eur_buy,
@@ -538,12 +538,31 @@ function getBanksRatesTable()
                     bk.rub_buy,
                     bk.rub_sell,
                     bk.banks_id,
-                    DATE_FORMAT(bk.time, '%Y-%m-%d %H:%i') AS time
-                FROM banks_kurs AS bk
+                    DATE_FORMAT(bk.time, '%Y-%m-%d %H:%i:%s') AS time
+                FROM banks_kurs AS bk 
                 LEFT JOIN banks AS b ON b.id = bk.banks_id
-					 WHERE status = 1 AND name NOT LIKE '%Банк для тестирования%' AND bk.time >= DATE_SUB(NOW(), INTERVAL  :sql_number_days DAY)
-                GROUP BY bk.banks_id
-                ORDER BY time DESC"
+					 where  bk.time >= DATE_SUB(NOW(), INTERVAL :sql_number_days DAY))
+                UNION ALL
+                (SELECT id,
+                name,
+                auto,
+                ico,
+                status,
+                url_parser,
+                note,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,                
+                id,
+                '0000-00-00 00:00:00'
+                FROM banks)
+                ORDER BY time DESC
+                ) AS bk2 
+                where  bk2.TIME <> '0000-00-00 00:00:00'
+                GROUP BY bk2.banks_id"
     );
 
     $query->execute(array(

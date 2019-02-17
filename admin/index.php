@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-//print_r($_SESSION);
+
 header('Content-Type: text/html; charset=utf-8');
 
 require_once 'kurs.php';
@@ -10,7 +10,6 @@ if (isset($_GET['action']) and $_GET['action'] == 'authpost'){
     $login = $_POST['login'];
     $password = $_POST['password'];
     $a = authuser($login, $password);
-
 
     if ($a['id'] > 0) {
         $_SESSION['sessionauth'] = true;

@@ -10,6 +10,7 @@ $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 function runTransaction()
 {
     $file_list_arr = searchFilesForMigration();
+    asort($file_list_arr);
 
     if (empty($file_list_arr)) {
         exit("Нет запросов для выполнения");
@@ -23,7 +24,7 @@ function runTransaction()
         foreach ($file_list_arr as $file) {
 
             $query_arr = file_get_contents($file);
-            $query_arr = preg_split("/(;\n)/", $query_arr);
+            $query_arr = preg_split("/((;\n)|(;\r\n))/", $query_arr);
 
             foreach ($query_arr as $query) {
 

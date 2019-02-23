@@ -20,7 +20,7 @@ class DataBase
      */
     private function connect()
     {
-        $config = require_once 'admin/config.php';
+        $config = require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/config.php';
         $dsn = 'mysql:host=' . $config['host'] . ';dbname=' . $config['db_name'] . ';charset=' . $config['charset'];
         $this->link = new PDO($dsn, $config['username'], $config['password']);
         $this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -216,8 +216,8 @@ class DataBase
         );
         $sth->execute(array(
             'sql_banks_id' => $banks_id,
-            'sql_text' => $text,
-            'sql_ip' => $ip
+            'sql_text'     => $text,
+            'sql_ip'       => $ip
         ));
     }
 
@@ -234,4 +234,18 @@ class DataBase
         shell_exec("mysqldump -u{$config['username']} -p{$config['password']} {$config['db_name']} > $dir/../backup/dump_$today.sql");
     }
 
+    public function beginTransaction()
+    {
+        $this->link->beginTransaction();
+    }
+
+    public function commit()
+    {
+        $this->link->commit();
+    }
+
+    public function rollBack()
+    {
+        $this->link->rollBack();
+    }
 }

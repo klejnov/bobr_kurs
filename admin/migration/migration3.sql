@@ -1,2 +1,10 @@
-insert into banks_kurs_log (id_bank, html) values (1, 'файл 3 Тест 1');
-insert into banks_kurs_log (id_bank, html) values (1, 'файл 3 Тест 2 ');
+UPDATE `kurs`.`banks` SET `name`='Беларусбанк № 703' WHERE  `id`=27;
+SELECT `id`, `name`, `auto`, `latlng`, `url`, `address`, `ico`, `status`, `url_parser`, `note` FROM `kurs`.`banks` WHERE  `id`=27;
+UPDATE `kurs`.`banks` SET `name`='Беларусбанк № 703/19' WHERE  `id`=28;
+SELECT `id`, `name`, `auto`, `latlng`, `url`, `address`, `ico`, `status`, `url_parser`, `note` FROM `kurs`.`banks` WHERE  `id`=28;
+UPDATE `kurs`.`banks` SET `name`='Беларусбанк № 703/38' WHERE  `id`=30;
+SELECT `id`, `name`, `auto`, `latlng`, `url`, `address`, `ico`, `status`, `url_parser`, `note` FROM `kurs`.`banks` WHERE  `id`=30;
+UPDATE `kurs`.`banks` SET `name`='Беларусбанк № 703/59' WHERE  `id`=31;
+SELECT `id`, `name`, `auto`, `latlng`, `url`, `address`, `ico`, `status`, `url_parser`, `note` FROM `kurs`.`banks` WHERE  `id`=31;
+UPDATE `kurs`.`banks` SET `name`='Беларусбанк № 703/9' WHERE  `id`=32;
+SELECT `id`, `name`, `auto`, `latlng`, `url`, `address`, `ico`, `status`, `url_parser`, `note` FROM `kurs`.`banks` WHERE  `id`=32;

@@ -2,6 +2,22 @@
 
 define('DS', DIRECTORY_SEPARATOR);
 
+function sendSMS($banks_id, $db)
+{
+
+    $sms_arr = require "admin/config_sms.php";
+
+    $sql = "SELECT name from banks WHERE id=$banks_id;";
+
+    $name_bank = $db->query($sql);
+
+    $name_bank = str_replace(' ', '%20', $name_bank[0]["name"]);
+
+    file_get_contents($sms_arr['site'] . "?r=api%2Fmsg_send&user=" . $sms_arr['user'] .
+                      "&apikey=" . $sms_arr['apikey'] . "&recipients=" . $sms_arr['recipients'] .
+                      "&message=Неверный%20курс%20в%20" . $name_bank . ".&sender=" . $sms_arr['sender'] . "&urgent=1&test=0");
+}
+
 /**
  * Автоматическая загрузка классов
  */
@@ -199,9 +215,12 @@ try {
             ];
             $result = json_encode($result);
             echo $result;
+
+            sendSMS($banks_id, $db);
+
         } catch (Throwable $e) {
             $result = [
-                'send' => false,
+                'send'      => false,
                 'error-msg' => $e->getMessage()
             ];
             $result = json_encode($result);
@@ -217,7 +236,6 @@ try {
 
         exit();
     }
-
 
     if (isset($_POST['AjaxAction']) && $_POST['AjaxAction'] == 'lastIdCurrency') {
 
@@ -244,24 +262,20 @@ try {
 
         $arr_news = json_decode($arr_news, true);
 
-        if(!empty($arr_news)) {
+        if (!empty($arr_news)) {
 
             $arr_news = array_values($arr_news);
 
             foreach ($arr_news as $arr_news_item) {
 
                 $arr_news[$i++] = array_values($arr_news_item);
-
             }
         }
 
-
         return $arr_news;
-
     }
 
     $arr_news = extractExchangeRates();
-
     //var_dump($arr_news);
 
 } catch (Throwable $e) {

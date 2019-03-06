@@ -1,3 +1,7 @@
 /admin/config.php
 /admin/config_sms.php
 /admin/migration/last_date_migration
+/admin/bank/
+/.idea
+/pass.php
+/test.html

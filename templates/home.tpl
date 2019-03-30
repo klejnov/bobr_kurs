@@ -307,7 +307,16 @@
 
             <?php $i = 1; ?>
 
-            <?php foreach($arr_news as $arr_news_item)  { ?>
+            <?php foreach($arr_news as $arr_news_item)  {
+
+            $file = $arr_news_item[2];
+
+            $headers = @get_headers($file);
+
+            if(!strpos($headers[0], '200')) {
+            $arr_news_item[2] = "../img/background_default.jpg";
+            }
+            ?>
 
             <?php if (count($arr_news) != $i++) { ?>
             <div class="col-sm-6 col-md-6 col-lg-4">

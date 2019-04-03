@@ -132,6 +132,7 @@ $active_banks = '';
 $active_statsavr = '';
 $active_edituser = '';
 $active_message = '';
+$active_log_errors = '';
 
 if (isset($_GET['action']) and $_GET['action'] == 'auth') {
 
@@ -209,6 +210,8 @@ if (isset($_GET['action']) and $_GET['action'] == 'auth') {
     $messages = getMessageBank($_GET['id']);
 
     $courses = getCoursesBank($_GET['id']);
+
+    $log_errors_bank = getLogErrorsBank($_GET['id']);
 
     ob_start();
     require "templates/editbank.tpl";
@@ -357,6 +360,22 @@ if (isset($_GET['action']) and $_GET['action'] == 'auth') {
     //print_r($banks);
     ob_start();
     require "templates/message.tpl";
+    $content = ob_get_clean();
+    require 'templates/main.tpl';
+} else if (isset($_GET['action']) and $_GET['action'] == 'log-errors'){
+    if (!isset($_SESSION['sessionauth']) or $_SESSION['sessionauth'] == false) {
+        header('location:index.php?action=auth');
+        exit;
+    } else if ($_SESSION['role'] == 0 ){
+        header('location:index.php?action=closed');
+        exit;
+    }
+    $user_data2 = userinfo($_SESSION['id']);
+    $log_errors = getLogErrorsList();
+    $active_log_errors = ' class="active"';
+    //print_r($log_errors);
+    ob_start();
+    require "templates/log-errors.tpl";
     $content = ob_get_clean();
     require 'templates/main.tpl';
 } else if (isset($_POST['AjaxAction']) and $_POST['AjaxAction'] == 'lastIdMessage'){

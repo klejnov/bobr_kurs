@@ -77,7 +77,7 @@
 <?php if ($bank_data['id'] > 0 && $messages) { ?>
 
 <div class="jumbotron">
-    <h4>Сообщения</h4>
+    <h4>Сообщения пользователей</h4>
     <table class="table table-bordered table-home">
         <thead>
         <tr>
@@ -102,6 +102,32 @@
 
 <?php }?>
 
+<?php if ($bank_data['id'] > 0 && $log_errors_bank) { ?>
+
+<div class="jumbotron">
+    <h4>Логирование ошибок</h4>
+    <h5>(курсов, выходящих за пределы среднего курса)</h5>
+    <table class="table table-bordered table-home">
+        <thead>
+        <tr>
+            <th>Текст ошибки</th>
+            <th style="width: 90px;">Время</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <?php foreach($log_errors_bank as $log_error_bank)  { ?>
+        <tr>
+            <td style="text-align:left;"><?=htmlspecialchars($log_error_bank['html'])?></td>
+            <td><?=$log_error_bank['time']?></td>
+        </tr>
+        <?php }?>
+
+        </tbody>
+    </table>
+</div>
+
+<?php }?>
 
 <?php if ($bank_data['id'] > 0 && $courses) { ?>
 

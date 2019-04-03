@@ -11,6 +11,8 @@ if ($bank_data['auto'] == 1) {
     addkurs($paritetbank3);
 }
 
+//exit("Выход");
+
 $banks_id = 2;
 $bank_data = getbanksinfo($banks_id);
 if ($bank_data['auto'] == 1) {

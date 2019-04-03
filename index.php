@@ -165,7 +165,7 @@ try {
 
         $db = new DataBase();
 
-        $sql = "DELETE FROM banks_kurs_log WHERE time < DATE_SUB(NOW(), INTERVAL 5 DAY);";
+        $sql = "DELETE FROM banks_kurs_log WHERE time < DATE_SUB(NOW(), INTERVAL 5 DAY) AND type_log <> 1;";
 
         $db->execute($sql);
 

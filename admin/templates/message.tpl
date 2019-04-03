@@ -1,5 +1,5 @@
 <div class="jumbotron">
-    <h3>Сообщения</h3>
+    <h3>Сообщения пользователей</h3>
     <div class="jumbotron" style="max-width: 100%; margin: auto;">
         <button class="bfs btn btn-success reload" style="display: none; margin: auto 46% 20px;" onclick="location.reload()" role="button">Обновить <i class="fa fa-refresh" aria-hidden="true"></i></button>
         <table class="table table-bordered table-home">

@@ -260,7 +260,40 @@ function delbank($func_dell_bank)
 
 function addkurs($data)
 {
-    //echo $func_name;
+
+    //Сравнение курсов со средним значением.
+
+    $filePath = __DIR__ . '/../js/widget.json';
+
+    $arr_news = file_get_contents($filePath);
+
+    $arr_news = json_decode($arr_news, true);
+
+    //var_dump($arr_news);
+
+    $rate = 0.2;
+
+    $avg_usd_buy = $arr_news["current_rate_usd_buy"];
+    $avg_usd_sell = $arr_news["current_rate_usd_sell"];
+    $avg_eur_buy = $arr_news["current_rate_eur_buy"];
+    $avg_eur_sell = $arr_news["current_rate_eur_sell"];
+    $avg_rub_buy = $arr_news["current_rate_rub_buy"];
+    $avg_rub_sell = $arr_news["current_rate_rub_sell"];
+
+    $avg_usd_buy_min = $avg_usd_buy * (1 - $rate);
+    $avg_usd_sell_min = $avg_usd_sell * (1 - $rate);
+    $avg_eur_buy_min = $avg_eur_buy * (1 - $rate);
+    $avg_eur_sell_min = $avg_eur_sell * (1 - $rate);
+    $avg_rub_buy_min = $avg_rub_buy * (1 - $rate);
+    $avg_rub_sell_min = $avg_rub_sell * (1 - $rate);
+
+    $avg_usd_buy_max = $avg_usd_buy * (1 + $rate);
+    $avg_usd_sell_max = $avg_usd_sell * (1 + $rate);
+    $avg_eur_buy_max = $avg_eur_buy * (1 + $rate);
+    $avg_eur_sell_max = $avg_eur_sell * (1 + $rate);
+    $avg_rub_buy_max = $avg_rub_buy * (1 + $rate);
+    $avg_rub_sell_max = $avg_rub_sell * (1 + $rate);
+
     global $db;
     foreach ($data as $parser_data) {
 
@@ -288,7 +321,7 @@ function addkurs($data)
             $html = 'Ошибка получения курсов';
         }
 
-        writeLog($id_bank, $html);
+        writeLog($id_bank, $html, 2);
 
         if ($parser_data['usd_buy'] == 0
             && $parser_data['eur_buy'] == 0
@@ -296,6 +329,18 @@ function addkurs($data)
             && $parser_data['usd_sell'] == 0
             && $parser_data['eur_sell'] == 0
             && $parser_data['rub_sell'] == 0) {
+            continue;
+        }
+
+        $text = "Курс USD: {$parser_data['usd_buy']} / {$parser_data['usd_sell']}.  Курс EUR: {$parser_data['eur_buy']} / {$parser_data['eur_sell']}.  Курс RUB: {$parser_data['rub_buy']} / {$parser_data['rub_sell']}. ";
+
+        if (($parser_data['usd_buy'] <= $avg_usd_buy_min || $parser_data['usd_buy'] >= $avg_usd_buy_max) ||
+            ($parser_data['usd_sell'] <= $avg_usd_sell_min || $parser_data['usd_sell'] >= $avg_usd_sell_max) ||
+            ($parser_data['eur_buy'] <= $avg_eur_buy_min || $parser_data['eur_buy'] >= $avg_eur_buy_max) ||
+            ($parser_data['eur_sell'] <= $avg_eur_sell_min || $parser_data['eur_sell'] >= $avg_eur_sell_max) ||
+            ($parser_data['rub_buy'] <= $avg_rub_buy_min || $parser_data['rub_buy'] >= $avg_rub_buy_max) ||
+            ($parser_data['rub_sell'] <= $avg_rub_sell_min || $parser_data['rub_sell'] >= $avg_rub_sell_max)) {
+            writeLog($id_bank, $text, 1);
             continue;
         }
 
@@ -342,21 +387,27 @@ function addkurs($data)
     //$data = $query->fetch(PDO::FETCH_ASSOC);
 }
 
-function writeLog($id_bank, $html)
+function writeLog($id_bank, $html, $type_log)
 {
-
     global $db;
+
+    /**
+     * 1 - limits exceeded (превышены лимиты)
+     * 2 - regular log (обычный лог)
+     */
 
     $query = $db->prepare(
         "INSERT INTO 
-              banks_kurs_log (id_bank, html) 
+              banks_kurs_log (id_bank, html, type_log) 
               VALUES (
               :sql_id_bank, 
-              :sql_html);"
+              :sql_html, 
+              :sql_type_log);"
     );
     $query->execute(array(
-        'sql_id_bank' => $id_bank,
-        'sql_html'    => $html,
+        'sql_id_bank'  => $id_bank,
+        'sql_html'     => $html,
+        'sql_type_log' => $type_log,
     ));
 }
 
@@ -514,7 +565,6 @@ function getBanksRatesTable()
         $number_days = 3;
     }
 
-
     global $db;
     $query = $db->prepare(
         "SELECT * FROM ((SELECT 
@@ -591,7 +641,7 @@ function getMessageList()
     return $data;
 }
 
-// Функция получаем все сообщения
+// Функция получаем все сообщения определенного банка
 function getMessageBank($id)
 {
     global $db;
@@ -607,6 +657,43 @@ function getMessageBank($id)
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
     return $data;
 }
+
+// Функция получаем лог ошибок (курсов, выходящих за пределы среднего курса)
+function getLogErrorsList()
+{
+    global $db;
+    $query = $db->prepare(
+        "SELECT  banks_kurs_log.id, 
+                          time,
+                          html,
+                          id_bank,
+                          banks.name,   
+                          banks.ico   
+                            FROM banks_kurs_log INNER JOIN banks ON banks_kurs_log.id_bank = banks.id
+                            WHERE type_log = 1
+                            ORDER BY time DESC LIMIT 50"
+    );
+    $query->execute();
+    $data = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $data;
+}
+
+// Функция получаем все сообщения определенного банка
+function getLogErrorsBank($id)
+{
+    global $db;
+    $query = $db->prepare(
+        "SELECT  banks_kurs_log.id, 
+                          time,
+                          html
+                            FROM banks_kurs_log INNER JOIN banks ON banks_kurs_log.id_bank = banks.id WHERE id_bank = $id AND type_log = 1
+                            ORDER BY time DESC LIMIT 20"
+    );
+    $query->execute();
+    $data = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $data;
+}
+
 
 // Функция получаем курсы валют по ID банка
 function getCoursesBank($id)
@@ -681,5 +768,4 @@ function parseExchangeRates()
     }
 
     saveExchangeRates($arr_news_new);
-
 }

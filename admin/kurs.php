@@ -1,6 +1,24 @@
 <?php
 
+define('DS', DIRECTORY_SEPARATOR);
+
 $config = require "config.php";
+
+/**
+ * Автоматическая загрузка классов
+ */
+
+spl_autoload_register(function ($class_name) {
+
+    $patchFile = __DIR__ . DS . '../classes' . DS . $class_name . '.php';
+
+    if (!file_exists($patchFile)) {
+        echo "Файла с классом $class_name нет";
+        die();
+    }
+    include $patchFile;
+});
+
 
 $db = new PDO('mysql:host=' . $config['host'] . ';dbname=' . $config['db_name'], $config['username'],
     $config['password'], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'"));
@@ -340,7 +358,12 @@ function addkurs($data)
             ($parser_data['eur_sell'] <= $avg_eur_sell_min || $parser_data['eur_sell'] >= $avg_eur_sell_max) ||
             ($parser_data['rub_buy'] <= $avg_rub_buy_min || $parser_data['rub_buy'] >= $avg_rub_buy_max) ||
             ($parser_data['rub_sell'] <= $avg_rub_sell_min || $parser_data['rub_sell'] >= $avg_rub_sell_max)) {
+
             writeLog($id_bank, $text, 1);
+
+            $telegram_msg = new TelegramBot();
+            $telegram_msg->sendMessageTelegramBot("Банк прислал курсы, выходящие за пределы среднего курса:\n$text\nВставка некорректных значений отменена\n<a href='https://kurs.bobr.by/admin/'>Посмотреть</a>");
+
             continue;
         }
 

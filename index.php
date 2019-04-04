@@ -2,7 +2,7 @@
 
 define('DS', DIRECTORY_SEPARATOR);
 
-function sendSMS($banks_id, $db)
+function sendSMS($banks_id, $text, $db)
 {
 
     $sms_arr = require "admin/config_sms.php";
@@ -11,11 +11,16 @@ function sendSMS($banks_id, $db)
 
     $name_bank = $db->query($sql);
 
+    $name_bank_telegram = $name_bank[0]["name"];
+
     $name_bank = str_replace(' ', '%20', $name_bank[0]["name"]);
 
     file_get_contents($sms_arr['site'] . "?r=api%2Fmsg_send&user=" . $sms_arr['user'] .
                       "&apikey=" . $sms_arr['apikey'] . "&recipients=" . $sms_arr['recipients'] .
                       "&message=Неверный%20курс%20в%20" . $name_bank . ".&sender=" . $sms_arr['sender'] . "&urgent=1&test=0");
+
+    $telegram_msg = new TelegramBot();
+    $telegram_msg->sendMessageTelegramBot("Пользователь сообщает о неверном курсе в <b>$name_bank_telegram</b>.\n<code>$text</code>\n<a href='https://kurs.bobr.by/admin/'>Посмотреть</a>");
 }
 
 /**
@@ -216,7 +221,7 @@ try {
             $result = json_encode($result);
             echo $result;
 
-            sendSMS($banks_id, $db);
+            sendSMS($banks_id, $text, $db);
 
         } catch (Throwable $e) {
             $result = [

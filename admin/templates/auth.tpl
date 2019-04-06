@@ -53,7 +53,7 @@
                   <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                   <input type="password" class="form-control" id="password" placeholder="Введите пароль">
               </div>
-              <button style="width: 100%" class="btn btn-success" onclick="authjs()">Вход</button>
+              <button style="width: 100%; outline: none;" class="btn btn-success" onclick="authjs()" autofocus>Вход</button>
       </div>
     </div>
     <!-- /container form auth-->

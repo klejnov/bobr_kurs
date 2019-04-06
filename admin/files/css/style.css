@@ -23,10 +23,93 @@
     margin-top: 1px;
 }
 
-.navbar-nav li:hover{
+.navbar-nav li:hover {
     background-color: #e7e7e7;
 }
 
 .navbar-right li:hover {
     background-color: #f8f8f8;
+}
+
+/* Style the links inside the sidenav */
+.mySidenav a {
+    position: absolute; /* Position them relative to the browser window */
+    transition: 0.3s; /* Add transition on hover */
+    padding: 15px 0px 15px 15px; /* 15px padding */
+    text-decoration: none; /* Remove underline */
+    font-size: 20px; /* Increase font size */
+    color: white; /* White text color */
+    border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
+}
+
+.mySidenav a:hover {
+    left: 0; /* On mouse-over, make the elements appear as they should */
+}
+
+.sidenav-changes a {
+    left: -280px; /* Position them outside of the screen */
+    width: 300px; /* Set a specific width */
+}
+
+.sidenav-error a {
+    left: -233px; /* Position them outside of the screen */
+    width: 253px; /* Set a specific width */
+}
+
+.sidenav-warning a {
+    left: -233px; /* Position them outside of the screen */
+    width: 253px; /* Set a specific width */
+}
+
+.sidenav-info a {
+    left: -233px; /* Position them outside of the screen */
+    width: 253px; /* Set a specific width */
+}
+
+#count-changes {
+    background-color: #00c851;
+}
+
+#count-error {
+    background-color: #d9534f;
+}
+
+#count-warning {
+    background-color: #f0ad4e;
+}
+
+#count-info {
+    background-color: #5bc0de;
+}
+
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+    .sidenav-changes a {
+        left: -235px;
+        width: 285px;
+    }
+
+    .sidenav-error a {
+        left: -203px;
+        width: 253px;
+    }
+
+    .sidenav-warning a, .sidenav-info a {
+        left: -192px;
+        width: 242px;
+    }
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+
+}
+
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+
 }

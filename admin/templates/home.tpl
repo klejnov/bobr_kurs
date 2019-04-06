@@ -7,27 +7,6 @@
 <div class="jumbotron">
     <h3>Список банков</h3>
     <style>
-        /* Style the links inside the sidenav */
-        #mySidenav a {
-            position: absolute; /* Position them relative to the browser window */
-            left: -280px; /* Position them outside of the screen */
-            transition: 0.3s; /* Add transition on hover */
-            padding: 15px; /* 15px padding */
-            width: 300px; /* Set a specific width */
-            text-decoration: none; /* Remove underline */
-            font-size: 20px; /* Increase font size */
-            color: white; /* White text color */
-            border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
-        }
-
-        #mySidenav a:hover {
-            left: 0; /* On mouse-over, make the elements appear as they should */
-        }
-
-        #count {
-            top: 95px;
-            background-color: #2196F3; /* Blue */
-        }
 
         .btn {
             border: none; /* Remove borders */
@@ -53,9 +32,6 @@
     <span class="label label-info">24 ч</span>
     <span class="label label-warning">3 сут</span>-->
 
-    <div id="mySidenav" class="sidenav">
-        <a href="#" id="count">Количество изменений: <?=$stats_count['COUNT(*)']?></a>
-    </div>
     <div class="jumbotron divhome" style="max-width: 100%; margin: auto;">
         <table class="table table-bordered table-home">
             <thead>
@@ -73,6 +49,12 @@
             </tr>
             </thead>
             <tbody>
+
+            <?php $error_count = 0; ?>
+            <?php $warning_count = 0; ?>
+            <?php $info_count = 0; ?>
+            <?php $height_top = 95; ?>
+
             <?php foreach($banks as $key => $bank) { ?>
             <?php if ($bank['auto'] == 1) { ?>
             <tr>
@@ -87,13 +69,16 @@
                 <td><?=$bank['time']?>
                     <br>
                     <?php if ($bank['alarm_time'] >= 3) {
+                    $warning_count += 1;
                     echo "<span class=\"label label-warning\">{$bank['alarm_time']} сут.</span>";
                     } else if ($bank['alarm_time'] >= 1){
+                    $info_count += 1;
                     echo "<span class=\"label label-info\">{$bank['alarm_time']} сут.</span>";
                     }?>
                     <?php if ($bank['status'] == 1) {
                     echo "<span data-toggle=\"tooltip\" data-placement=\"auto\" title=\"Нет проблем при последнем обновлении\" class=\"label label-success\">OK</span>";
                     } else if ($bank['status'] == 0){
+                    $error_count += 1;
                     echo "<span data-toggle=\"tooltip\" data-placement=\"auto\" title=\"Проблема при последнем обновлении. Сообщите администратору!\" class=\"label label-danger\">ERROR</span>";
                     }?>
                 </td>
@@ -125,4 +110,23 @@
             </tbody>
         </table>
     </div>
+    <div class="mySidenav sidenav-changes">
+        <a href="#" id="count-changes" style="top:<?= $height_top ?>px;">Количество изменений: <?=$stats_count['COUNT(*)']?></a>
+    </div>
+    <?php if ($error_count) { ?>
+        <div class="mySidenav sidenav-error">
+            <a href="#" id="count-error" style="top:<?= $height_top += 75 ?>px;">Количество ошибок: <?= $error_count ?></a>
+        </div>
+    <?php } ?>
+    <?php if ($warning_count) { ?>
+        <div class="mySidenav sidenav-warning">
+            <a href="#" id="count-warning" style="top:<?= $height_top += 75 ?>px;">Устаревшие курсы: <?= $warning_count ?></a>
+        </div>
+    <?php } ?>
+    <?php if ($info_count) { ?>
+    <div class="mySidenav sidenav-info">
+        <a href="#" id="count-info" style="top:<?= $height_top += 75 ?>px;">Устаревшие курсы: <?= $info_count ?></a>
+    </div>
+    <?php } ?>
+
 </div>

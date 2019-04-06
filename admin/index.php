@@ -46,6 +46,7 @@ if (isset($_GET['action']) and $_GET['action'] == 'authpost'){
         'eur_sell' => $eur_sell,
         'rub_buy' => $rub_buy,
         'rub_sell' => $rub_sell,
+        'html' => 'Ручное изменение курсов',
         'status' => 1,
     ));
     addkurs($kurs);

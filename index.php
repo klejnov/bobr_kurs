@@ -13,7 +13,7 @@ function sendSMS($banks_id, $text, $db)
 
     $name_bank_telegram = $name_bank[0]["name"];
 
-    $name_bank = str_replace(' ', '%20', $name_bank[0]["name"]);
+    $name_bank = urlencode($name_bank[0]["name"]);
 
     file_get_contents($sms_arr['site'] . "?r=api%2Fmsg_send&user=" . $sms_arr['user'] .
                       "&apikey=" . $sms_arr['apikey'] . "&recipients=" . $sms_arr['recipients'] .

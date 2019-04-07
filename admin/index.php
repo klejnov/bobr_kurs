@@ -12,6 +12,7 @@ if (isset($_GET['action']) and $_GET['action'] == 'authpost'){
     $a = authuser($login, $password);
 
     if ($a['id'] > 0) {
+        lastLoginUser($a['id']);
         $_SESSION['sessionauth'] = true;
         $_SESSION['id'] = $a['id'];
         $_SESSION['role'] = $a['role'];
@@ -130,6 +131,7 @@ if (isset($_GET['action']) and $_GET['action'] == 'authpost'){
 $active_home = '';
 $active_stats = '';
 $active_banks = '';
+$active_users = '';
 $active_statsavr = '';
 $active_edituser = '';
 $active_message = '';
@@ -377,6 +379,28 @@ if (isset($_GET['action']) and $_GET['action'] == 'auth') {
     //print_r($log_errors);
     ob_start();
     require "templates/log-errors.tpl";
+    $content = ob_get_clean();
+    require 'templates/main.tpl';
+} else if (isset($_GET['action']) and $_GET['action'] == 'users'){
+    if (!isset($_SESSION['sessionauth']) or $_SESSION['sessionauth'] == false) {
+        header('location:index.php?action=auth');
+        exit;
+    } else if ($_SESSION['role'] == 0 ){
+        header('location:index.php?action=closed');
+        exit;
+    }
+    $user_data2 = userinfo($_SESSION['id']);
+
+    $user_list = getUsersList();
+
+    $i = 0;
+    foreach ($user_list as $user_item) {
+        $user_list[$i++]['logined_at_timeago'] = date("Y-m-d\TH:i:sP", strtotime($user_item['logined_at']));
+    }
+    $active_users = ' class="active"';
+
+    ob_start();
+    require "templates/users.tpl";
     $content = ob_get_clean();
     require 'templates/main.tpl';
 } else if (isset($_POST['AjaxAction']) and $_POST['AjaxAction'] == 'lastIdMessage'){

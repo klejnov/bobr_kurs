@@ -33,7 +33,7 @@
     <span class="label label-warning">3 сут</span>-->
 
     <div class="jumbotron divhome" style="max-width: 100%; margin: auto;">
-        <table class="table table-bordered table-home">
+        <table class="table table-home">
             <thead>
             <tr>
                 <th>ID</th>

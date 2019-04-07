@@ -82,8 +82,9 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Настройки<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li<?=$active_banks?>><a href="index.php?action=bank">Банки</a></li>
                   <li><a href="index.php?action=cron">Обновить курсы</a></li>
+                  <li<?=$active_banks?>><a href="index.php?action=bank">Банки</a></li>
+                  <li<?=$active_users?>><a href="index.php?action=users">Пользователи</a></li>
                   <li><a href="../?widget=show">Виджет</a></li>
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">Архив</li>

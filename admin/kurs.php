@@ -121,6 +121,20 @@ function edituser($func_id, $func_login, $func_name, $func_avatar)
     }
 }
 
+function lastLoginUser($user_id) {
+
+    global $db;
+
+    $query = $db->prepare(
+        "UPDATE user
+                    SET logined_at = NOW()
+                    WHERE id = :sql_user_id"
+    );
+    $query->execute(array(
+        'sql_user_id' => $user_id,
+    ));
+}
+
 // Функция добавляем банк
 function addbank(
     $func_name, $func_auto, $func_latlng, $func_url, $func_address, $func_ico_bank, $func_url_parser, $func_note
@@ -695,6 +709,18 @@ function getLogErrorsList()
                             FROM banks_kurs_log INNER JOIN banks ON banks_kurs_log.id_bank = banks.id
                             WHERE type_log = 1
                             ORDER BY time DESC LIMIT 50"
+    );
+    $query->execute();
+    $data = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $data;
+}
+
+// Функция получаем список всех пользователей
+function getUsersList()
+{
+    global $db;
+    $query = $db->prepare(
+        "SELECT id, login, name, avatar, role, logined_at FROM user ORDER BY id"
     );
     $query->execute();
     $data = $query->fetchAll(PDO::FETCH_ASSOC);

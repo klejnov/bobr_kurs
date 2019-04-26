@@ -1239,4 +1239,4 @@ function infoMessage(banks_id, name, address, usd_buy, usd_sell, eur_buy, eur_se
     })
 }
 
-
+console.log("%c+",'padding: 110px 110px; line-height: 0; background: url("https://kurs.bobr.by/img/dev-dollar.jpg"); background-size: 250px 230px; color: transparent;');

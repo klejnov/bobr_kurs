@@ -97,8 +97,10 @@
                 <td><?=$bank['time']?>
                     <br>
                     <?php if ($bank['alarm_time'] >= 3) {
+                    $warning_count += 1;
                     echo "<span class=\"label label-warning\">{$bank['alarm_time']} сут.</span>";
                     } else if ($bank['alarm_time'] >= 1){
+                    $info_count += 1;
                     echo "<span class=\"label label-info\">{$bank['alarm_time']} сут.</span>";
                     }?>
                 </td>

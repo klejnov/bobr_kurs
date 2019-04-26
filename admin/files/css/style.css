@@ -92,6 +92,15 @@
 @media (min-width: 576px) {
 }
 
+@media (max-width: 576px) {
+    .table-home img, .table-bordered img {
+        width: 14px;
+        display: block;
+        margin: auto;
+    }
+}
+
+
 /*Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) {
     .sidenav-changes a {

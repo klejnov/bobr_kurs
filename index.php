@@ -107,10 +107,33 @@ try {
         exit();
     }
 
-    if (isset($_POST["AjaxAction"]) && $_POST['AjaxAction'] == 'TableInfoGet' ||
-        isset($_GET['mobile']) && $_GET['mobile'] == 'getInfoBanks') {
+    if (isset($_POST["AjaxAction"]) && $_POST['AjaxAction'] == 'TableInfoGet') {
 
         print_r(file_get_contents("js/table.json"));
+
+        exit();
+    }
+
+    if (isset($_GET['mobile']) && $_GET['mobile'] == 'getInfoBanks') {
+
+        $arr_banks = file_get_contents("js/table.json");
+
+        $arr_banks = json_decode($arr_banks, true);
+
+        $i = 0;
+
+        $url_utm = "?utm_source=kursbobrby&utm_medium=mobile&utm_campaign=table_and_maps_balloon";
+
+        if (!empty($arr_banks)) {
+
+            foreach ($arr_banks as $arr_bank_item) {
+                $arr_banks[$i++]['url'] = $arr_bank_item['url'] . $url_utm;
+            }
+        }
+
+        $arr_banks = json_encode($arr_banks, true);
+
+        echo $arr_banks;
 
         exit();
     }
@@ -222,7 +245,6 @@ try {
             echo $result;
 
             sendSMS($banks_id, $text, $db);
-
         } catch (Throwable $e) {
             $result = [
                 'send'      => false,
@@ -237,7 +259,23 @@ try {
 
     if (isset($_GET['mobile']) && $_GET['mobile'] == 'getNews') {
 
-        require "js/arr_news.json";
+        $arr_news = file_get_contents("js/arr_news.json");
+
+        $arr_news = json_decode($arr_news, true);
+
+        $i = 0;
+
+        if (!empty($arr_news)) {
+
+            foreach ($arr_news as $arr_news_item) {
+
+                $arr_news[$i++] = str_replace("page", "mobile", $arr_news_item);
+            }
+        }
+
+        $arr_news = json_encode($arr_news, true);
+
+        echo $arr_news;
 
         exit();
     }

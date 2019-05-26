@@ -88,6 +88,22 @@
     margin: 10px 0px;
 }
 
+.scrollup{
+    width:50px;
+    height:50px;
+    opacity:0.3;
+    position:fixed;
+    bottom:50px;
+    right:70px;
+    display:none;
+    text-indent:-9999px;
+    background: url('../img/icon_top.png') no-repeat;
+}
+
+.scrollup:hover{
+    opacity:0.7;
+}
+
 /*Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
 }
@@ -97,6 +113,9 @@
         width: 14px;
         display: block;
         margin: auto;
+    }
+    .scrollup{
+        right:35px;
     }
 }
 

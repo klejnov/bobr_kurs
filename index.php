@@ -29,7 +29,7 @@ function sendSMS($banks_id, $text, $db)
 
 spl_autoload_register(function ($class_name) {
 
-    $patchFile = 'classes' . DS . $class_name . '.php';
+    $patchFile = __DIR__  . DS . 'classes' . DS . $class_name . '.php';
 
     if (!file_exists($patchFile)) {
         echo "Файла с классом $class_name нет";
@@ -228,11 +228,41 @@ try {
         exit();
     }
 
-    if (isset($_POST["AjaxAction"]) && $_POST['AjaxAction'] == 'Message') {
+    if ((isset($_POST["AjaxAction"]) && $_POST['AjaxAction'] == 'Message') || (isset($_POST["wap"]) && $_POST['wap'] == 'true')) {
 
-        $text = $_POST["AjaxText"];
-        $banks_id = $_POST["AjaxBanksId"];
+        if (isset($_POST["AjaxAction"])) {
+            $text = $_POST["AjaxText"];
+            $banks_id = $_POST["AjaxBanksId"];
+        }
+
         $ip = $_SERVER['REMOTE_ADDR'];
+
+        if (isset($_POST["wap"])) {
+
+            $user_msg = $_POST['WapText'] == '' ? '' : ". Дополнительно хочу сообщить: " . $_POST["WapText"];
+            $text_wap = "Сообщаю, что на WAP версии вашего сайта: "
+                        . "курс USD в банке: " . $_POST['usdBank'] . " и это " . $_POST['USD']
+                        . "; курс EUR в банке: " . $_POST['eurBank'] . " и это " . $_POST['EUR']
+                        . "; курс RUB в банке: " . $_POST['rubBank'] . " и это " . $_POST['RUB']
+                        . $user_msg;
+
+            $text = $text_wap;
+            $banks_id = $_POST['bankID'];
+            try {
+                $db = new DataBase();
+                $db->saveMessage($banks_id, $text, $ip);
+                sendSMS($banks_id, $text, $db);
+
+                echo '<wml><card title="Статус отправки">';
+                echo "<p align='center'><big>Ваше сообщение отправлено</big></p>";
+                echo "</card></wml>";
+            } catch (Throwable $e) {
+                echo '<wml><card title="Статус отправки">';
+                echo "<p align='center'><big>Ошибка отправки</big></p>";
+                echo "</card></wml>";
+            }
+            exit();
+        }
 
         try {
             $db = new DataBase();

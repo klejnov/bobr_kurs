@@ -22,6 +22,12 @@ print <<<HTML_BLOCK
       <changefreq>hourly</changefreq>
       <priority>0.8</priority>
    </url>
+   <url>
+      <loc>http://wap.kurs.bobr.by/</loc>
+      <lastmod>$date</lastmod>
+      <changefreq>hourly</changefreq>
+      <priority>0.6</priority>
+   </url>
 
 </urlset>
 HTML_BLOCK;

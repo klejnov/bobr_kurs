@@ -29,16 +29,21 @@ if ($bank_data['auto'] == 1) {
     addkurs($paritetbank12);
 }
 
-//Удаляет из массива $priorbank_by банки для которых установлено ручное обновление
-require 'bank/priorbank_by.php';
-$priorbank_by = priorbank_by();
-foreach ($priorbank_by as $key => $priorbank_by2) {
-    $bank_data = getbanksinfo($priorbank_by2['banks_id']);
-    if ($bank_data['auto'] == 0) {
-        unset($priorbank_by[$key]);
-    }
+$banks_id = 4;
+$bank_data = getbanksinfo($banks_id);
+if ($bank_data['auto'] == 1) {
+    require 'bank/priorbank_by_id21.php';
+    $priorbank_by_id21 = priorbank_by_parser_id21($banks_id);
+    addkurs($priorbank_by_id21);
 }
-addkurs($priorbank_by);
+
+$banks_id = 54;
+$bank_data = getbanksinfo($banks_id);
+if ($bank_data['auto'] == 1) {
+    require 'bank/priorbank_by_id72.php';
+    $priorbank_by_id72 = priorbank_by_parser_id72($banks_id);
+    addkurs($priorbank_by_id72);
+}
 
 /*
 $banks_id = 5;

@@ -20,7 +20,7 @@ class DataBase
      */
     private function connect()
     {
-        $config = require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/config.php';
+        $config = require_once __DIR__  . DS . '../admin/config.php';
         $dsn = 'mysql:host=' . $config['host'] . ';dbname=' . $config['db_name'] . ';charset=' . $config['charset'];
         $this->link = new PDO($dsn, $config['username'], $config['password']);
         $this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

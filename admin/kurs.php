@@ -209,7 +209,7 @@ function getbanks()
                 FROM banks)
                 ORDER BY time DESC
                 ) AS bk2
-                GROUP BY bk2.banks_id
+                GROUP BY bk2.banks_id ORDER BY bk2.name
                 "
     );
     $query->execute();
